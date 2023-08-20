@@ -33,9 +33,32 @@ select {
     --color-accent: #032752;
 }
 
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: var(--scroll-bar-width);
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color-secondary);
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar-color);
+    border-radius: calc(var(--scroll-bar-width) / 2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scroll-bar-hover-color);
+}
+
+/* App Styles */
+
 body {
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .landing {
@@ -43,47 +66,14 @@ body {
 
     width: 100vw;
     height: 100vh;
-    padding: 0 32px;
+    padding: 0 32px 32px 32px;
 
     display: grid;
-    grid-template-rows: auto 32px;
-}
-
-.landing-text {
-    align-self: center;
-    margin-left: 128px;
-}
-
-.landing-text h1 {
-    margin: 32px 0 0 0;
-
-    font-family: 'Moul', cursive;
-    font-size: 160px;
-    line-height: 1em;
-
-    filter: drop-shadow(0 0 24px);
-}
-
-.landing-text h2 {
-    margin: 0;
-
-    font-size: 96px;
-    line-height: 1em;
-
-    font-weight: 400;
-}
-
-.landing-action-text {
-    text-align: center;
-
-    width: 100%;
-
-    color: black;
-    font-weight: bold;
+    grid-template-rows: auto 16px;
 }
 
 .landing-graphic {
-    position: absolute;
+    position: fixed;
     z-index: -1;
 }
 
@@ -117,4 +107,43 @@ body {
 
     transform: translateX(50%) translateY(-50%);
     filter: blur(12vw);
+}
+
+.landing-text {
+    align-self: center;
+    margin-left: 128px;
+    transform: translateY(8px);
+}
+
+.landing-text h1 {
+    margin: 32px 0 0 0;
+
+    font-family: 'Moul', cursive;
+    font-size: 160px;
+    line-height: 1em;
+
+    filter: drop-shadow(0 0 24px);
+}
+
+.landing-text h2 {
+    margin: 0;
+
+    font-size: 80px;
+    line-height: 1em;
+
+    font-weight: 400;
+}
+
+.landing-action-text {
+    text-align: center;
+
+    width: 100%;
+
+    color: black;
+    font-weight: bold;
+}
+
+.products {
+    width: 100vw;
+    height: 100vh;
 }
