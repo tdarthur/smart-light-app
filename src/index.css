@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700;900&display=swap');
+@import url('https://use.typekit.net/cvr5lac.css');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+:root {
+    font-family: 'Nunito', sans-serif;
+
+    background-color: var(--color-background);
+    color: var(--color-text);
+
+    scroll-behavior: smooth;
+
+    --scroll-bar-width: 8px;
+    --scroll-bar-color: #fff;
+    --scroll-bar-hover-color: #888;
+
+    --color-text: #f6fafe;
+    --color-background: #111111;
+    --color-primary: #57bcff;
+    --color-secondary: #041324;
+    --color-accent: #9224e5;
+
+    --color-error-background: #f7d6d6;
+    --color-error: #eb8080;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: var(--scroll-bar-width);
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar-color);
+    border-radius: calc(var(--scroll-bar-width) / 2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scroll-bar-hover-color);
+}
+
+@media screen and (max-width: 1074px) {
+    ::-webkit-scrollbar {
+        width: 0;
+    }
+}
