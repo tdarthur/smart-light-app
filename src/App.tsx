@@ -1,28 +1,15 @@
-import useScrollPosition from './hooks/useScrollPosition';
+import Landing from './pages/Landing';
+import Products from './pages/Products';
+import Yeehaw from './pages/Yeehaw';
+import Demo from './pages/demo';
 
-function App() {
-    const scrollPosition = useScrollPosition();
-
-    console.log(scrollPosition);
-
-    return (
-        <>
-            <div className="landing" style={{ opacity: 1 - scrollPosition / window.innerHeight }}>
-                <div className="landing-graphic landing-spotlight" />
-                <div className="landing-graphic landing-pointlight" />
-
-                <div className="landing-text">
-                    <h2>Light up your life with</h2>
-                    <h1>Illuminous</h1>
-                </div>
-                <div className="landing-action-text">Check out our products below</div>
-            </div>
-
-            <div className="products"></div>
-
-            <div className="demo"></div>
-        </>
-    );
-}
+const App = () => (
+    <>
+        <Landing />
+        <Yeehaw />
+        <Demo />
+        <Products />
+    </>
+);
 
 export default App;
