@@ -1,12 +1,10 @@
-import Landing from './pages/Landing';
-import Products from './pages/Products';
-import Yeehaw from './pages/Yeehaw';
-import Demo from './pages/demo';
+import Landing from './pages/landing/Landing';
+import Products from './pages/products/Products';
+import Demo from './pages/demo/Demo';
 
 const App = () => (
     <>
         <Landing />
-        <Yeehaw />
         <Demo />
         <Products />
     </>

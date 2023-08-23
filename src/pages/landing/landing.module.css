@@ -1,0 +1,85 @@
+.landing {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+    padding: 0 32px 32px 32px;
+
+    display: grid;
+    grid-template-rows: auto 16px;
+}
+
+.landingGraphic {
+    position: fixed;
+    z-index: -1;
+}
+
+.landingSpotlight {
+    composes: landingGraphic;
+
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 20vw solid transparent;
+    border-right: 20vw solid transparent;
+    border-bottom: 200vh solid var(--color-primary);
+
+    background-color: transparent;
+    transform: translateX(20%) translateY(-20%) rotate(-40deg);
+    filter: blur(6.5vw);
+}
+
+.landingPointlight {
+    composes: landingGraphic;
+
+    right: 0;
+
+    width: 100%;
+    height: auto;
+    max-width: 50vw;
+    max-height: 50vh;
+    aspect-ratio: 1;
+    border-radius: 50%;
+
+    background-color: var(--color-secondary);
+
+    transform: translateX(50%) translateY(-50%);
+    filter: blur(12vw);
+}
+
+.landingText {
+    align-self: center;
+    margin-left: 128px;
+    transform: translateY(8px);
+}
+
+.landingText h1 {
+    margin: 32px 0 0 0;
+
+    font-family: 'Moul', cursive;
+    font-size: 160px;
+    line-height: 1em;
+
+    filter: drop-shadow(0 0 24px);
+}
+
+.landingText h2 {
+    margin: 0;
+
+    font-size: 80px;
+    line-height: 1em;
+
+    font-weight: 400;
+}
+
+.landingActionText {
+    text-align: center;
+
+    width: 100%;
+
+    color: black;
+    font-weight: bold;
+}
