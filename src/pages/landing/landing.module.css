@@ -83,5 +83,6 @@
     width: 100%;
 
     color: black;
+    font-size: max(min(32px, 0.8vw), 8px);
     font-weight: bold;
 }
