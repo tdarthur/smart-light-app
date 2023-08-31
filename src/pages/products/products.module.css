@@ -16,12 +16,50 @@
 }
 
 .product {
+    position: relative;
+
     width: 28em;
     height: 32em;
     padding: 2em;
     border-radius: 1em;
 
     background-color: #222222;
+
+    transition: scale 150ms linear;
+}
+
+.product:hover {
+    scale: 1.02;
+
+    cursor: pointer;
+}
+
+.product::after {
+    content: 'View Product';
+
+    position: absolute;
+    left: 0;
+    top: calc(100% + 1em);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    background-color: transparent;
+    opacity: 0;
+
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 0 0 24px black;
+
+    transition: opacity 150ms linear;
+}
+
+.product:hover::after {
+    opacity: 1;
 }
 
 .productImage {
