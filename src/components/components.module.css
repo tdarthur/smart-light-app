@@ -1,0 +1,26 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 64px;
+
+    background-color: #080808;
+}
+
+.headerLogo {
+    position: absolute;
+    z-index: 1000;
+
+    font-family: 'Moul', cursive;
+
+    color: white;
+    font-size: 24px;
+
+    filter: drop-shadow(0 0 8px white);
+}

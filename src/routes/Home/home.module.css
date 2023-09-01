@@ -1,0 +1,46 @@
+@keyframes landing-fade {
+    from {
+        color: transparent;
+    }
+
+    33% {
+        color: white;
+    }
+
+    66% {
+        color: white;
+    }
+
+    87% {
+        color: transparent;
+        opacity: 100%;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.landingOverlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #000000;
+    font-size: 20px;
+
+    animation: landing-fade 5000ms 750ms both;
+}
+
+.homePage {
+    margin-top: 64px;
+    padding: 8px 32px;
+}
