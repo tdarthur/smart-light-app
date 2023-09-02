@@ -1,4 +1,4 @@
-@keyframes landing-fade {
+@keyframes landing-text-fade {
     from {
         color: transparent;
     }
@@ -11,21 +11,16 @@
         color: white;
     }
 
-    87% {
-        color: transparent;
-        opacity: 100%;
-    }
-
     to {
-        opacity: 0;
+        color: transparent;
     }
 }
 
-.landingOverlay {
+.landingUnderlay {
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 100;
+    z-index: -1;
 
     display: flex;
     align-items: center;
@@ -34,10 +29,31 @@
     width: 100vw;
     height: 100vh;
 
+    color: transparent;
     background-color: #000000;
     font-size: 20px;
 
-    animation: landing-fade 5000ms 750ms both;
+    animation: landing-text-fade 4000ms 500ms forwards;
+}
+
+@keyframes landing-fade {
+    from {
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.landingFade {
+    opacity: 0;
+
+    animation: landing-fade 5000ms 500ms forwards;
 }
 
 .homePage {
