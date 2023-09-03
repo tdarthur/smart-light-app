@@ -3,15 +3,18 @@
 	top: 0;
 	left: 0;
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	display: grid;
+	grid-template-columns: 50% 50%;
 
 	width: 100vw;
 	height: 64px;
 
 	background-color: var(--color-background);
-	border-bottom: 1px solid #202020;
+	border-bottom: 1px solid var(--color-header-border);
+}
+
+.header > * {
+	align-self: center;
 }
 
 @keyframes background-slide {
@@ -25,6 +28,19 @@
 }
 
 .headerLogo {
+	display: flex;
+	align-items: center;
+
+	height: 100%;
+	padding-left: 32px;
+}
+
+body:global(.light-mode) .headerLogo {
+	clip-path: polygon(0 0, 224px 0, 256px 100%, 0% 100%);
+	background-color: black;
+}
+
+.headerLogoText {
 	--logo-gradient: linear-gradient(
 		90deg,
 		#ff0000 0%,
@@ -53,7 +69,7 @@
 	transition: color 150ms linear;
 }
 
-.headerLogo::before {
+.headerLogoText::before {
 	content: attr(data-text);
 
 	position: absolute;
@@ -73,12 +89,23 @@
 		filter 150ms linear;
 }
 
-.headerLogo:hover {
+.headerLogoText:hover {
 	color: transparent;
 }
 
-.headerLogo:hover::before {
+.headerLogoText:hover::before {
 	color: transparent;
+}
+
+.headerDarkModeToggle {
+	justify-self: right;
+	padding-right: 32px;
+
+	font-size: 14px;
+}
+
+.headerDarkModeToggle:hover {
+	font-weight: bold;
 }
 
 .headerSpacer {

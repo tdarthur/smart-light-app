@@ -20,22 +20,7 @@ button:not(:disabled):hover {
 }
 
 :root {
-	font-family: "Montserrat", sans-serif;
-
-	background-color: var(--color-background);
-	color: var(--color-text);
-
 	scroll-behavior: smooth;
-
-	--scroll-bar-width: 8px;
-	--scroll-bar-color: #fff;
-	--scroll-bar-hover-color: #888;
-
-	--color-text: white;
-	--color-background: #080808;
-	--color-primary: #f7ffc8;
-	--color-secondary: #39ebff;
-	--color-accent: #032752;
 }
 
 /* Scrollbar */
@@ -46,7 +31,6 @@ button:not(:disabled):hover {
 }
 
 ::-webkit-scrollbar-track {
-	background-color: var(--color-secondary);
 	background-color: transparent;
 }
 
@@ -62,10 +46,31 @@ button:not(:disabled):hover {
 /* App Styles */
 
 body {
+	--color-text: white;
+	--color-background: #080808;
+
+	--scroll-bar-width: 8px;
+	--scroll-bar-color: #fff;
+	--scroll-bar-hover-color: #888;
+
 	--main-padding: 32px;
+
+	--color-header-border: #202020;
 
 	margin: 0;
 	overflow-x: hidden;
+
+	font-family: "Montserrat", sans-serif;
+
+	background-color: var(--color-background);
+	color: var(--color-text);
+}
+
+body.light-mode {
+	--color-text: #080808;
+	--color-background: #e8e8e8;
+
+	--color-header-border: #888888;
 }
 
 .yeehaw {

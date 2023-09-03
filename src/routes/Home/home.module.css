@@ -4,17 +4,17 @@
 	}
 
 	33% {
-		color: white;
+		color: var(--color-text);
 	}
 
 	66% {
-		color: white;
+		color: var(--color-text);
 		opacity: 1;
 		text-shadow:
-			0 0 8px white,
-			0 0 32px white,
-			0 0 64px white,
-			0 0 128px white;
+			0 0 8px,
+			0 0 32px,
+			0 0 64px,
+			0 0 128px;
 	}
 
 	to {
@@ -44,6 +44,10 @@
 	font-size: 20px;
 
 	animation: landing-underlay-fade 4000ms 500ms forwards;
+}
+
+body:global(.light-mode) .landingUnderlay {
+	background-color: var(--background-color);
 }
 
 @keyframes landing-fade {
