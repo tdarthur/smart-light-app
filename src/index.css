@@ -1,67 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=Moul&family=Open+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Moul&family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Moul&family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Moul&family=Open+Sans&display=swap");
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 input,
 button,
 textarea,
 select {
-    font: inherit;
+	all: unset;
+	font: inherit;
+}
+
+button:not(:disabled):hover {
+	cursor: pointer;
 }
 
 :root {
-    font-family: 'Montserrat', sans-serif;
+	font-family: "Montserrat", sans-serif;
 
-    background-color: var(--color-background);
-    color: var(--color-text);
+	background-color: var(--color-background);
+	color: var(--color-text);
 
-    scroll-behavior: smooth;
+	scroll-behavior: smooth;
 
-    --scroll-bar-width: 8px;
-    --scroll-bar-color: #fff;
-    --scroll-bar-hover-color: #888;
+	--scroll-bar-width: 8px;
+	--scroll-bar-color: #fff;
+	--scroll-bar-hover-color: #888;
 
-    --color-text: white;
-    --color-background: #181818;
-    --color-primary: #f7ffc8;
-    --color-secondary: #9bcade;
-    --color-accent: #032752;
+	--color-text: white;
+	--color-background: #080808;
+	--color-primary: #f7ffc8;
+	--color-secondary: #39ebff;
+	--color-accent: #032752;
 }
 
 /* Scrollbar */
 
 ::-webkit-scrollbar {
-    width: var(--scroll-bar-width);
-    background-color: transparent;
+	width: var(--scroll-bar-width);
+	background-color: transparent;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: var(--color-secondary);
-    background-color: transparent;
+	background-color: var(--color-secondary);
+	background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--scroll-bar-color);
-    border-radius: calc(var(--scroll-bar-width) / 2);
+	background-color: var(--scroll-bar-color);
+	border-radius: calc(var(--scroll-bar-width) / 2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--scroll-bar-hover-color);
+	background-color: var(--scroll-bar-hover-color);
 }
 
 /* App Styles */
 
 body {
-    margin: 0;
-    overflow-x: hidden;
+	margin: 0;
+	overflow-x: hidden;
 }
 
 .yeehaw {
-    width: 100vw;
-    height: 100vh;
+	width: 100vw;
+	height: 100vh;
 }

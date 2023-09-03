@@ -1,62 +1,64 @@
-@keyframes landing-text-fade {
-    from {
-        color: transparent;
-    }
+@keyframes landing-underlay-fade {
+	from {
+		color: transparent;
+	}
 
-    33% {
-        color: white;
-    }
+	33% {
+		color: white;
+	}
 
-    66% {
-        color: white;
-    }
+	66% {
+		color: white;
+		opacity: 1;
+	}
 
-    to {
-        color: transparent;
-    }
+	to {
+		color: transparent;
+		opacity: 0;
+	}
 }
 
 .landingUnderlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-    width: 100vw;
-    height: 100vh;
+	width: 100vw;
+	height: 100vh;
 
-    color: transparent;
-    background-color: #000000;
-    font-size: 20px;
+	color: transparent;
+	background-color: #000000;
+	font-size: 20px;
 
-    animation: landing-text-fade 4000ms 500ms forwards;
+	animation: landing-underlay-fade 4000ms 500ms forwards;
 }
 
 @keyframes landing-fade {
-    from {
-        opacity: 0;
-    }
+	from {
+		opacity: 0;
+	}
 
-    80% {
-        opacity: 0;
-    }
+	80% {
+		opacity: 0;
+	}
 
-    to {
-        opacity: 1;
-    }
+	to {
+		opacity: 1;
+	}
 }
 
 .landingFade {
-    opacity: 0;
+	opacity: 0;
 
-    animation: landing-fade 5000ms 500ms forwards;
+	animation: landing-fade 5000ms both;
 }
 
 .homePage {
-    margin-top: 64px;
-    padding: 8px 32px;
+	margin-top: 64px;
+	padding: 8px 32px;
 }

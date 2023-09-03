@@ -1,26 +1,81 @@
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    width: 100vw;
-    height: 64px;
+	width: 100vw;
+	height: 64px;
 
-    background-color: #080808;
+	border-bottom: 1px solid #202020;
+}
+
+@keyframes background-slide {
+	from {
+		background-position: 0;
+	}
+
+	to {
+		background-position: var(--logo-background-size);
+	}
 }
 
 .headerLogo {
-    position: absolute;
-    z-index: 1000;
+	--logo-gradient: linear-gradient(
+		90deg,
+		#ff0000 0%,
+		#ffff00 17%,
+		#00ff00 33%,
+		#00ffff 50%,
+		#0000ff 67%,
+		#ff00ff 83%,
+		#ff0000 100%
+	);
+	--logo-background-size: 1600% 100%;
+	--logo-animation: background-slide 64s linear infinite;
 
-    font-family: 'Moul', cursive;
+	content: attr(data-text);
 
-    color: white;
-    font-size: 24px;
+	position: relative;
 
-    filter: drop-shadow(0 0 8px white);
+	color: white;
+	font-family: "Moul", cursive;
+	font-size: 24px;
+	background-size: var(--logo-background-size);
+	background-image: var(--logo-gradient);
+	-webkit-background-clip: text;
+
+	animation: var(--logo-animation);
+	transition: color 150ms linear;
+}
+
+.headerLogo::before {
+	content: attr(data-text);
+
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	left: 0;
+
+	background-size: var(--logo-background-size);
+	background-image: var(--logo-gradient);
+	-webkit-background-clip: text;
+
+	filter: blur(12px);
+
+	animation: var(--logo-animation);
+	transition:
+		color 150ms linear,
+		filter 150ms linear;
+}
+
+.headerLogo:hover {
+	color: transparent;
+}
+
+.headerLogo:hover::before {
+	color: transparent;
 }
