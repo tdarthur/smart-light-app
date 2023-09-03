@@ -5,18 +5,21 @@ import Header from "../../components/Header";
 import styles from "./home.module.css";
 import { useEffect, useCallback, useState } from "react";
 
-console.log(sessionStorage.getItem("visited"));
 const landingAnimationEnabled = sessionStorage.getItem("visited") !== "true";
 sessionStorage.setItem("visited", "true");
 
+const animationStart = Date.now();
+const landingAnimationDefaultDuration = 6_000;
+
 const Home = () => {
-	const [landingAnimationFinished, setLandingAnimationFinished] = useState(!landingAnimationEnabled);
+	const [landingAnimationDuration, setLandingAnimationDuration] = useState(landingAnimationDefaultDuration);
 
 	const landingAnimationListener = useCallback((event: KeyboardEvent | MouseEvent) => {
 		let skipped = false;
 		if ("code" in event) {
 			const keyboardEvent = event as KeyboardEvent;
-			if (keyboardEvent.code === "Space") {
+			console.log(keyboardEvent);
+			if (keyboardEvent.code === "Space" || keyboardEvent.code === "Enter") {
 				skipped = true;
 			}
 		} else {
@@ -24,7 +27,7 @@ const Home = () => {
 		}
 
 		if (skipped) {
-			setLandingAnimationFinished(true);
+			setLandingAnimationDuration(Date.now() + 250 - animationStart);
 			removeLandingAnimationListener();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,8 +36,6 @@ const Home = () => {
 	const removeLandingAnimationListener = useCallback(() => {
 		window.removeEventListener("keypress", landingAnimationListener);
 		window.removeEventListener("click", landingAnimationListener);
-
-		console.log("removing listeners");
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -43,38 +44,33 @@ const Home = () => {
 			window.addEventListener("keypress", landingAnimationListener);
 			window.addEventListener("click", landingAnimationListener);
 
-			console.log("adding listeners");
-
 			return removeLandingAnimationListener;
 		}
 	}, [landingAnimationListener, removeLandingAnimationListener]);
 
+	const landingAnimationDurationStyle = `${landingAnimationDuration}ms`;
+
 	return (
 		<>
 			{landingAnimationEnabled && (
-				<div
-					className={styles.landingUnderlay}
-					style={landingAnimationFinished ? { animationDuration: "150ms" } : undefined}
-				>
+				<div className={styles.landingUnderlay} style={{ animationDuration: landingAnimationDurationStyle }}>
 					Light up your life
 				</div>
 			)}
 
 			<Header
 				className={landingAnimationEnabled ? styles.landingFade : undefined}
-				style={landingAnimationFinished ? { animationDuration: "150ms" } : { animationDelay: "0ms" }}
+				style={{ animationDuration: landingAnimationDurationStyle, animationDelay: "0ms" }}
 			/>
 			<main
 				className={clsx(styles.homePage, landingAnimationEnabled && styles.landingFade)}
-				style={landingAnimationFinished ? { animationDuration: "150ms" } : { animationDelay: "500ms" }}
+				style={{ animationDuration: landingAnimationDurationStyle, animationDelay: "500ms" }}
 				onAnimationEnd={() => {
-					setLandingAnimationFinished(true);
+					removeLandingAnimationListener();
 				}}
 			>
-				<section className={styles.aboutSection}>
-					<h2>This is some placeholder text</h2>
-					<p>This is some other placeholder text</p>
-				</section>
+				<h1>This is some placeholder text</h1>
+				<p>This is some other placeholder text</p>
 			</main>
 		</>
 	);

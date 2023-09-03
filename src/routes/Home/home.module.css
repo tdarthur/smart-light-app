@@ -10,11 +10,19 @@
 	66% {
 		color: white;
 		opacity: 1;
+		text-shadow:
+			0 0 8px white,
+			0 0 32px white,
+			0 0 64px white,
+			0 0 128px white;
 	}
 
 	to {
+		display: none;
+
 		color: transparent;
 		opacity: 0;
+		text-shadow: none;
 	}
 }
 
@@ -59,6 +67,9 @@
 }
 
 .homePage {
-	margin-top: 64px;
-	padding: 8px 32px;
+	padding: var(--main-padding);
+}
+
+.homePage > h1 {
+	margin-bottom: 16px;
 }

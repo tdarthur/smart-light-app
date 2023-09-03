@@ -1,0 +1,27 @@
+.errorPage {
+	padding: var(--main-padding);
+}
+
+.errorPage > h1 {
+	margin-bottom: 16px;
+}
+
+.errorPage > p {
+	margin: 8px 0;
+}
+
+.errorDecoration {
+	position: absolute;
+	left: -64px;
+	top: 0;
+	z-index: -1;
+
+	width: 256px;
+	height: 256px;
+	aspect-ratio: 1;
+
+	background-color: red;
+	border-radius: 50%;
+
+	filter: blur(128px);
+}
