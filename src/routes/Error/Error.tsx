@@ -1,4 +1,4 @@
-import { isRouteErrorResponse, useRouteError } from "react-router-dom";
+import { Link, isRouteErrorResponse, useRouteError } from "react-router-dom";
 import Header from "../../components/Header";
 
 import styles from "./error.module.css";
@@ -21,6 +21,7 @@ const Error = () => {
 				<h1>An Error Occurred</h1>
 				<h2 className={styles.errorStatus}>{errorStatus}</h2>
 				<p>{errorMessage}</p>
+				<Link to="/">Back</Link>
 			</main>
 		</>
 	);

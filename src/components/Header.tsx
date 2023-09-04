@@ -2,7 +2,7 @@ import { useState, type ComponentProps } from "react";
 import clsx from "clsx";
 
 import styles from "./components.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 let lightModeEnabled = localStorage.getItem("light-mode") === "true";
 if (lightModeEnabled) {
@@ -31,6 +31,20 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 						Illuminous
 					</button>
 				</div>
+
+				<nav className={styles.headerNavigation}>
+					<ul>
+						<li>
+							<Link to="/">Home</Link>
+						</li>
+						<li>
+							<Link to="/products">Products</Link>
+						</li>
+						<li>
+							<Link to="/">About Us</Link>
+						</li>
+					</ul>
+				</nav>
 
 				<button
 					className={styles.headerDarkModeToggle}

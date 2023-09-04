@@ -6,6 +6,7 @@ import Home from "./routes/Home/Home";
 import Error from "./routes/Error/Error";
 
 import "./index.css";
+import Products from "./routes/Products/Products";
 
 setTimeout(() => {
 	sessionStorage.setItem("visited", "true");
@@ -13,14 +14,22 @@ setTimeout(() => {
 
 const routes: RouteObject[] = [
 	{
-		path: "/",
-		element: <Home />,
 		errorElement: <Error />,
+		children: [
+			{
+				path: "/",
+				element: <Home />,
+			},
+			{
+				path: "products",
+				element: <Products />,
+			},
+		],
 	},
 ];
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
-		<RouterProvider router={createBrowserRouter(routes)} />,
+		<RouterProvider router={createBrowserRouter(routes)} />
 	</React.StrictMode>,
 );

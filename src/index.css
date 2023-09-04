@@ -11,11 +11,16 @@ input,
 button,
 textarea,
 select {
-	all: unset;
 	font: inherit;
 }
 
-button:not(:disabled):hover {
+a,
+button {
+	all: unset;
+}
+
+button:not(:disabled):hover,
+a:not(:disabled):hover {
 	cursor: pointer;
 }
 
