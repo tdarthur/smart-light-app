@@ -74,6 +74,49 @@ body:global(.light-mode) .landingUnderlay {
 	padding: var(--main-padding);
 }
 
-.homePage > h1 {
-	margin-bottom: 16px;
+.contentImageContainer {
+	position: relative;
+
+	overflow: hidden;
+
+	width: 100vw;
+	height: 448px;
+
+	margin-left: -32px;
+	margin-top: -32px;
+	margin-bottom: 32px;
+}
+
+.contentImageContainer::after {
+	content: "";
+
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	width: 100%;
+	height: 100%;
+
+	background: linear-gradient(90deg, black 0%, black 5%, transparent 30%, transparent 100%);
+}
+
+.contentImage {
+	width: 100%;
+
+	transform: translateY(-128px);
+}
+
+.contentImageText {
+	position: absolute;
+	left: 128px;
+	top: 50%;
+	z-index: 1;
+
+	color: white;
+
+	transform: translateY(-50%);
+}
+
+.contentImageText > h1 {
+	margin-bottom: 8px;
 }

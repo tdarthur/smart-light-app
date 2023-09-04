@@ -7,6 +7,10 @@ import Error from "./routes/Error/Error";
 
 import "./index.css";
 
+setTimeout(() => {
+	sessionStorage.setItem("visited", "true");
+}, 100);
+
 const routes: RouteObject[] = [
 	{
 		path: "/",
@@ -17,6 +21,6 @@ const routes: RouteObject[] = [
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
-		<RouterProvider router={createBrowserRouter(routes)} />
+		<RouterProvider router={createBrowserRouter(routes)} />,
 	</React.StrictMode>,
 );

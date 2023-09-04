@@ -12,16 +12,16 @@
 
 .errorDecoration {
 	position: absolute;
-	left: -64px;
-	top: 0;
+	left: -128px;
+	top: -64px;
 	z-index: -1;
 
-	width: 256px;
-	height: 256px;
+	width: 384px;
+	height: 384px;
 	aspect-ratio: 1;
 
 	background-color: red;
 	border-radius: 50%;
 
-	filter: blur(128px);
+	filter: blur(96px);
 }

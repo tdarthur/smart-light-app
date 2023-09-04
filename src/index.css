@@ -50,7 +50,7 @@ body {
 	--color-background: #080808;
 
 	--scroll-bar-width: 8px;
-	--scroll-bar-color: #fff;
+	--scroll-bar-color: white;
 	--scroll-bar-hover-color: #888;
 
 	--main-padding: 32px;
@@ -68,9 +68,11 @@ body {
 
 body.light-mode {
 	--color-text: #080808;
-	--color-background: #e8e8e8;
+	--color-background: #f0f0f0;
 
-	--color-header-border: #888888;
+	--scroll-bar-color: black;
+
+	--color-header-border: #d8d8d8;
 }
 
 .yeehaw {

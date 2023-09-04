@@ -5,20 +5,17 @@ import Header from "../../components/Header";
 import styles from "./home.module.css";
 import { useEffect, useCallback, useState } from "react";
 
-const landingAnimationEnabled = sessionStorage.getItem("visited") !== "true";
-sessionStorage.setItem("visited", "true");
-
 const animationStart = Date.now();
 const landingAnimationDefaultDuration = 6_000;
 
 const Home = () => {
+	const [landingAnimationEnabled, setLandingAnimationEnabled] = useState(false);
 	const [landingAnimationDuration, setLandingAnimationDuration] = useState(landingAnimationDefaultDuration);
 
 	const landingAnimationListener = useCallback((event: KeyboardEvent | MouseEvent) => {
 		let skipped = false;
 		if ("code" in event) {
 			const keyboardEvent = event as KeyboardEvent;
-			console.log(keyboardEvent);
 			if (keyboardEvent.code === "Space" || keyboardEvent.code === "Enter") {
 				skipped = true;
 			}
@@ -40,13 +37,17 @@ const Home = () => {
 	}, []);
 
 	useEffect(() => {
+		setLandingAnimationEnabled(sessionStorage.getItem("visited") !== "true");
+	}, []);
+
+	useEffect(() => {
 		if (landingAnimationEnabled) {
 			window.addEventListener("keypress", landingAnimationListener);
 			window.addEventListener("click", landingAnimationListener);
 
 			return removeLandingAnimationListener;
 		}
-	}, [landingAnimationListener, removeLandingAnimationListener]);
+	}, [landingAnimationEnabled, landingAnimationListener, removeLandingAnimationListener]);
 
 	const landingAnimationDurationStyle = `${landingAnimationDuration}ms`;
 
@@ -69,7 +70,17 @@ const Home = () => {
 					removeLandingAnimationListener();
 				}}
 			>
-				<h1>This is some placeholder text</h1>
+				<div className={styles.contentImageContainer}>
+					<img
+						className={styles.contentImage}
+						src="https://9to5toys.com/wp-content/uploads/sites/5/2023/05/govee-led-light-strip-m1-matter.jpg"
+					/>
+					<div className={styles.contentImageText}>
+						<h1>Home lighting redefined</h1>
+						<h2>Give life to your whole space</h2>
+					</div>
+				</div>
+				<h2>This is placeholder text</h2>
 				<p>This is some other placeholder text</p>
 			</main>
 		</>
