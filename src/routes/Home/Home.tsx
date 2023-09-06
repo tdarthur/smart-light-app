@@ -16,7 +16,8 @@ const Home = () => {
 		let skipped = false;
 		if ("code" in event) {
 			const keyboardEvent = event as KeyboardEvent;
-			if (keyboardEvent.code === "Space" || keyboardEvent.code === "Enter") {
+			console.log(keyboardEvent);
+			if (keyboardEvent.code === "Escape" || keyboardEvent.code === "Space" || keyboardEvent.code === "Enter") {
 				skipped = true;
 			}
 		} else {
@@ -31,7 +32,7 @@ const Home = () => {
 	}, []);
 
 	const removeLandingAnimationListener = useCallback(() => {
-		window.removeEventListener("keypress", landingAnimationListener);
+		window.removeEventListener("keydown", landingAnimationListener);
 		window.removeEventListener("click", landingAnimationListener);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -42,7 +43,7 @@ const Home = () => {
 
 	useEffect(() => {
 		if (landingAnimationEnabled) {
-			window.addEventListener("keypress", landingAnimationListener);
+			window.addEventListener("keydown", landingAnimationListener);
 			window.addEventListener("click", landingAnimationListener);
 
 			return removeLandingAnimationListener;
