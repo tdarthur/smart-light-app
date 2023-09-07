@@ -1,9 +1,11 @@
+import { useEffect, useCallback, useState } from "react";
 import clsx from "clsx";
 
 import Header from "../../components/Header";
 
 import styles from "./home.module.css";
-import { useEffect, useCallback, useState } from "react";
+
+import homeLightingImage from "../../assets/home-lighting.jpg";
 
 const animationStart = Date.now();
 const landingAnimationDefaultDuration = 6_000;
@@ -72,10 +74,7 @@ const Home = () => {
 				}}
 			>
 				<div className={styles.contentImageContainer}>
-					<img
-						className={styles.contentImage}
-						src="https://9to5toys.com/wp-content/uploads/sites/5/2023/05/govee-led-light-strip-m1-matter.jpg"
-					/>
+					<img className={styles.contentImage} src={homeLightingImage} />
 					<div className={styles.contentImageText}>
 						<h1>Home lighting redefined</h1>
 						<h2>Give life to your whole space</h2>

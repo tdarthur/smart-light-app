@@ -79,12 +79,15 @@ body:global(.light-mode) .landingUnderlay {
 
 	overflow: hidden;
 
+	display: block;
 	width: 100vw;
-	height: 448px;
+	height: auto;
+	max-width: 2560px;
+	max-height: 960px;
 
-	margin-left: -32px;
-	margin-top: -32px;
-	margin-bottom: 32px;
+	margin: calc(-1 * var(--main-padding)) auto 32px auto;
+
+	transform: translateX(calc(-1 * var(--main-padding)));
 }
 
 .contentImageContainer::after {
@@ -97,13 +100,14 @@ body:global(.light-mode) .landingUnderlay {
 	width: 100%;
 	height: 100%;
 
-	background: linear-gradient(90deg, black 0%, black 5%, transparent 30%, transparent 100%);
+	background: linear-gradient(90deg, black 0%, transparent 50%, transparent 100%);
 }
 
 .contentImage {
-	width: 100%;
+	position: relative;
+	bottom: 0;
 
-	transform: translateY(-128px);
+	width: 100%;
 }
 
 .contentImageText {
