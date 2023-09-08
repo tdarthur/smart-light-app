@@ -80,8 +80,12 @@ const Home = () => {
 						<h2>Give life to your whole space</h2>
 					</div>
 				</div>
-				<h2>This is placeholder text</h2>
-				<p>This is some other placeholder text</p>
+				<h2>A world of customization</h2>
+				<p>
+					Control your lights directly, schedule wake-up and wind-down routines, and integrate with other
+					smart devices all from your phone. All of our products support all the major home-hub accessories
+					and integrate seamlessly for a simplistic and relaxing experience.
+				</p>
 			</main>
 		</>
 	);

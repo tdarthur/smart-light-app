@@ -1,0 +1,34 @@
+.aboutPage {
+	max-width: 1024px;
+	padding: 32px;
+	margin: 0 auto;
+}
+
+.statement {
+	display: flex;
+	flex-direction: column;
+
+	width: 100%;
+	margin-bottom: 64px;
+}
+
+.statement * {
+	max-width: 512px;
+}
+
+.statement h1 {
+	margin: 0 0 8px 0;
+}
+
+.statement:nth-child(even) {
+	align-items: end;
+	text-align: right;
+}
+
+.statement a {
+	color: var(--color-link-text);
+}
+
+.statement a:hover {
+	text-decoration: underline;
+}

@@ -41,7 +41,7 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 							<Link to="/products">Products</Link>
 						</li>
 						<li>
-							<Link to="/">About Us</Link>
+							<Link to="/about">About Us</Link>
 						</li>
 					</ul>
 				</nav>

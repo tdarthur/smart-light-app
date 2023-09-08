@@ -74,6 +74,10 @@ body:global(.light-mode) .landingUnderlay {
 	padding: var(--main-padding);
 }
 
+.homePage p {
+	max-width: 512px;
+}
+
 .contentImageContainer {
 	position: relative;
 
@@ -81,7 +85,7 @@ body:global(.light-mode) .landingUnderlay {
 
 	display: block;
 	width: 100vw;
-	height: auto;
+	height: fit-content;
 	max-width: 2560px;
 	max-height: 960px;
 
@@ -101,6 +105,8 @@ body:global(.light-mode) .landingUnderlay {
 	height: 100%;
 
 	background: linear-gradient(90deg, black 0%, transparent 50%, transparent 100%);
+
+	/* mix-blend-mode: lighten; */
 }
 
 .contentImage {

@@ -52,6 +52,7 @@ a:not(:disabled):hover {
 
 body {
 	--color-text: white;
+	--color-link-text: #57bcff;
 	--color-background: #080808;
 
 	--scroll-bar-width: 8px;
@@ -74,7 +75,7 @@ body {
 body.light-mode {
 	--color-text: #080808;
 	--color-background: #f0f0f0;
-
+	--color-link-text: #0099ff;
 	--scroll-bar-color: black;
 
 	--color-header-border: #d8d8d8;
