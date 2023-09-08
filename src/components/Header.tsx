@@ -3,6 +3,8 @@ import clsx from "clsx";
 
 import styles from "./components.module.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import IconSun from "./icons/IconSun";
+import IconMoon from "./icons/IconMoon";
 
 let lightModeEnabled = localStorage.getItem("light-mode") === "true";
 if (lightModeEnabled) {
@@ -62,7 +64,7 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 						setLightMode(lightModeEnabled);
 					}}
 				>
-					{lightMode ? "Light Mode" : "Dark Mode"}
+					{lightMode ? <IconSun /> : <IconMoon />}
 				</button>
 			</header>
 			<div className={styles.headerSpacer} />

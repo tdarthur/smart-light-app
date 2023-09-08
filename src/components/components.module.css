@@ -1,4 +1,6 @@
 .header {
+	--header-height: 64px;
+
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -8,7 +10,7 @@
 	grid-template-columns: 30% 40% 30%;
 
 	width: 100vw;
-	height: 64px;
+	height: var(--header-height);
 
 	background-color: var(--color-background);
 	border-bottom: 1px solid var(--color-header-border);
@@ -141,10 +143,21 @@ body:global(.light-mode) .headerLogo {
 }
 
 .headerDarkModeToggle {
+	--toggle-button-size: 24px;
+
 	justify-self: right;
-	padding-right: 32px;
+
+	width: var(--toggle-button-size);
+	height: var(--toggle-button-size);
+	margin-right: 16px;
+
+	box-sizing: content-box;
 
 	font-size: 14px;
+}
+
+.headerDarkModeToggle:hover {
+	filter: invert(50%);
 }
 
 .headerDarkModeToggle:hover {
@@ -153,5 +166,5 @@ body:global(.light-mode) .headerLogo {
 
 .headerSpacer {
 	width: 100%;
-	height: 64px;
+	height: var(--header-height);
 }
