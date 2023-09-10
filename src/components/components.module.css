@@ -1,6 +1,9 @@
-.header {
+.header,
+.headerSpacer {
 	--header-height: 64px;
+}
 
+.header {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -158,10 +161,6 @@ body:global(.light-mode) .headerLogo {
 
 .headerDarkModeToggle:hover {
 	filter: invert(50%);
-}
-
-.headerDarkModeToggle:hover {
-	font-weight: bold;
 }
 
 .headerSpacer {

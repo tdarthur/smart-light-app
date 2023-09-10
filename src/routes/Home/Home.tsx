@@ -82,7 +82,7 @@ const Home = () => {
 				</div>
 				<h2>A world of customization</h2>
 				<p>
-					Control your lights directly, schedule wake-up and wind-down routines, and integrate with other
+					Control your lights independently, schedule wake-up and wind-down routines, and integrate with other
 					smart devices all from your phone. All of our products support all the major home-hub accessories
 					and integrate seamlessly for a simplistic and relaxing experience.
 				</p>

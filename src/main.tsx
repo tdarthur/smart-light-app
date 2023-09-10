@@ -4,6 +4,7 @@ import { RouteObject, RouterProvider, createBrowserRouter } from "react-router-d
 
 import Home from "./routes/Home/Home";
 import Products from "./routes/Products/Products";
+import Product from "./routes/Products/Product";
 import About from "./routes/About/About";
 import Error from "./routes/Error/Error";
 
@@ -21,6 +22,7 @@ const routes: RouteObject[] = [
 				path: "/",
 				element: <Home />,
 			},
+			{ path: "products/:id", element: <Product /> },
 			{
 				path: "products",
 				element: <Products />,
