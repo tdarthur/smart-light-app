@@ -1,11 +1,15 @@
 .products {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
 	width: 100vw;
 	height: 100vh;
 }
+
+/* .productSearchInput {
+} */
 
 .productList {
 	display: flex;
@@ -51,12 +55,6 @@
 	right: 8px;
 
 	font-weight: bold;
-}
-
-.productPriceDollarSign {
-	font-size: 10px;
-
-	font-weight: normal;
 }
 
 .productDetails {
