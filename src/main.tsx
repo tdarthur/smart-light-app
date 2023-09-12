@@ -10,9 +10,14 @@ import Error from "./routes/Error/Error";
 
 import "./index.css";
 
-setTimeout(() => {
+const tenMinutes = 600_000;
+
+const visitedInThisSession = sessionStorage.getItem("visited");
+const lastVisited = localStorage.getItem("last-visit");
+if (!visitedInThisSession && (!lastVisited || Date.now() - parseInt(lastVisited) > tenMinutes)) {
+	localStorage.setItem("last-visit", Date.now().toString());
 	sessionStorage.setItem("visited", "true");
-}, 100);
+}
 
 const routes: RouteObject[] = [
 	{

@@ -12,6 +12,7 @@ button,
 textarea,
 select {
 	font: inherit;
+	color: currentColor;
 }
 
 a,
@@ -54,6 +55,7 @@ body {
 	--color-text: white;
 	--color-link-text: #57bcff;
 	--color-background: #080808;
+	--color-input-background: #202020;
 
 	--scroll-bar-width: 8px;
 	--scroll-bar-color: white;
@@ -76,6 +78,8 @@ body.light-mode {
 	--color-text: #080808;
 	--color-background: #f0f0f0;
 	--color-link-text: #0099ff;
+	--color-input-background: #d0d0d0;
+
 	--scroll-bar-color: black;
 
 	--color-header-border: #d8d8d8;

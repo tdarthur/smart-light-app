@@ -1,42 +1,82 @@
 .products {
+	--product-container-width: 1080px;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	flex-wrap: wrap;
 
 	width: 100%;
-	max-width: 1080px;
+	max-width: var(--product-container-width);
 	height: 100vh;
 	margin: auto;
 	margin-top: 32px;
 }
 
-.productSearchBar {
+.products h1 {
+	margin-bottom: 32px;
+}
+
+.searchBar {
+	--search-bar-height: 48px;
+	--icon-size: 20px;
+	--icon-padding: 12px;
+
+	position: relative;
+
+	height: var(--search-bar-height);
 	width: 100%;
-	max-width: 1080px;
-
-	margin-top: 32px;
+	margin-bottom: 32px;
 }
 
-.productSearchContainer {
-	display: inline;
+.searchInput {
+	border: none;
+	padding-left: 8px;
 
-	height: 32px;
+	width: 100%;
+	height: 100%;
+	padding-left: calc(var(--icon-padding) * 2 + var(--icon-size));
+
+	background-color: var(--color-input-background);
+	border-radius: 2px;
 }
 
-/* .productSearchInput {
-} */
+.searchBarSearchButton {
+	left: var(--icon-padding);
+}
+
+.searchInputClearButton {
+	right: var(--icon-padding);
+}
+
+.searchBar button {
+	position: absolute;
+	top: calc((var(--search-bar-height) - var(--icon-size)) / 2);
+
+	width: var(--icon-size);
+	height: var(--icon-size);
+
+	opacity: 0.5;
+}
+
+.searchBar button:hover {
+	opacity: 1;
+}
 
 .toggleFilterOptionsShownButton {
-	height: 24px;
 	width: 24px;
-	aspect-ratio: 1;
+	height: 24px;
 }
 
 .filters {
 	position: relative;
 
-	display: inline;
+	height: 100%;
+
+	background-color: var(--color-input-background);
+	color: white;
+
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
 }
 
 .filterSelectionContainer {
@@ -57,24 +97,30 @@
 }
 
 .productList {
+	--product-gap: 16px;
+	--products-per-line: 5;
+
+	--product-width: calc(
+		(var(--product-container-width) - (var(--product-gap) * (var(--products-per-line) - 1))) /
+			(var(--products-per-line))
+	);
+
 	display: flex;
 	align-items: start;
 	flex-wrap: wrap;
-	gap: 16px;
+	gap: var(--product-gap);
 
 	width: 100%;
 }
 
 .product {
-	--product-width: 256px;
-
 	position: relative;
 
 	overflow: hidden;
 
 	width: var(--product-width);
 	height: auto;
-	border-radius: 8px;
+	border-radius: 2px;
 
 	opacity: 0.8;
 
@@ -120,4 +166,10 @@
 
 	font-size: 10px;
 	list-style-type: "- ";
+}
+
+.productListEmptyText {
+	padding-top: calc(var(--product-width) / 2);
+	width: 100%;
+	text-align: center;
 }

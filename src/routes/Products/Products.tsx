@@ -2,30 +2,33 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import Header from "../../components/Header";
-import IconFilter from "../../components/icons/IconFilter";
+// import IconFilter from "../../components/icons/IconFilter";
 
 import styles from "./products.module.css";
+import IconX from "../../components/icons/IconX";
+import IconMagnifyingGlass from "../../components/icons/IconMagnifyingGlass";
 
-type FilterSelectProps = {
-	name: string;
-	label: string;
-};
+// type FilterSelectProps = {
+// 	name: string;
+// 	label: string;
+// };
 
-const FilterSelect = ({ name, label }: FilterSelectProps) => (
-	<div className={styles.filterSelect}>
-		<input id={name} name={name} type="checkbox" />
-		<label htmlFor={name}>{label}</label>
-	</div>
-);
+// const FilterSelect = ({ name, label }: FilterSelectProps) => (
+// 	<div className={styles.filterSelect}>
+// 		<input id={name} name={name} type="checkbox" />
+// 		<label htmlFor={name}>{label}</label>
+// 	</div>
+// );
 
-type ProductSearchBarProps = {
+type SearchBarProps = {
 	setSearchString: React.Dispatch<React.SetStateAction<string>>;
 	setActiveFilters: React.Dispatch<React.SetStateAction<(typeof productFeatures)[]>>;
-	search: () => void;
+	search: (searchValue?: string) => void;
 };
 
-const ProductSearchBar = ({ setSearchString, search }: ProductSearchBarProps) => {
-	const [showFilterOptions, setShowFilterOptions] = useState(false);
+const SearchBar = ({ setSearchString, search }: SearchBarProps) => {
+	// const [showFilterOptions, setShowFilterOptions] = useState(false);
+	const searchInputRef = useRef<HTMLInputElement>(null);
 	const filterContainerRef = useRef(null);
 
 	useEffect(() => {
@@ -39,7 +42,7 @@ const ProductSearchBar = ({ setSearchString, search }: ProductSearchBarProps) =>
 					false;
 
 				if (!isDescendantOfFilters(target)) {
-					setShowFilterOptions(false);
+					// setShowFilterOptions(false);
 				}
 			};
 
@@ -52,54 +55,75 @@ const ProductSearchBar = ({ setSearchString, search }: ProductSearchBarProps) =>
 	}, []);
 
 	return (
-		<div className={styles.productSearchBar}>
-			<div className={styles.productSearchContainer}>
-				<input
-					name="product-search"
-					className={styles.productSearchInput}
-					onChange={(event) => {
-						setSearchString(event.target.value);
-					}}
-					onKeyDown={(event) => {
-						if (event.key === "Enter") {
-							search();
+		<div className={styles.searchBar}>
+			<input
+				id="product-search"
+				className={styles.searchInput}
+				onChange={(event) => {
+					setSearchString(event.target.value);
+				}}
+				onKeyDown={(event) => {
+					if (event.key === "Enter") {
+						search();
+					}
+				}}
+				placeholder="Search all products"
+				ref={searchInputRef}
+			/>
+			<button
+				type="button"
+				className={styles.searchBarSearchButton}
+				onClick={() => {
+					searchInputRef.current?.focus();
+				}}
+			>
+				<IconMagnifyingGlass />
+			</button>
+			{searchInputRef.current?.value && (
+				<button
+					type="button"
+					className={styles.searchInputClearButton}
+					onClick={() => {
+						if (searchInputRef.current) {
+							searchInputRef.current.value = "";
+							setSearchString("");
+							search("");
 						}
 					}}
-				/>
-				<button className={styles.productSearchButton} onClick={search}>
-					Search
-				</button>
-			</div>
-			<div className={styles.filters} ref={filterContainerRef}>
-				{/* <div className={styles.appliedFilters}>
-					<p>These are the active filters</p>
-				</div> */}
-				<button
-					id="toggle-filter-options-shown"
-					className={styles.toggleFilterOptionsShownButton}
-					onClick={() => {
-						setShowFilterOptions(!showFilterOptions);
-					}}
 				>
-					<IconFilter />
+					<IconX />
 				</button>
-				{showFilterOptions && (
-					<div id="filter-options" className={styles.filterSelectionContainer}>
-						<h3>Color</h3>
-						<FilterSelect name="rgb" label="RGB" />
-						<FilterSelect name="white" label="White" />
-						<h3>Shape</h3>
-						<FilterSelect name="standard" label="Standard bulb" />
-						<FilterSelect name="flood" label="Flood bulb" />
-						<h3>Brightness</h3>
-						<FilterSelect name="1100-lumen" label="400 lumen" />
-						<FilterSelect name="1100-lumen" label="600 lumen" />
-						<FilterSelect name="1100-lumen" label="800 lumen" />
-						<FilterSelect name="1100-lumen" label="1100 lumen" />
-					</div>
-				)}
-			</div>
+			)}
 		</div>
+		//     <div className={styles.filters} ref={filterContainerRef}>
+		//     {/* <div className={styles.appliedFilters}>
+		//         <p>These are the active filters</p>
+		//     </div> */}
+		//     <button
+		//         id="toggle-filter-options-shown"
+		//         className={styles.toggleFilterOptionsShownButton}
+		//         onClick={() => {
+		//             setShowFilterOptions(!showFilterOptions);
+		//         }}
+		//     >
+		//         <IconFilter />
+		//     </button>
+		//     {showFilterOptions && (
+		//         <div id="filter-options" className={styles.filterSelectionContainer}>
+		//             <h3>Color</h3>
+		//             <FilterSelect name="rgb" label="RGB" />
+		//             <FilterSelect name="white" label="White" />
+		//             <h3>Shape</h3>
+		//             <FilterSelect name="standard" label="Standard bulb" />
+		//             <FilterSelect name="flood" label="Flood bulb" />
+		//             <h3>Brightness</h3>
+		//             <FilterSelect name="1100-lumen" label="400 lumen" />
+		//             <FilterSelect name="1100-lumen" label="600 lumen" />
+		//             <FilterSelect name="1100-lumen" label="800 lumen" />
+		//             <FilterSelect name="1100-lumen" label="1100 lumen" />
+		//         </div>
+		//     )}
+		// </div>
 	);
 };
 
@@ -145,6 +169,7 @@ const Products = () => {
 	const [activeFilters, setActiveFilters] = useState<(typeof productFeatures)[]>([]);
 	const [products, setProducts] = useState<ProductInfo[]>([]);
 	const [filteredProducts, setFilteredProducts] = useState<ProductInfo[]>([]);
+	const [lastSearch, setLastSearch] = useState("");
 
 	useEffect(() => {
 		(async () => {
@@ -154,21 +179,23 @@ const Products = () => {
 		})();
 	}, []);
 
-	const search = () => {
-		const searchStringLowerCase = searchString.toLowerCase();
+	const search = (searchValue = searchString) => {
+		setLastSearch(searchValue);
+
+		const searchValueLowercase = searchValue.toLowerCase();
 		console.log(activeFilters);
 		setFilteredProducts(
 			products.filter(({ name }) => {
 				const idLowerCase = name.toLowerCase();
 
-				if (idLowerCase.includes(searchStringLowerCase)) {
+				if (idLowerCase.includes(searchValueLowercase)) {
 					return true;
 				}
 
-				const distance = calculateLevenshteinDistance(searchStringLowerCase, idLowerCase);
+				const distance = calculateLevenshteinDistance(searchValueLowercase, idLowerCase);
 
 				return (
-					distance / Math.max(searchStringLowerCase.length, idLowerCase.length) <= searchSimilarityThreshold
+					distance / Math.max(searchValueLowercase.length, idLowerCase.length) <= searchSimilarityThreshold
 				);
 			}),
 		);
@@ -180,27 +207,27 @@ const Products = () => {
 			<main className={styles.products}>
 				<h1>Products</h1>
 
-				<ProductSearchBar
-					setSearchString={setSearchString}
-					setActiveFilters={setActiveFilters}
-					search={search}
-				/>
+				<SearchBar setSearchString={setSearchString} setActiveFilters={setActiveFilters} search={search} />
 
 				<div className={styles.productList}>
-					{filteredProducts.map(({ id, name, image, features, price }) => (
-						<Link className={styles.product} to={`${id}`} key={name}>
-							<img className={styles.productImage} src={image} key={name} />
-							<div className={styles.productPrice}>{price.toLocaleString("en-US")}</div>
-							<div className={styles.productDetails}>
-								<h3 className={styles.productName}>{name}</h3>
-								<ul className={styles.productFeatures}>
-									{features.map((feature) => (
-										<li key={feature}>{feature}</li>
-									))}
-								</ul>
-							</div>
-						</Link>
-					))}
+					{filteredProducts.length > 0 ? (
+						filteredProducts.map(({ id, name, image, features, price }) => (
+							<Link className={styles.product} to={`${id}`} key={name}>
+								<img className={styles.productImage} src={image} key={name} />
+								<div className={styles.productPrice}>{price.toLocaleString("en-US")}</div>
+								<div className={styles.productDetails}>
+									<h3 className={styles.productName}>{name}</h3>
+									<ul className={styles.productFeatures}>
+										{features.map((feature) => (
+											<li key={feature}>{feature}</li>
+										))}
+									</ul>
+								</div>
+							</Link>
+						))
+					) : (
+						<p className={styles.productListEmptyText}>No results for &quot;{lastSearch}&quot;</p>
+					)}
 				</div>
 			</main>
 		</>

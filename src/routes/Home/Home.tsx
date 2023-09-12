@@ -40,7 +40,10 @@ const Home = () => {
 	}, []);
 
 	useEffect(() => {
-		setLandingAnimationEnabled(sessionStorage.getItem("visited") !== "true");
+		const visited = localStorage.getItem("last-visit");
+		if (visited && Date.now() - parseInt(visited) < 2000) {
+			setLandingAnimationEnabled(true);
+		}
 	}, []);
 
 	useEffect(() => {
