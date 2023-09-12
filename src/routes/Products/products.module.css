@@ -1,20 +1,65 @@
 .products {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
+	flex-wrap: wrap;
 
-	width: 100vw;
+	width: 100%;
+	max-width: 1080px;
 	height: 100vh;
+	margin: auto;
+	margin-top: 32px;
+}
+
+.productSearchBar {
+	width: 100%;
+	max-width: 1080px;
+
+	margin-top: 32px;
+}
+
+.productSearchContainer {
+	display: inline;
+
+	height: 32px;
 }
 
 /* .productSearchInput {
 } */
 
+.toggleFilterOptionsShownButton {
+	height: 24px;
+	width: 24px;
+	aspect-ratio: 1;
+}
+
+.filters {
+	position: relative;
+
+	display: inline;
+}
+
+.filterSelectionContainer {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	right: 0;
+
+	width: 256px;
+	padding: 8px;
+
+	background-color: blue;
+	font-size: 14px;
+}
+
+.filterSelectionContainer h3:not(:nth-child(1)) {
+	margin-top: 16px;
+}
+
 .productList {
 	display: flex;
-	justify-content: center;
 	align-items: start;
+	flex-wrap: wrap;
 	gap: 16px;
 
 	width: 100%;
