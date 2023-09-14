@@ -83,12 +83,31 @@ const Home = () => {
 						<h2>Give life to your whole space</h2>
 					</div>
 				</div>
-				<h2>A world of customization</h2>
-				<p>
-					Control your lights independently, schedule wake-up and wind-down routines, and integrate with other
-					smart devices all from your phone. All of our products support all the major home-hub accessories
-					and integrate seamlessly for a simplistic and relaxing experience.
-				</p>
+
+				<div className={styles.homeContent}>
+					<h2 className={styles.statsHeader}>Smart home done right</h2>
+					<div className={styles.statsContainer}>
+						<div className={styles.stat}>
+							<h3>2m+</h3>
+							<p>satisfied customers</p>
+						</div>
+						<div className={styles.stat}>
+							<h3>200k</h3>
+							<p>positive reviews</p>
+						</div>
+						<div className={styles.stat}>
+							<h3>5m+</h3>
+							<p>devices purchased</p>
+						</div>
+					</div>
+
+					<h2>A world of customization</h2>
+					<p>
+						Control your lights independently, schedule wake-up and wind-down routines, and integrate with
+						other smart devices all from your phone. All of our products support all the major home-hub
+						accessories and integrate seamlessly for a simplistic and relaxing experience.
+					</p>
+				</div>
 			</main>
 		</>
 	);

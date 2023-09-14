@@ -89,7 +89,7 @@ body:global(.light-mode) .landingUnderlay {
 	max-width: 2560px;
 	max-height: 960px;
 
-	margin: calc(-1 * var(--main-padding)) auto 32px auto;
+	margin: calc(-1 * var(--main-padding)) auto 128px auto;
 
 	transform: translateX(calc(-1 * var(--main-padding)));
 }
@@ -129,4 +129,43 @@ body:global(.light-mode) .landingUnderlay {
 
 .contentImageText > h1 {
 	margin-bottom: 8px;
+}
+
+.homeContent {
+	width: var(--main-container-width);
+	margin: auto;
+}
+
+.statsContainer {
+	display: flex;
+	gap: 64px;
+
+	width: fit-content;
+	margin: 0 auto 128px auto;
+
+	justify-content: space-between;
+}
+
+.statsHeader {
+	text-align: center;
+
+	width: fit-content;
+
+	padding-bottom: 16px;
+	margin: auto;
+	margin-bottom: 16px;
+
+	font-size: 3em;
+	font-weight: normal;
+
+	border-bottom: 2px solid;
+}
+
+.stat > * {
+	width: 100%;
+	text-align: center;
+}
+
+.stat h3 {
+	font-size: 2.5rem;
 }

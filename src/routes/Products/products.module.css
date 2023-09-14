@@ -1,13 +1,10 @@
 .products {
-	--product-container-width: 1080px;
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 
 	width: 100%;
-	max-width: var(--product-container-width);
-	height: 100vh;
+	max-width: var(--main-container-width);
 	margin: auto;
 	margin-top: 32px;
 }
@@ -101,7 +98,7 @@
 	--products-per-line: 5;
 
 	--product-width: calc(
-		(var(--product-container-width) - (var(--product-gap) * (var(--products-per-line) - 1))) /
+		(var(--main-container-width) - (var(--product-gap) * (var(--products-per-line) - 1))) /
 			(var(--products-per-line))
 	);
 
