@@ -2,42 +2,42 @@
 	{
 		"id": "smart-bulb-standard-rgb",
 		"name": "Full Color Smart Bulb",
-		"image": "./smart-light-rgb.png",
+		"image": "/smart-light-rgb.png",
 		"features": ["800 lumen", "full color range vibrant LED", "supports Alexa, Google Home, and Homekit"],
 		"price": "19.99"
 	},
 	{
 		"id": "smart-bulb-flood-rgb",
 		"name": "Full Color Smart Flood Bulb",
-		"image": "./smart-light-rgb.png",
+		"image": "/smart-light-rgb.png",
 		"features": ["1100 lumen", "full color range vibrant LED", "supports Alexa, Google Home, and Homekit"],
 		"price": "24.99"
 	},
 	{
 		"id": "smart-bulb-standard",
 		"name": "Smart Bulb",
-		"image": "./smart-light.png",
+		"image": "/smart-light.png",
 		"features": ["800 lumen", "vibrant LED", "supports Alexa, Google Home, and Homekit"],
 		"price": "9.99"
 	},
 	{
 		"id": "smart-bulb-flood",
 		"name": "Smart Flood Bulb",
-		"image": "./smart-light.png",
+		"image": "/smart-light.png",
 		"features": ["1100 lumen", "vibrant LED", "supports Alexa, Google Home, and Homekit"],
 		"price": "12.99"
 	},
 	{
 		"id": "led-bulb-standard",
 		"name": "LED Standard Bulb",
-		"image": "./smart-light.png",
+		"image": "/smart-light.png",
 		"features": ["800 lumen", "vibrant LED"],
 		"price": "5.99"
 	},
 	{
 		"id": "led-bulb-flood",
 		"name": "LED Flood Bulb",
-		"image": "./smart-light.png",
+		"image": "/smart-light.png",
 		"features": ["1100 lumen", "vibrant LED"],
 		"price": "6.99"
 	}

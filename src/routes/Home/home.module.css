@@ -127,13 +127,34 @@ body:global(.light-mode) .landingUnderlay {
 	transform: translateY(-50%);
 }
 
-.contentImageText > h1 {
+.contentImageText > h2 {
 	margin-bottom: 8px;
+
+	font-size: 3rem;
+	font-weight: normal;
+}
+
+.contentImageText > h3 {
+	margin-bottom: 8px;
+
+	font-size: 2rem;
+	font-weight: normal;
 }
 
 .homeContent {
 	width: var(--main-container-width);
 	margin: auto;
+}
+
+.homeContent h2 {
+	font-weight: normal;
+	font-size: 3rem;
+}
+
+.homeContent p {
+	margin-bottom: 64px;
+
+	font-size: 1.2rem;
 }
 
 .statsContainer {
@@ -153,6 +174,7 @@ body:global(.light-mode) .landingUnderlay {
 
 	padding-bottom: 16px;
 	margin: auto;
+	margin-top: 128px;
 	margin-bottom: 16px;
 
 	font-size: 3em;
@@ -168,4 +190,5 @@ body:global(.light-mode) .landingUnderlay {
 
 .stat h3 {
 	font-size: 2.5rem;
+	font-weight: bold;
 }

@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { RouteObject, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Home from "./routes/Home/Home";
-import Products from "./routes/Products/Products";
-import Product from "./routes/Products/Product";
+import Shop from "./routes/Shop/Shop";
+import Product from "./routes/Product/Product";
 import About from "./routes/About/About";
 import Error from "./routes/Error/Error";
 
@@ -27,11 +27,11 @@ const routes: RouteObject[] = [
 				path: "/",
 				element: <Home />,
 			},
-			{ path: "products/:id", element: <Product /> },
 			{
-				path: "products",
-				element: <Products />,
+				path: "shop",
+				element: <Shop />,
 			},
+			{ path: "product/:id", element: <Product /> },
 			{
 				path: "about",
 				element: <About />,

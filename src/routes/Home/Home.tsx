@@ -79,12 +79,24 @@ const Home = () => {
 				<div className={styles.contentImageContainer}>
 					<img className={styles.contentImage} src={homeLightingImage} />
 					<div className={styles.contentImageText}>
-						<h1>Home lighting redefined</h1>
-						<h2>Give life to your whole space</h2>
+						<h2>Home lighting redefined</h2>
+						<h3>Give life to your whole space</h3>
 					</div>
 				</div>
 
 				<div className={styles.homeContent}>
+					<h2>Welcome to a world of customization</h2>
+					<p>
+						Control your lights one at a time, as part of a group, or all at once. Schedule wake-up and
+						wind-down routines to shape the mood of your day. Your lights, how you want them.
+					</p>
+
+					<h2>Control anytime, anywhere</h2>
+					<p>
+						All of our products support all the major home-hub accessories and integrate seamlessly for a
+						simple and relaxing experience.
+					</p>
+
 					<h2 className={styles.statsHeader}>Smart home done right</h2>
 					<div className={styles.statsContainer}>
 						<div className={styles.stat}>
@@ -100,13 +112,6 @@ const Home = () => {
 							<p>devices purchased</p>
 						</div>
 					</div>
-
-					<h2>A world of customization</h2>
-					<p>
-						Control your lights independently, schedule wake-up and wind-down routines, and integrate with
-						other smart devices all from your phone. All of our products support all the major home-hub
-						accessories and integrate seamlessly for a simplistic and relaxing experience.
-					</p>
 				</div>
 			</main>
 		</>

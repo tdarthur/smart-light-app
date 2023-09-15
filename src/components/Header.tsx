@@ -40,7 +40,7 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 							<Link to="/">Home</Link>
 						</li>
 						<li>
-							<Link to="/products">Products</Link>
+							<Link to="/shop">Products</Link>
 						</li>
 						<li>
 							<Link to="/about">About Us</Link>

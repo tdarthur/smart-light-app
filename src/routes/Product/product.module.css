@@ -1,0 +1,16 @@
+.productPage {
+	width: var(--main-container-width);
+	margin: 0 auto;
+	padding: 32px;
+}
+
+.productPage h1 {
+	margin-bottom: 16px;
+}
+
+.productImage {
+	width: 512px;
+	height: 512px;
+
+	background-color: var(--color-input-background);
+}

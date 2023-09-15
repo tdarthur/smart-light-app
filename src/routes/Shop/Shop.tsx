@@ -2,9 +2,10 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import Header from "../../components/Header";
+import type { Product } from "../../models/Product";
 // import IconFilter from "../../components/icons/IconFilter";
 
-import styles from "./products.module.css";
+import styles from "./shop.module.css";
 import IconX from "../../components/icons/IconX";
 import IconMagnifyingGlass from "../../components/icons/IconMagnifyingGlass";
 
@@ -57,7 +58,7 @@ const SearchBar = ({ setSearchString, search }: SearchBarProps) => {
 	return (
 		<div className={styles.searchBar}>
 			<input
-				id="product-search"
+				id="search-bar"
 				className={styles.searchInput}
 				onChange={(event) => {
 					setSearchString(event.target.value);
@@ -127,14 +128,6 @@ const SearchBar = ({ setSearchString, search }: SearchBarProps) => {
 	);
 };
 
-type ProductInfo = {
-	id: string;
-	name: string;
-	image: string;
-	features: string[];
-	price: number;
-};
-
 const productFeatures = ["white", "rgb", "standard", "flood"] as const;
 
 const searchSimilarityThreshold = 0.6;
@@ -164,16 +157,16 @@ function calculateLevenshteinDistance(a: string, b: string) {
 	return matrix[b.length][a.length];
 }
 
-const Products = () => {
+const Shop = () => {
 	const [searchString, setSearchString] = useState("");
 	const [activeFilters, setActiveFilters] = useState<(typeof productFeatures)[]>([]);
-	const [products, setProducts] = useState<ProductInfo[]>([]);
-	const [filteredProducts, setFilteredProducts] = useState<ProductInfo[]>([]);
+	const [products, setProducts] = useState<Product[]>([]);
+	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 	const [lastSearch, setLastSearch] = useState("");
 
 	useEffect(() => {
 		(async () => {
-			const products = (await (await fetch("/products.json")).json()) as ProductInfo[];
+			const products = (await (await fetch("/products.json")).json()) as Product[];
 			setProducts(products);
 			setFilteredProducts(products);
 		})();
@@ -205,14 +198,14 @@ const Products = () => {
 		<>
 			<Header />
 			<main className={styles.products}>
-				<h1>Products</h1>
+				<h1>Shop</h1>
 
 				<SearchBar setSearchString={setSearchString} setActiveFilters={setActiveFilters} search={search} />
 
 				<div className={styles.productList}>
 					{filteredProducts.length > 0 ? (
 						filteredProducts.map(({ id, name, image, features, price }) => (
-							<Link className={styles.product} to={`${id}`} key={name}>
+							<Link className={styles.product} to={`/product/${id}`} key={name}>
 								<img className={styles.productImage} src={image} key={name} />
 								<div className={styles.productPrice}>{price.toLocaleString("en-US")}</div>
 								<div className={styles.productDetails}>
@@ -234,4 +227,4 @@ const Products = () => {
 	);
 };
 
-export default Products;
+export default Shop;
