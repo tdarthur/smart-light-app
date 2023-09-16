@@ -167,7 +167,7 @@ const Shop = () => {
 
 	useEffect(() => {
 		(async () => {
-			const products = (await (await fetch("/products.json")).json()) as Product[];
+			const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
 			setProducts(products);
 			setFilteredProducts(products);
 		})();

@@ -19,7 +19,7 @@ const Product = () => {
 
 	useEffect(() => {
 		(async () => {
-			const products = (await (await fetch("/products.json")).json()) as Product[];
+			const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
 			setProduct(products.find((p) => p.id === matches[0].params.id));
 		})();
 	}, [matches]);
