@@ -1,15 +1,4 @@
-.products {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-
-	width: 100%;
-	max-width: var(--main-container-width);
-	margin: auto;
-	margin-top: 32px;
-}
-
-.products h1 {
+.shopPage h1 {
 	margin-bottom: 32px;
 }
 

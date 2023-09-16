@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import type { Product } from "../../models/Product";
 
 import styles from "./product.module.css";
+import clsx from "clsx";
 
 const Product = () => {
 	const [product, setProduct] = useState<Product>();
@@ -28,7 +29,7 @@ const Product = () => {
 	return (
 		<>
 			<Header />
-			<div className={styles.productPage}>
+			<div className={clsx("main-container", styles.productPage)}>
 				<h1>{product?.name}</h1>
 				<img className={styles.productImage} src={product?.image} />
 			</div>

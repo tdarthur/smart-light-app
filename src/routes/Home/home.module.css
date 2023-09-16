@@ -47,7 +47,7 @@
 }
 
 body:global(.light-mode) .landingUnderlay {
-	background-color: var(--background-color);
+	background-color: white;
 }
 
 @keyframes landing-fade {
@@ -68,14 +68,6 @@ body:global(.light-mode) .landingUnderlay {
 	opacity: 0;
 
 	animation: landing-fade 5000ms both;
-}
-
-.homePage {
-	padding: var(--main-padding);
-}
-
-.homePage p {
-	max-width: 512px;
 }
 
 .contentImageContainer {
@@ -141,20 +133,26 @@ body:global(.light-mode) .landingUnderlay {
 	font-weight: normal;
 }
 
-.homeContent {
-	width: var(--main-container-width);
-	margin: auto;
-}
-
 .homeContent h2 {
 	font-weight: normal;
 	font-size: 3rem;
 }
 
-.homeContent p {
-	margin-bottom: 64px;
+.infoContainer {
+	margin-bottom: 128px;
+}
+
+.infoContainer > p {
+	max-width: 512px;
 
 	font-size: 1.2rem;
+}
+
+.infoContainer > img {
+	display: block;
+
+	width: 512px;
+	margin: 16px 0;
 }
 
 .statsContainer {
@@ -162,7 +160,7 @@ body:global(.light-mode) .landingUnderlay {
 	gap: 64px;
 
 	width: fit-content;
-	margin: 0 auto 128px auto;
+	margin: 0 auto;
 
 	justify-content: space-between;
 }

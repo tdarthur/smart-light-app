@@ -6,6 +6,7 @@ import Header from "../../components/Header";
 import styles from "./home.module.css";
 
 import homeLightingImage from "../../assets/home-lighting.jpg";
+import accessoryCompatibilitiesImage from "../../assets/accessory-compatibilities.png";
 
 const animationStart = Date.now();
 const landingAnimationDefaultDuration = 6_000;
@@ -84,18 +85,23 @@ const Home = () => {
 					</div>
 				</div>
 
-				<div className={styles.homeContent}>
-					<h2>Welcome to a world of customization</h2>
-					<p>
-						Control your lights one at a time, as part of a group, or all at once. Schedule wake-up and
-						wind-down routines to shape the mood of your day. Your lights, how you want them.
-					</p>
+				<div className={clsx("main-container", styles.homeContent)}>
+					<div className={styles.infoContainer}>
+						<h2>A world of customization</h2>
+						<p>
+							Control your lights one at a time, as part of a group, or all at once. Schedule wake-up and
+							wind-down routines to shape the mood of your day. Your lights, how you want them.
+						</p>
+					</div>
 
-					<h2>Control anytime, anywhere</h2>
-					<p>
-						All of our products support all the major home-hub accessories and integrate seamlessly for a
-						simple and relaxing experience.
-					</p>
+					<div className={styles.infoContainer}>
+						<h2>Control anytime, anywhere</h2>
+						<p>
+							All of our products support all the major home-hub accessories and integrate seamlessly for
+							a simple and relaxing experience.
+						</p>
+						<img className={styles.compatibleAccessoriesImage} src={accessoryCompatibilitiesImage} />
+					</div>
 
 					<h2 className={styles.statsHeader}>Smart home done right</h2>
 					<div className={styles.statsContainer}>

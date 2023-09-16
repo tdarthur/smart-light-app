@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 
 import Header from "../../components/Header";
 import type { Product } from "../../models/Product";
@@ -197,7 +198,7 @@ const Shop = () => {
 	return (
 		<>
 			<Header />
-			<main className={styles.products}>
+			<main className={clsx("main-container", styles.shopPage)}>
 				<h1>Shop</h1>
 
 				<SearchBar setSearchString={setSearchString} setActiveFilters={setActiveFilters} search={search} />

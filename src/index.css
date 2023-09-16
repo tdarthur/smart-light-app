@@ -4,6 +4,7 @@
 *::before,
 *::after {
 	box-sizing: border-box;
+
 	margin: 0;
 }
 
@@ -72,6 +73,7 @@ body {
 
 	--main-padding: 32px;
 	--main-container-width: 1080px;
+	--main-container-padding: 32px;
 
 	--color-header-border: #202020;
 
@@ -95,7 +97,10 @@ body.light-mode {
 	--color-header-border: #d8d8d8;
 }
 
-.yeehaw {
-	width: 100vw;
-	height: 100vh;
+.main-container {
+	max-width: var(--main-container-width);
+	padding: var(--main-container-padding);
+	margin: 0 auto;
+
+	box-sizing: content-box;
 }

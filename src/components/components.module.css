@@ -149,12 +149,11 @@ body:global(.light-mode) .headerLogo {
 	--toggle-button-size: 24px;
 
 	justify-self: right;
+	box-sizing: content-box;
 
 	width: var(--toggle-button-size);
 	height: var(--toggle-button-size);
 	margin-right: 16px;
-
-	box-sizing: content-box;
 
 	font-size: 14px;
 }
