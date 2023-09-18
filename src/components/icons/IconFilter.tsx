@@ -9,6 +9,8 @@ const IconFilter = (props: React.SVGProps<SVGSVGElement>) => (
 			strokeWidth={1.5}
 			stroke="currentColor"
 			className="w-6 h-6"
+			width="100%"
+			height="100%"
 			{...props}
 		>
 			<path

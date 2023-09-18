@@ -73,17 +73,14 @@ body:global(.light-mode) .landingUnderlay {
 .contentImageContainer {
 	position: relative;
 
+	display: block;
 	overflow: hidden;
 
-	display: block;
 	width: 100vw;
 	height: fit-content;
 	max-width: 2560px;
 	max-height: 960px;
-
-	margin: calc(-1 * var(--main-padding)) auto 128px auto;
-
-	transform: translateX(calc(-1 * var(--main-padding)));
+	margin-bottom: 64px;
 }
 
 .contentImageContainer::after {
@@ -97,8 +94,6 @@ body:global(.light-mode) .landingUnderlay {
 	height: 100%;
 
 	background: linear-gradient(90deg, black 0%, transparent 50%, transparent 100%);
-
-	/* mix-blend-mode: lighten; */
 }
 
 .contentImage {
@@ -142,6 +137,10 @@ body:global(.light-mode) .landingUnderlay {
 	margin-bottom: 128px;
 }
 
+.infoContainer > * {
+	max-width: 100%;
+}
+
 .infoContainer > p {
 	max-width: 512px;
 
@@ -153,16 +152,6 @@ body:global(.light-mode) .landingUnderlay {
 
 	width: 512px;
 	margin: 16px 0;
-}
-
-.statsContainer {
-	display: flex;
-	gap: 64px;
-
-	width: fit-content;
-	margin: 0 auto;
-
-	justify-content: space-between;
 }
 
 .statsHeader {
@@ -181,6 +170,14 @@ body:global(.light-mode) .landingUnderlay {
 	border-bottom: 2px solid;
 }
 
+.statsContainer {
+	display: flex;
+	gap: 64px;
+
+	width: fit-content;
+	margin: 0 auto;
+}
+
 .stat > * {
 	width: 100%;
 	text-align: center;
@@ -189,4 +186,23 @@ body:global(.light-mode) .landingUnderlay {
 .stat h3 {
 	font-size: 2.5rem;
 	font-weight: bold;
+}
+
+@media (max-width: 1079px) {
+	.contentImage {
+		right: 0%;
+
+		width: 1080px;
+	}
+
+	.contentImageText {
+		left: 64px;
+	}
+}
+
+@media (max-width: 767px) {
+	.statsContainer {
+		flex-direction: column;
+		gap: 32px;
+	}
 }

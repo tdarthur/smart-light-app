@@ -27,7 +27,7 @@ a:not(:disabled):hover {
 }
 
 :root {
-	scroll-behavior: smooth;
+	overflow-x: hidden;
 }
 
 h1,
@@ -98,6 +98,7 @@ body.light-mode {
 }
 
 .main-container {
+	width: calc(100vw - (var(--main-container-padding) * 2));
 	max-width: var(--main-container-width);
 	padding: var(--main-container-padding);
 	margin: 0 auto;
