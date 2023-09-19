@@ -66,6 +66,7 @@ body {
 	--color-link-text: #57bcff;
 	--color-background: #080808;
 	--color-input-background: #202020;
+	--color-header-border: #202020;
 
 	--scroll-bar-width: 8px;
 	--scroll-bar-color: white;
@@ -74,8 +75,9 @@ body {
 	--main-padding: 32px;
 	--main-container-width: 1080px;
 	--main-container-padding: 32px;
-
-	--color-header-border: #202020;
+	--main-icon-size: 24px;
+	--main-icon-padding: 8px;
+	--header-height: 64px;
 
 	margin: 0;
 	overflow-x: hidden;
@@ -104,4 +106,10 @@ body.light-mode {
 	margin: 0 auto;
 
 	box-sizing: content-box;
+}
+
+.icon-button {
+	width: var(--main-icon-size);
+	height: var(--main-icon-size);
+	padding: var(--main-icon-padding);
 }

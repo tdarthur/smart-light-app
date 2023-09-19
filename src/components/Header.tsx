@@ -1,25 +1,71 @@
-import { useState, type ComponentProps } from "react";
+import { useState, type ComponentProps, useEffect } from "react";
 import clsx from "clsx";
-
-import styles from "./components.module.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, To, useLocation, useNavigate } from "react-router-dom";
 import IconSun from "./icons/IconSun";
 import IconMoon from "./icons/IconMoon";
+import IconHamburger from "./icons/IconHamburger";
+
+import styles from "./header.module.css";
+import IconX from "./icons/IconX";
 
 let lightModeEnabled = localStorage.getItem("light-mode") === "true";
 if (lightModeEnabled) {
 	document.body.classList.add("light-mode");
 }
 
+type NavigationOption = {
+	name: string;
+	to: To;
+};
+
+const locations: NavigationOption[] = [
+	{ name: "Home", to: "/" },
+	{ name: "Products", to: "/shop" },
+	{ name: "About Us", to: "/about" },
+];
+
 const Header = ({ className, ...props }: ComponentProps<"header">) => {
 	const [lightMode, setLightMode] = useState(lightModeEnabled);
+	const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
 
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		const resizeListener = () => {
+			setHamburgerMenuOpen(false);
+		};
+
+		window.addEventListener("resize", resizeListener);
+
+		return () => {
+			window.removeEventListener("resize", resizeListener);
+		};
+	}, []);
+
+	const navigationList = (
+		<ul>
+			{locations.map(({ name, to }) => (
+				<li>
+					<Link to={to}>{name}</Link>
+				</li>
+			))}
+		</ul>
+	);
+
 	return (
 		<>
 			<header className={clsx(styles.header, className)} {...props}>
+				<button
+					className={clsx("icon-button", styles.hamburgerButton)}
+					type="button"
+					onClick={() => {
+						setHamburgerMenuOpen(true);
+					}}
+				>
+					<IconHamburger />
+				</button>
+
 				<div className={styles.headerLogo}>
 					<button
 						className={styles.headerLogoText}
@@ -34,22 +80,10 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 					</button>
 				</div>
 
-				<nav className={styles.headerNavigation}>
-					<ul>
-						<li>
-							<Link to="/">Home</Link>
-						</li>
-						<li>
-							<Link to="/shop">Products</Link>
-						</li>
-						<li>
-							<Link to="/about">About Us</Link>
-						</li>
-					</ul>
-				</nav>
+				{!hamburgerMenuOpen && <nav className={styles.headerNavigation}>{navigationList}</nav>}
 
 				<button
-					className={styles.headerDarkModeToggle}
+					className={clsx("icon-button", styles.headerDarkModeToggle)}
 					onClick={() => {
 						lightModeEnabled = !lightModeEnabled;
 
@@ -67,6 +101,22 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 					{lightMode ? <IconSun /> : <IconMoon />}
 				</button>
 			</header>
+
+			{hamburgerMenuOpen && (
+				<div className={styles.hamburgerMenu}>
+					<button
+						className={clsx("icon-button", styles.hamburgerExitButton)}
+						type="button"
+						onClick={() => {
+							setHamburgerMenuOpen(false);
+						}}
+					>
+						<IconX />
+					</button>
+					<nav className={styles.hamburgerMenuNavigation}>{navigationList}</nav>
+				</div>
+			)}
+
 			<div className={styles.headerSpacer} />
 		</>
 	);
