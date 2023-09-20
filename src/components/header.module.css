@@ -168,17 +168,37 @@ body:global(.light-mode) .headerLogo {
 	left: 0;
 	z-index: 3;
 
-	width: fit-content;
+	width: 256px;
 	height: 100vh;
-
 	padding: 0 var(--main-padding);
 
-	background-color: var(--color-background);
+	background-color: var(--color-hamburger-menu-background);
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
 }
 
 .hamburgerExitButton {
-	margin-top: calc((var(--header-height) - var(--main-icon-size)) / 2 - var(--main-icon-padding));
-	margin-left: calc(-1 * var(--main-icon-padding));
+	margin: calc((var(--header-height) - var(--main-icon-size)) / 2 - var(--main-icon-padding)) 0 32px
+		calc(-1 * var(--main-icon-padding));
+}
+
+.hamburgerMenuNavigation ul {
+	padding: 0;
+
+	list-style: none;
+}
+
+.hamburgerMenuNavigation li {
+	width: 256px;
+	margin-bottom: 32px;
+}
+
+.hamburgerMenuNavigation a {
+	padding: 0 2px;
+}
+
+.hamburgerMenuNavigation a:hover {
+	padding: 0 0 0 4px;
 }
 
 @media (max-width: 895px) {

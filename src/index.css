@@ -67,6 +67,7 @@ body {
 	--color-background: #080808;
 	--color-input-background: #202020;
 	--color-header-border: #202020;
+	--color-hamburger-menu-background: #08080880;
 
 	--scroll-bar-width: 8px;
 	--scroll-bar-color: white;
@@ -93,6 +94,7 @@ body.light-mode {
 	--color-background: #f0f0f0;
 	--color-link-text: #0099ff;
 	--color-input-background: #d0d0d0;
+	--color-hamburger-menu-background: #f0f0f080;
 
 	--scroll-bar-color: black;
 

@@ -55,13 +55,14 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 
 	return (
 		<>
-			<header className={clsx(styles.header, className)} {...props}>
+			<header className={clsx(styles.header, className)} {...props} key={location.key}>
 				<button
 					className={clsx("icon-button", styles.hamburgerButton)}
 					type="button"
 					onClick={() => {
 						setHamburgerMenuOpen(true);
 					}}
+					style={hamburgerMenuOpen ? { color: "transparent" } : undefined}
 				>
 					<IconHamburger />
 				</button>

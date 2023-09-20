@@ -104,10 +104,14 @@ body:global(.light-mode) .landingUnderlay {
 }
 
 .contentImageText {
+	--content-image-padding: 128px;
+
 	position: absolute;
-	left: 128px;
+	left: var(--content-image-padding);
 	top: 50%;
 	z-index: 1;
+
+	padding-right: var(--content-image-padding);
 
 	color: white;
 
@@ -193,10 +197,12 @@ body:global(.light-mode) .landingUnderlay {
 		right: 0%;
 
 		width: 1080px;
+
+		transform: translateX(calc(-50% + 50vw));
 	}
 
 	.contentImageText {
-		left: 64px;
+		--content-image-padding: 64px;
 	}
 }
 
