@@ -48,53 +48,22 @@
 	opacity: 1;
 }
 
-.toggleFilterOptionsShownButton {
-	width: 24px;
-	height: 24px;
-}
-
-.filters {
-	position: relative;
-
-	height: 100%;
-
-	background-color: var(--color-input-background);
-	color: white;
-
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 2px;
-}
-
-.filterSelectionContainer {
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	right: 0;
-
-	width: 256px;
-	padding: 8px;
-
-	background-color: blue;
-	font-size: 14px;
-}
-
-.filterSelectionContainer h3:not(:nth-child(1)) {
-	margin-top: 16px;
-}
-
 .productList {
 	--product-gap: 16px;
 	--products-per-line: 5;
 
-	--product-width: calc(
-		(var(--main-container-width) - (var(--product-gap) * (var(--products-per-line) - 1))) /
-			(var(--products-per-line))
-	);
-
-	display: flex;
-	align-items: start;
-	flex-wrap: wrap;
+	display: grid;
 	gap: var(--product-gap);
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(
+			calc(
+				(var(--main-container-width) - (var(--product-gap) * (var(--products-per-line) - 1))) /
+					var(--products-per-line)
+			),
+			1fr
+		)
+	);
 
 	width: 100%;
 }
@@ -102,15 +71,11 @@
 .product {
 	position: relative;
 
-	overflow: hidden;
-
-	width: var(--product-width);
-	height: auto;
 	border-radius: 2px;
 
 	opacity: 0.8;
 
-	transition: scale 150ms linear;
+	background-color: var(--color-input-background);
 }
 
 .product:hover {
@@ -119,39 +84,33 @@
 }
 
 .productImage {
-	width: var(--product-width);
-	height: var(--product-width);
+	width: 100%;
 
 	border: none;
 	outline: none;
 }
 
-.productPrice {
-	position: absolute;
-	top: calc(var(--product-width) - 20px);
-	right: 8px;
-
-	font-weight: bold;
-}
-
 .productDetails {
+	position: relative;
+
 	height: fit-content;
 	padding: 8px;
-
-	background-color: var(--color-header-border);
 }
 
 .productName {
+	overflow: hidden;
+
+	width: 100%;
+	max-width: 100%;
 	margin-bottom: 4px;
 
 	font-size: 16px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
-.productFeatures {
-	padding-left: 8px;
-
-	font-size: 10px;
-	list-style-type: "- ";
+.productPrice {
+	font-size: 18px;
 }
 
 .productListEmptyText {
@@ -160,9 +119,9 @@
 	text-align: center;
 }
 
-@media (max-width: 1079px) {
+@media (max-width: 511px) {
 	.productList {
-		--product-gap: 16px;
-		--products-per-line: 8;
+		--main-container-width: 100%;
+		--products-per-line: 2;
 	}
 }

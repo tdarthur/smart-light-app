@@ -1,4 +1,4 @@
-import { useState, type ComponentProps, useEffect } from "react";
+import { useState, type ComponentProps, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { Link, To, useLocation, useNavigate } from "react-router-dom";
 import IconSun from "./icons/IconSun";
@@ -27,6 +27,7 @@ const locations: NavigationOption[] = [
 const Header = ({ className, ...props }: ComponentProps<"header">) => {
 	const [lightMode, setLightMode] = useState(lightModeEnabled);
 	const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
+	const hamburgerMenuRef = useRef(null);
 
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -43,10 +44,37 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 		};
 	}, []);
 
+	useEffect(() => {
+		if (hamburgerMenuRef.current) {
+			const hideHamburgerMenu = (event: MouseEvent) => {
+				if (document.getElementById("hamburger-menu")?.getAttribute("data-displayed") === "true") {
+					const target = event.target as HTMLElement;
+
+					if (target === document.getElementById("hamburger-button")) return;
+
+					const isDescendantOfHamburgerMenu = (element: HTMLElement): boolean =>
+						element === hamburgerMenuRef.current ||
+						(element.parentElement && isDescendantOfHamburgerMenu(element.parentElement)) ||
+						false;
+
+					if (!isDescendantOfHamburgerMenu(target)) {
+						setHamburgerMenuOpen(false);
+					}
+				}
+			};
+
+			window.addEventListener("click", hideHamburgerMenu);
+
+			return () => {
+				window.removeEventListener("click", hideHamburgerMenu);
+			};
+		}
+	}, []);
+
 	const navigationList = (
 		<ul>
 			{locations.map(({ name, to }) => (
-				<li>
+				<li key={name}>
 					<Link to={to}>{name}</Link>
 				</li>
 			))}
@@ -57,6 +85,7 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 		<>
 			<header className={clsx(styles.header, className)} {...props} key={location.key}>
 				<button
+					id="hamburger-button"
 					className={clsx("icon-button", styles.hamburgerButton)}
 					type="button"
 					onClick={() => {
@@ -103,20 +132,23 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 				</button>
 			</header>
 
-			{hamburgerMenuOpen && (
-				<div className={styles.hamburgerMenu}>
-					<button
-						className={clsx("icon-button", styles.hamburgerExitButton)}
-						type="button"
-						onClick={() => {
-							setHamburgerMenuOpen(false);
-						}}
-					>
-						<IconX />
-					</button>
-					<nav className={styles.hamburgerMenuNavigation}>{navigationList}</nav>
-				</div>
-			)}
+			<div
+				id="hamburger-menu"
+				className={styles.hamburgerMenu}
+				ref={hamburgerMenuRef}
+				data-displayed={hamburgerMenuOpen || undefined}
+			>
+				<button
+					className={clsx("icon-button", styles.hamburgerExitButton)}
+					type="button"
+					onClick={() => {
+						setHamburgerMenuOpen(false);
+					}}
+				>
+					<IconX />
+				</button>
+				<nav className={styles.hamburgerMenuNavigation}>{navigationList}</nav>
+			</div>
 
 			<div className={styles.headerSpacer} />
 		</>

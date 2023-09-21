@@ -115,3 +115,7 @@ body.light-mode {
 	height: var(--main-icon-size);
 	padding: var(--main-icon-padding);
 }
+
+.icon-button > * {
+	pointer-events: none;
+}
