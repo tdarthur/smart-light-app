@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import type { Product } from "../../models/Product";
 import { calculateLevenshteinDistance } from "../../utils/stringUtils";
 
-import styles from "./shop.module.css";
+import styles from "./store.module.css";
 import IconX from "../../components/icons/IconX";
 import IconMagnifyingGlass from "../../components/icons/IconMagnifyingGlass";
 
@@ -64,7 +64,7 @@ const SearchBar = ({ setSearchString, search }: SearchBarProps) => {
 
 const searchSimilarityThreshold = 0.6;
 
-const Shop = () => {
+const Store = () => {
 	const products = useLoaderData() as Product[];
 
 	const [searchString, setSearchString] = useState("");
@@ -95,9 +95,7 @@ const Shop = () => {
 	return (
 		<>
 			<Header />
-			<main className={clsx("main-container", styles.shopPage)}>
-				<h1>Shop</h1>
-
+			<main className={clsx("main-container", styles.storePage)}>
 				<SearchBar setSearchString={setSearchString} search={search} />
 
 				<div className={styles.productList}>
@@ -120,4 +118,4 @@ const Shop = () => {
 	);
 };
 
-export default Shop;
+export default Store;

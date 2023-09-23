@@ -10,7 +10,8 @@
 
 .productImage {
 	width: 512px;
-	height: 512px;
+	max-width: 100%;
+	aspect-ratio: 1;
 
 	background-color: var(--color-input-background);
 }

@@ -13,7 +13,7 @@ const Product = () => {
 
 	useEffect(() => {
 		if (!matches[0].params.id) {
-			navigate("/shop");
+			navigate("/store");
 		}
 	}, [matches, navigate]);
 

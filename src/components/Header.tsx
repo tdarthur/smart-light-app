@@ -21,7 +21,7 @@ type NavigationOption = {
 
 const locations: NavigationOption[] = [
 	{ name: "Home", to: "/" },
-	{ name: "Products", to: "/shop" },
+	{ name: "Store", to: "/store" },
 	{ name: "About Us", to: "/about" },
 ];
 

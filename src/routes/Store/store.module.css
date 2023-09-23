@@ -1,4 +1,4 @@
-.shopPage h1 {
+.storePage h1 {
 	margin-bottom: 32px;
 }
 
@@ -85,6 +85,7 @@
 
 .productImage {
 	width: 100%;
+	aspect-ratio: 1;
 
 	border: none;
 	outline: none;

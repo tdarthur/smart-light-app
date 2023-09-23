@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouteObject, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouteObject, RouterProvider, ScrollRestoration, createBrowserRouter } from "react-router-dom";
 
 import Home from "./routes/Home/Home";
-import Shop from "./routes/Shop/Shop";
+import Store from "./routes/Store/Store";
 import Product from "./routes/Product/Product";
 import About from "./routes/About/About";
-import ErrorPage from "./routes/Error/Error";
+import ErrorPage from "./routes/Error/ErrorPage";
 
 import "./index.css";
 
@@ -21,15 +21,23 @@ if (!visitedInThisSession && (!lastVisited || Date.now() - parseInt(lastVisited)
 
 const routes: RouteObject[] = [
 	{
+		element: (
+			<>
+				<ScrollRestoration />
+				<Outlet />
+			</>
+		),
 		errorElement: <ErrorPage />,
 		children: [
 			{
 				path: "/",
 				element: <Home />,
+				errorElement: <ErrorPage />,
+				children: [],
 			},
 			{
-				path: "shop",
-				element: <Shop />,
+				path: "/store",
+				element: <Store />,
 				loader: async () => {
 					const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
 
@@ -44,8 +52,9 @@ const routes: RouteObject[] = [
 				},
 			},
 			{
-				path: "product/:id",
+				path: "/product/:id",
 				element: <Product />,
+				errorElement: <ErrorPage returnTo="/store" />,
 				loader: async ({ params }) => {
 					const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
 					const product = products.find((p) => p.id === params.id);
@@ -61,7 +70,7 @@ const routes: RouteObject[] = [
 				},
 			},
 			{
-				path: "about",
+				path: "/about",
 				element: <About />,
 			},
 		],
