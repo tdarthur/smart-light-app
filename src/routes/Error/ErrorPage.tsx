@@ -1,4 +1,4 @@
-import { Link, To, isRouteErrorResponse, useOutlet, useRouteError } from "react-router-dom";
+import { Link, To, isRouteErrorResponse, useRouteError } from "react-router-dom";
 import Header from "../../components/Header";
 
 import styles from "./error.module.css";
@@ -9,8 +9,6 @@ type Props = {
 
 const ErrorPage = ({ returnTo = "/" }: Props) => {
 	const error = useRouteError();
-	console.log(useOutlet());
-	// console.log(returnTo);
 
 	let errorStatus = "500 Internal Server Error";
 	let errorMessage = "No details";

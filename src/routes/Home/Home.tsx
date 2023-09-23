@@ -19,7 +19,6 @@ const Home = () => {
 		let skipped = false;
 		if ("code" in event) {
 			const keyboardEvent = event as KeyboardEvent;
-			console.log(keyboardEvent);
 			if (keyboardEvent.code === "Escape" || keyboardEvent.code === "Space" || keyboardEvent.code === "Enter") {
 				skipped = true;
 			}
