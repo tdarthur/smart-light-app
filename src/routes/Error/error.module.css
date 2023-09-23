@@ -1,27 +1,28 @@
 .errorPage {
-	padding: var(--main-padding);
+	height: calc(100dvh - var(--header-height));
+
+	background-image: linear-gradient(135deg, red, var(--color-background) 256px);
 }
 
-.errorPage > h1 {
+.errorInformation {
+	margin-bottom: 24px;
+}
+
+.errorPage h1 {
 	margin-bottom: 16px;
+	font-weight: bold;
 }
 
 .errorPage > p {
 	margin: 8px 0;
 }
 
-.errorDecoration {
-	position: absolute;
-	left: -128px;
-	top: -64px;
-	z-index: -1;
+.backButton {
+	display: block;
 
-	width: 384px;
-	height: 384px;
-	aspect-ratio: 1;
+	width: fit-content;
+	padding: 16px 32px;
 
-	background-color: red;
-	border-radius: 50%;
-
-	filter: blur(96px);
+	border-radius: 2px;
+	background-color: #80808040;
 }

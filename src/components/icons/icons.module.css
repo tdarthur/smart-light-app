@@ -1,5 +1,5 @@
 .iconImage {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
 }

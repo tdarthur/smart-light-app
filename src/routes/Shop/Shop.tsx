@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useState, useRef } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 import clsx from "clsx";
 
 import Header from "../../components/Header";
@@ -65,18 +65,11 @@ const SearchBar = ({ setSearchString, search }: SearchBarProps) => {
 const searchSimilarityThreshold = 0.6;
 
 const Shop = () => {
-	const [searchString, setSearchString] = useState("");
-	const [products, setProducts] = useState<Product[]>([]);
-	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-	const [lastSearch, setLastSearch] = useState("");
+	const products = useLoaderData() as Product[];
 
-	useEffect(() => {
-		(async () => {
-			const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
-			setProducts(products);
-			setFilteredProducts(products);
-		})();
-	}, []);
+	const [searchString, setSearchString] = useState("");
+	const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+	const [lastSearch, setLastSearch] = useState("");
 
 	const search = (searchValue = searchString) => {
 		setLastSearch(searchValue);

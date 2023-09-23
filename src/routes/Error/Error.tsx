@@ -3,28 +3,43 @@ import Header from "../../components/Header";
 
 import styles from "./error.module.css";
 
-const Error = () => {
+const ErrorPage = () => {
 	const error = useRouteError();
 
-	let errorStatus = "Unknown Error";
-	let errorMessage = "";
+	let errorStatus = "500 Internal Server Error";
+	let errorMessage = "No details";
 	if (isRouteErrorResponse(error)) {
 		errorStatus = `${error.status.toString()} ${error.statusText}`;
-		errorMessage = error.error?.message || "";
+		if (error.data) {
+			const errorData = error.data as string;
+			if (errorData.startsWith("Error: ")) {
+				errorMessage = errorData.substring(7);
+			} else {
+				errorMessage = error.data;
+			}
+		}
 	}
+
+	const returnTo = "/";
 
 	return (
 		<>
 			<Header />
-			<div className={styles.errorDecoration} />
 			<main className={styles.errorPage}>
-				<h1>An Error Occurred</h1>
-				<h2 className={styles.errorStatus}>{errorStatus}</h2>
-				<p>{errorMessage}</p>
-				<Link to="/">Back</Link>
+				<div className="main-container">
+					<div className={styles.errorInformation}>
+						<h1>An Error Occurred</h1>
+						<h2 className={styles.errorStatus}>{errorStatus}</h2>
+						<p>{errorMessage}</p>
+					</div>
+
+					<Link className={styles.backButton} to={returnTo}>
+						Back
+					</Link>
+				</div>
 			</main>
 		</>
 	);
 };
 
-export default Error;
+export default ErrorPage;

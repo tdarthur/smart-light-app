@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useMatches } from "react-router-dom";
+import { useEffect } from "react";
+import { useLoaderData, useMatches, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import type { Product } from "../../models/Product";
 
@@ -7,24 +7,15 @@ import styles from "./product.module.css";
 import clsx from "clsx";
 
 const Product = () => {
-	const [product, setProduct] = useState<Product>();
+	const product = useLoaderData() as Product;
 	const matches = useMatches();
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		// check that the id is valid, otherwise navigate back to products page.
-		if (matches[0].params.id) {
-			console.log(matches[0].params.id);
+		if (!matches[0].params.id) {
+			navigate("/shop");
 		}
-	}, [matches]);
-
-	useEffect(() => {
-		(async () => {
-			const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
-			setProduct(products.find((p) => p.id === matches[0].params.id));
-		})();
-	}, [matches]);
-
-	console.log(product);
+	}, [matches, navigate]);
 
 	return (
 		<>

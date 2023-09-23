@@ -212,12 +212,34 @@ body:global(.light-mode) .headerLogo {
 	margin-bottom: 32px;
 }
 
-.hamburgerMenuNavigation a {
-	padding: 0 2px;
+.hamburgerNavigationLink {
+	position: relative;
+
+	padding-left: 2px;
 }
 
-.hamburgerMenuNavigation a:hover {
-	padding: 0 0 0 4px;
+.hamburgerNavigationLink[data-active="true"] {
+	font-weight: bold;
+}
+
+.hamburgerNavigationLink[data-active="true"]:hover {
+	cursor: unset;
+}
+
+.activeRouteIndicator {
+	position: absolute;
+	left: -14px;
+	top: 1px;
+
+	display: none;
+	width: 16px;
+	height: 16px;
+
+	stroke-width: 2px;
+}
+
+.hamburgerNavigationLink:hover .activeRouteIndicator {
+	display: inline-block;
 }
 
 @media (max-width: 895px) {
