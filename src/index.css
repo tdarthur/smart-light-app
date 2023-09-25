@@ -73,9 +73,8 @@ body {
 	--scroll-bar-color: white;
 	--scroll-bar-hover-color: #888;
 
-	--main-padding: 32px;
+	--standard-padding: 32px;
 	--main-container-width: 1080px;
-	--main-container-padding: 32px;
 	--main-icon-size: 24px;
 	--main-icon-padding: 8px;
 	--header-height: 64px;
@@ -102,9 +101,9 @@ body.light-mode {
 }
 
 .main-container {
-	width: calc(100vw - (var(--main-container-padding) * 2));
+	width: calc(100vw - (var(--standard-padding) * 2));
 	max-width: var(--main-container-width);
-	padding: var(--main-container-padding);
+	padding: var(--standard-padding);
 	margin: 0 auto;
 
 	box-sizing: content-box;

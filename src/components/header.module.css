@@ -34,7 +34,7 @@
 	align-items: center;
 
 	height: 100%;
-	padding-left: var(--main-padding);
+	padding-left: var(--standard-padding);
 }
 
 body:global(.light-mode) .headerLogo {
@@ -126,7 +126,7 @@ body:global(.light-mode) .headerLogo {
 
 	width: calc(100% - 64px);
 	height: 100%;
-	padding: 0 var(--main-padding);
+	padding: 0 var(--standard-padding);
 }
 
 .headerNavigation a > * {
@@ -140,16 +140,15 @@ body:global(.light-mode) .headerLogo {
 	padding-top: 2px;
 }
 
-.headerDarkModeToggle {
+.headerButtons {
+	display: flex;
 	justify-self: right;
-	box-sizing: content-box;
+	gap: 8px;
 
-	margin-right: calc(var(--main-padding) - var(--main-icon-padding));
-
-	font-size: 14px;
+	margin-right: calc(var(--standard-padding) - var(--main-icon-padding));
 }
 
-.headerDarkModeToggle:hover {
+.headerButtons > *:hover {
 	filter: invert(50%);
 }
 
@@ -171,8 +170,8 @@ body:global(.light-mode) .headerLogo {
 	z-index: 3;
 
 	width: 256px;
-	height: 100vh;
-	padding: 0 var(--main-padding);
+	height: 100dvh;
+	padding: 0 var(--standard-padding);
 
 	background-color: var(--color-hamburger-menu-background);
 	backdrop-filter: blur(2px);
@@ -228,8 +227,8 @@ body:global(.light-mode) .headerLogo {
 
 .activeRouteIndicator {
 	position: absolute;
-	left: -14px;
-	top: 1px;
+	left: -16px;
+	top: 2px;
 
 	display: none;
 	width: 16px;
@@ -246,7 +245,7 @@ body:global(.light-mode) .headerLogo {
 	.hamburgerButton {
 		display: block;
 
-		margin-left: calc(var(--main-padding) - var(--main-icon-padding));
+		margin-left: calc(var(--standard-padding) - var(--main-icon-padding));
 	}
 
 	.headerLogo {
@@ -260,6 +259,16 @@ body:global(.light-mode) .headerLogo {
 	}
 
 	.headerNavigation {
+		display: none;
+	}
+}
+
+@media (max-width: 511px) {
+	.headerButtons {
+		gap: 0;
+	}
+
+	.headerDarkModeToggle {
 		display: none;
 	}
 }

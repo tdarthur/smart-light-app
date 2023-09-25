@@ -1,4 +1,4 @@
-import { useState, type ComponentProps, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Link, To, useLocation, useMatches, useNavigate } from "react-router-dom";
 import IconSun from "./icons/IconSun";
@@ -8,6 +8,7 @@ import IconHamburger from "./icons/IconHamburger";
 import styles from "./header.module.css";
 import IconX from "./icons/IconX";
 import IconChevron from "./icons/IconChevron";
+import IconShoppingCart from "./icons/IconShoppingCart";
 
 let lightModeEnabled = localStorage.getItem("light-mode") === "true";
 if (lightModeEnabled) {
@@ -25,7 +26,7 @@ const locations: NavigationOption[] = [
 	{ name: "About Us", to: "/about" },
 ];
 
-const Header = ({ className, ...props }: ComponentProps<"header">) => {
+const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => {
 	const [lightMode, setLightMode] = useState(lightModeEnabled);
 	const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
 	const hamburgerMenuRef = useRef(null);
@@ -115,24 +116,34 @@ const Header = ({ className, ...props }: ComponentProps<"header">) => {
 					</nav>
 				)}
 
-				<button
-					className={clsx("icon-button", styles.headerDarkModeToggle)}
-					onClick={() => {
-						lightModeEnabled = !lightModeEnabled;
+				<div className={styles.headerButtons}>
+					<button
+						className={clsx("icon-button", styles.headerShoppingCart)}
+						onClick={() => {
+							console.log("shopping cart!");
+						}}
+					>
+						<IconShoppingCart />
+					</button>
+					<button
+						className={clsx("icon-button", styles.headerDarkModeToggle)}
+						onClick={() => {
+							lightModeEnabled = !lightModeEnabled;
 
-						if (lightModeEnabled) {
-							document.body.classList.add("light-mode");
-							localStorage.setItem("light-mode", "true");
-						} else {
-							document.body.classList.remove("light-mode");
-							localStorage.setItem("light-mode", "false");
-						}
+							if (lightModeEnabled) {
+								document.body.classList.add("light-mode");
+								localStorage.setItem("light-mode", "true");
+							} else {
+								document.body.classList.remove("light-mode");
+								localStorage.setItem("light-mode", "false");
+							}
 
-						setLightMode(lightModeEnabled);
-					}}
-				>
-					{lightMode ? <IconSun /> : <IconMoon />}
-				</button>
+							setLightMode(lightModeEnabled);
+						}}
+					>
+						{lightMode ? <IconSun /> : <IconMoon />}
+					</button>
+				</div>
 			</header>
 
 			<div
