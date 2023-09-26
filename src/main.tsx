@@ -9,6 +9,7 @@ import About from "./routes/About/About";
 import ErrorPage from "./routes/Error/ErrorPage";
 
 import "./index.css";
+import CartContextProvider from "./contexts/CartContextProvider";
 
 const tenMinutes = 600_000;
 
@@ -24,7 +25,9 @@ const routes: RouteObject[] = [
 		element: (
 			<>
 				<ScrollRestoration />
-				<Outlet />
+				<CartContextProvider>
+					<Outlet />
+				</CartContextProvider>
 			</>
 		),
 		errorElement: <ErrorPage />,

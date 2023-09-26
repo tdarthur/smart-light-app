@@ -6,6 +6,7 @@ import type { Product } from "../../models/Product";
 import styles from "./product.module.css";
 import clsx from "clsx";
 import IconChevron from "../../components/icons/IconChevron";
+import useShoppingCartContext from "../../hooks/useCartContext";
 
 const Product = () => {
 	const product = useLoaderData() as Product;
@@ -17,6 +18,8 @@ const Product = () => {
 			navigate("/store");
 		}
 	}, [matches, navigate]);
+
+	const { addToCart } = useShoppingCartContext();
 
 	return (
 		<>
@@ -38,7 +41,14 @@ const Product = () => {
 
 						<h2>{product.price}</h2>
 
-						<button className={styles.addToCartButton}>Add to Cart</button>
+						<button
+							className={styles.addToCartButton}
+							onClick={() => {
+								addToCart(product.id);
+							}}
+						>
+							Add to Cart
+						</button>
 					</div>
 				</div>
 			</div>
