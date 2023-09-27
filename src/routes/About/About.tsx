@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 
 import styles from "./about.module.css";
@@ -26,8 +27,11 @@ const About = () => (
 			<div className={styles.statement}>
 				<h1>Additional questions?</h1>
 				<p>
-					Reach out to us (me) at <a href="https://findtyler.com">findtyler.com</a>. We'll be happy to help in
-					any way we can!
+					Reach out to us (me) at{" "}
+					<Link className="link-text" to="https://findtyler.com">
+						findtyler.com
+					</Link>
+					. We'll be happy to help in any way we can!
 				</p>
 			</div>
 		</main>

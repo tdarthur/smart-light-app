@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
-import { Link, To, useLocation, useMatches, useNavigate } from "react-router-dom";
+import { Link, To, useLocation, useMatches, useMatch, useNavigate } from "react-router-dom";
 import IconSun from "./icons/IconSun";
 import IconMoon from "./icons/IconMoon";
 import IconHamburger from "./icons/IconHamburger";
@@ -9,6 +9,9 @@ import styles from "./header.module.css";
 import IconX from "./icons/IconX";
 import IconChevron from "./icons/IconChevron";
 import IconShoppingCart from "./icons/IconShoppingCart";
+import useCartContext from "../hooks/useCartContext";
+import IconMinus from "./icons/IconMinus";
+import IconPlus from "./icons/IconPlus";
 
 let lightModeEnabled = localStorage.getItem("light-mode") === "true";
 if (lightModeEnabled) {
@@ -28,6 +31,7 @@ const locations: NavigationOption[] = [
 
 const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => {
 	const [lightMode, setLightMode] = useState(lightModeEnabled);
+	const [shoppingCartOpen, setShoppingCartOpen] = useState(false);
 	const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
 	const hamburgerMenuRef = useRef(null);
 
@@ -35,6 +39,8 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 	const navigate = useNavigate();
 
 	const matches = useMatches();
+
+	const { addToCart, removeFromCart, products } = useCartContext();
 
 	useEffect(() => {
 		const resizeListener = () => {
@@ -74,6 +80,8 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 			};
 		}
 	}, []);
+
+	const onStorePage = useMatch("/store");
 
 	return (
 		<>
@@ -117,16 +125,58 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 				)}
 
 				<div className={styles.headerButtons}>
+					<div className={styles.shoppingCartContainer}>
+						<button
+							className="icon-button"
+							onClick={() => {
+								setShoppingCartOpen(!shoppingCartOpen);
+							}}
+						>
+							<IconShoppingCart />
+						</button>
+						<div className={styles.shoppingCart} data-displayed={shoppingCartOpen || undefined}>
+							{products.size > 0 ? (
+								[...products].map(([, [product, count]]) => (
+									<div className={styles.shoppingCartProduct}>
+										<img className={styles.shoppingCartProductImage} src={product.image} />
+										<div className={styles.shoppingCartProductInfo}>
+											<p>{product.name}</p>
+											<div className={styles.shoppingCartProductQuantity}>
+												<button
+													className="icon-button"
+													onClick={() => {
+														removeFromCart(product);
+													}}
+												>
+													<IconMinus />
+												</button>
+												{count}
+												<button
+													className="icon-button"
+													onClick={() => {
+														addToCart(product);
+													}}
+												>
+													<IconPlus />
+												</button>
+											</div>
+										</div>
+									</div>
+								))
+							) : (
+								<p className={styles.shoppingCartEmptyMessage}>
+									No items yet. Get shopping! <br />
+									{!onStorePage && (
+										<Link className="link-text" to="/store">
+											Go to Store
+										</Link>
+									)}
+								</p>
+							)}
+						</div>
+					</div>
 					<button
-						className={clsx("icon-button", styles.headerShoppingCart)}
-						onClick={() => {
-							console.log("shopping cart!");
-						}}
-					>
-						<IconShoppingCart />
-					</button>
-					<button
-						className={clsx("icon-button", styles.headerDarkModeToggle)}
+						className={clsx("icon-button", styles.darkModeToggle)}
 						onClick={() => {
 							lightModeEnabled = !lightModeEnabled;
 

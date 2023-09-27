@@ -118,3 +118,12 @@ body.light-mode {
 .icon-button > * {
 	pointer-events: none;
 }
+
+.link-text {
+	color: var(--color-link-text);
+}
+
+.link-text:hover {
+	color: var(--color-text);
+	text-decoration: underline;
+}

@@ -2,14 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Outlet, RouteObject, RouterProvider, ScrollRestoration, createBrowserRouter } from "react-router-dom";
 
-import Home from "./routes/Home/Home";
-import Store from "./routes/Store/Store";
-import Product from "./routes/Product/Product";
-import About from "./routes/About/About";
+import HomePage from "./routes/Home/Home";
+import StorePage from "./routes/Store/Store";
+import ProductPage from "./routes/Product/Product";
+import AboutPage from "./routes/About/About";
 import ErrorPage from "./routes/Error/ErrorPage";
+import { Product } from "./models/Product";
+import CartContextProvider from "./contexts/CartContextProvider";
 
 import "./index.css";
-import CartContextProvider from "./contexts/CartContextProvider";
 
 const tenMinutes = 600_000;
 
@@ -34,13 +35,13 @@ const routes: RouteObject[] = [
 		children: [
 			{
 				path: "/",
-				element: <Home />,
+				element: <HomePage />,
 				errorElement: <ErrorPage />,
 				children: [],
 			},
 			{
 				path: "/store",
-				element: <Store />,
+				element: <StorePage />,
 				loader: async () => {
 					const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
 
@@ -56,7 +57,7 @@ const routes: RouteObject[] = [
 			},
 			{
 				path: "/product/:id",
-				element: <Product />,
+				element: <ProductPage />,
 				errorElement: <ErrorPage returnTo="/store" />,
 				loader: async ({ params }) => {
 					const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
@@ -74,7 +75,7 @@ const routes: RouteObject[] = [
 			},
 			{
 				path: "/about",
-				element: <About />,
+				element: <AboutPage />,
 			},
 		],
 	},

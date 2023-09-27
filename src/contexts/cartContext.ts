@@ -1,13 +1,16 @@
 import { createContext } from "react";
+import { Product } from "../models/Product";
+
+export type CartProductData = [product: Product, count: number];
 
 export type CartContext = {
-	products: Map<string, number>;
-	addToCart: (productId: string) => void;
-	removeFromCart: (productId: string) => void;
+	products: Map<string, CartProductData>;
+	addToCart: (product: Product) => void;
+	removeFromCart: (product: Product) => void;
 };
 
 const cartContext = createContext<CartContext>({
-	products: new Map<string, number>(),
+	products: new Map(),
 	addToCart: () => {},
 	removeFromCart: () => {},
 });

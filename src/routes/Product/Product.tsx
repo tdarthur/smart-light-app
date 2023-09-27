@@ -44,7 +44,7 @@ const Product = () => {
 						<button
 							className={styles.addToCartButton}
 							onClick={() => {
-								addToCart(product.id);
+								addToCart(product);
 							}}
 						>
 							Add to Cart

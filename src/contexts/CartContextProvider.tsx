@@ -1,47 +1,47 @@
 import { Reducer, useReducer } from "react";
-import cartContext, { CartContext } from "./cartContext";
+import cartContext, { CartContext, CartProductData } from "./cartContext";
+import { Product } from "../models/Product";
 
 type Props = Omit<React.ProviderProps<CartContext>, "value">;
 
-type CartProducts = Map<string, number>;
-
 type cardReducerAction = {
-	productId: string;
+	product: Product;
 	operation: "add" | "remove";
 };
 
-const cartReducer = (products: CartProducts, action: cardReducerAction) => {
-	const { productId, operation } = action;
+const cartReducer = (products: Map<string, CartProductData>, action: cardReducerAction) => {
+	const { product, operation } = action;
 
+	const updatedProducts = new Map(products);
 	if (operation === "add") {
-		if (products.has(productId)) {
-			products.set(productId, (products.get(productId) as number) + 1);
+		if (updatedProducts.has(product.id)) {
+			updatedProducts.set(product.id, [product, (updatedProducts.get(product.id) as CartProductData)[1] + 1]);
 		} else {
-			products.set(productId, 1);
+			updatedProducts.set(product.id, [product, 1]);
 		}
 	} else if (operation === "remove") {
-		if ((products.get(productId) as number) > 1) {
-			products.set(productId, (products.get(productId) as number) - 1);
+		if ((updatedProducts.get(product.id) as CartProductData)?.[1] > 1) {
+			updatedProducts.set(product.id, [product, (updatedProducts.get(product.id) as CartProductData)[1] - 1]);
 		} else {
-			products.delete(productId);
+			updatedProducts.delete(product.id);
 		}
 	}
 
-	return products;
+	return updatedProducts;
 };
 
 const CartContextProvider = ({ children }: Props) => {
-	const [products, updateProducts] = useReducer<Reducer<CartProducts, cardReducerAction>>(
+	const [products, updateProducts] = useReducer<Reducer<Map<string, CartProductData>, cardReducerAction>>(
 		cartReducer,
-		new Map<string, number>(),
+		new Map(),
 	);
 
-	const addToCart = (productId: string) => {
-		updateProducts({ productId, operation: "add" });
+	const addToCart = (product: Product) => {
+		updateProducts({ product, operation: "add" });
 	};
 
-	const removeFromCart = (productId: string) => {
-		updateProducts({ productId, operation: "remove" });
+	const removeFromCart = (product: Product) => {
+		updateProducts({ product, operation: "remove" });
 	};
 
 	return (

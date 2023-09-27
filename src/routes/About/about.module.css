@@ -19,11 +19,3 @@
 	align-items: end;
 	text-align: right;
 }
-
-.statement a {
-	color: var(--color-link-text);
-}
-
-.statement a:hover {
-	text-decoration: underline;
-}
