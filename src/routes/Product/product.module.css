@@ -8,6 +8,7 @@
 	margin-bottom: 16px;
 
 	opacity: 0.8;
+	white-space: nowrap;
 }
 
 .viewProductsButton:hover {
@@ -21,6 +22,7 @@
 }
 
 .viewProductsButton > *:first-child {
+	width: var(--main-icon-size);
 	margin-right: 8px;
 }
 
@@ -32,6 +34,7 @@
 .product {
 	display: grid;
 	grid-template-columns: 50% 50%;
+	gap: var(--standard-padding);
 }
 
 .product h1 {
@@ -46,7 +49,7 @@
 	width: 512px;
 	max-width: 100%;
 	aspect-ratio: 1;
-	margin-bottom: 24px;
+	margin-bottom: 16px;
 
 	background-color: var(--color-input-background);
 }
@@ -54,4 +57,10 @@
 .addToCartButton {
 	padding: 16px 32px;
 	background-color: #80808020;
+}
+
+@media (max-width: 1079px) {
+	.product {
+		display: block;
+	}
 }

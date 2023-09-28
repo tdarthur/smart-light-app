@@ -135,6 +135,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 							<IconShoppingCart />
 						</button>
 						<div className={styles.shoppingCart} data-displayed={shoppingCartOpen || undefined}>
+							<h3 className={styles.shoppingCartHeader}>Your Cart</h3>
 							{products.size > 0 ? (
 								[...products].map(([, [product, count]]) => (
 									<div className={styles.shoppingCartProduct}>

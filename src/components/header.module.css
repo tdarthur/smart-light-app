@@ -152,6 +152,11 @@ body:global(.light-mode) .headerLogo {
 	filter: invert(50%);
 }
 
+.shoppingCartHeader {
+	margin-bottom: 8px;
+	font-size: 16px;
+}
+
 .shoppingCartContainer {
 	position: relative;
 }
