@@ -161,6 +161,31 @@ body:global(.light-mode) .headerLogo {
 	position: relative;
 }
 
+.shoppingCartButton {
+	position: relative;
+}
+
+.shoppingCartButton[data-quantity]::after {
+	content: attr(data-quantity);
+
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	text-align: center;
+
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+
+	font-size: 12px;
+	font-weight: bold;
+	border-radius: 50%;
+	color: white;
+	background-color: red;
+	opacity: 0.8;
+}
+
 .shoppingCart {
 	position: absolute;
 	top: calc(var(--main-icon-size) + (2 * var(--main-icon-padding)) + 0px);

@@ -127,10 +127,13 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 				<div className={styles.headerButtons}>
 					<div className={styles.shoppingCartContainer}>
 						<button
-							className="icon-button"
+							className={clsx("icon-button", styles.shoppingCartButton)}
 							onClick={() => {
 								setShoppingCartOpen(!shoppingCartOpen);
 							}}
+							data-quantity={
+								products.size > 0 ? (products.size < 10 ? products.size.toString() : "9+") : undefined
+							}
 						>
 							<IconShoppingCart />
 						</button>
