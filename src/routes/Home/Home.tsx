@@ -9,7 +9,7 @@ import homeLightingImage from "../../assets/home-lighting.jpg";
 import accessoryCompatibilitiesImage from "../../assets/accessory-compatibilities.png";
 
 const animationStart = Date.now();
-const landingAnimationDefaultDuration = 6_000;
+const landingAnimationDefaultDuration = 4_000;
 
 const Home = () => {
 	const [landingAnimationEnabled, setLandingAnimationEnabled] = useState(false);

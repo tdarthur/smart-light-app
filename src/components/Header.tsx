@@ -83,6 +83,13 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 
 	const onStorePage = useMatch("/store");
 
+	let productQuantity = 0;
+	let productSubtotal = 0;
+	products.forEach(([{ price }, count]) => {
+		productQuantity += count;
+		productSubtotal += price * count;
+	});
+
 	return (
 		<>
 			<header className={clsx(styles.header, className)} {...props} key={location.key}>
@@ -132,7 +139,11 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 								setShoppingCartOpen(!shoppingCartOpen);
 							}}
 							data-quantity={
-								products.size > 0 ? (products.size < 10 ? products.size.toString() : "9+") : undefined
+								productQuantity > 0
+									? productQuantity < 10
+										? productQuantity.toString()
+										: "9+"
+									: undefined
 							}
 						>
 							<IconShoppingCart />
@@ -140,33 +151,52 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 						<div className={styles.shoppingCart} data-displayed={shoppingCartOpen || undefined}>
 							<h3 className={styles.shoppingCartHeader}>Your Cart</h3>
 							{products.size > 0 ? (
-								[...products].map(([, [product, count]]) => (
-									<div className={styles.shoppingCartProduct}>
-										<img className={styles.shoppingCartProductImage} src={product.image} />
-										<div className={styles.shoppingCartProductInfo}>
-											<p>{product.name}</p>
-											<div className={styles.shoppingCartProductQuantity}>
-												<button
-													className="icon-button"
-													onClick={() => {
-														removeFromCart(product);
-													}}
-												>
-													<IconMinus />
-												</button>
-												{count}
-												<button
-													className="icon-button"
-													onClick={() => {
-														addToCart(product);
-													}}
-												>
-													<IconPlus />
-												</button>
+								<>
+									<div className={styles.shoppingCartProducts}>
+										{[...products].map(([, [product, count]]) => (
+											<div className={styles.shoppingCartProduct}>
+												<img className={styles.shoppingCartProductImage} src={product.image} />
+												<div className={styles.shoppingCartProductInfo}>
+													<p>{product.name}</p>
+													<div className={styles.shoppingCartProductQuantity}>
+														<button
+															className="icon-button"
+															onClick={() => {
+																removeFromCart(product);
+															}}
+														>
+															<IconMinus />
+														</button>
+														{count}
+														<button
+															className="icon-button"
+															onClick={() => {
+																addToCart(product);
+															}}
+														>
+															<IconPlus />
+														</button>
+													</div>
+												</div>
 											</div>
-										</div>
+										))}
 									</div>
-								))
+									<div className={styles.shoppingCartSubtotal}>
+										<p>Subtotal</p>
+										<strong className={styles.shoppingCartSubtotalPrice}>
+											{productSubtotal.toFixed(2)}
+										</strong>
+									</div>
+									<button
+										type="button"
+										className={styles.shoppingCartCheckoutButton}
+										onClick={() => {
+											console.log("Going to checkout!");
+										}}
+									>
+										Checkout
+									</button>
+								</>
 							) : (
 								<p className={styles.shoppingCartEmptyMessage}>
 									No items yet. Get shopping! <br />

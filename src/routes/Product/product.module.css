@@ -33,7 +33,7 @@
 
 .product {
 	display: grid;
-	grid-template-columns: 50% 50%;
+	grid-template-columns: 512px 512px;
 	gap: var(--standard-padding);
 }
 
@@ -74,5 +74,7 @@
 @media (max-width: 1079px) {
 	.product {
 		display: block;
+
+		max-width: 512px;
 	}
 }
