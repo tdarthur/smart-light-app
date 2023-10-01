@@ -34,7 +34,7 @@
 .product {
 	display: grid;
 	grid-template-columns: 512px 512px;
-	gap: var(--standard-padding);
+	gap: var(--standard-container-padding);
 }
 
 .product h1 {

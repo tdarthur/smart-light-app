@@ -28,7 +28,7 @@ const About = () => (
 				<h1>Additional questions?</h1>
 				<p>
 					Reach out to us (me) at{" "}
-					<Link className="link-text" to="https://findtyler.com">
+					<Link className="link-text" to="https://findtyler.com/#contact" target="_blank">
 						findtyler.com
 					</Link>
 					. We'll be happy to help in any way we can!

@@ -81,12 +81,26 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 		}
 	}, []);
 
+	const toggleDarkMode = () => {
+		lightModeEnabled = !lightModeEnabled;
+
+		if (lightModeEnabled) {
+			document.body.classList.add("light-mode");
+			localStorage.setItem("light-mode", "true");
+		} else {
+			document.body.classList.remove("light-mode");
+			localStorage.setItem("light-mode", "false");
+		}
+
+		setLightMode(lightModeEnabled);
+	};
+
 	const onStorePage = useMatch("/store");
 
 	let productQuantity = 0;
 	let productSubtotal = 0;
 	products.forEach(([{ price }, count]) => {
-		productQuantity += count;
+		productQuantity++;
 		productSubtotal += price * count;
 	});
 
@@ -101,6 +115,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 						setHamburgerMenuOpen(true);
 					}}
 					style={hamburgerMenuOpen ? { color: "transparent" } : undefined}
+					tabIndex={hamburgerMenuOpen ? -1 : 0}
 				>
 					<IconHamburger />
 				</button>
@@ -114,6 +129,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 								navigate("/");
 							}
 						}}
+						tabIndex={hamburgerMenuOpen ? -1 : 0}
 					>
 						Illuminous
 					</button>
@@ -132,12 +148,20 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 				)}
 
 				<div className={styles.headerButtons}>
+					<button
+						className={clsx("icon-button", styles.darkModeToggle)}
+						onClick={toggleDarkMode}
+						tabIndex={hamburgerMenuOpen ? -1 : 0}
+					>
+						{lightMode ? <IconSun /> : <IconMoon />}
+					</button>
 					<div className={styles.shoppingCartContainer}>
 						<button
 							className={clsx("icon-button", styles.shoppingCartButton)}
 							onClick={() => {
 								setShoppingCartOpen(!shoppingCartOpen);
 							}}
+							tabIndex={hamburgerMenuOpen ? -1 : 0}
 							data-quantity={
 								productQuantity > 0
 									? productQuantity < 10
@@ -209,24 +233,6 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 							)}
 						</div>
 					</div>
-					<button
-						className={clsx("icon-button", styles.darkModeToggle)}
-						onClick={() => {
-							lightModeEnabled = !lightModeEnabled;
-
-							if (lightModeEnabled) {
-								document.body.classList.add("light-mode");
-								localStorage.setItem("light-mode", "true");
-							} else {
-								document.body.classList.remove("light-mode");
-								localStorage.setItem("light-mode", "false");
-							}
-
-							setLightMode(lightModeEnabled);
-						}}
-					>
-						{lightMode ? <IconSun /> : <IconMoon />}
-					</button>
 				</div>
 			</header>
 
@@ -236,29 +242,43 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 				ref={hamburgerMenuRef}
 				data-displayed={hamburgerMenuOpen || undefined}
 			>
-				<button
-					className={clsx("icon-button", styles.hamburgerExitButton)}
-					type="button"
-					onClick={() => {
-						setHamburgerMenuOpen(false);
-					}}
-				>
-					<IconX />
-				</button>
+				<div className={styles.hamburgerHeader}>
+					<button
+						className="icon-button"
+						type="button"
+						onClick={() => {
+							setHamburgerMenuOpen(false);
+						}}
+						tabIndex={hamburgerMenuOpen ? 0 : -1}
+					>
+						<IconX />
+					</button>
+					<button
+						className={clsx("icon-button", styles.hamburgerDarkModeToggle)}
+						onClick={toggleDarkMode}
+						tabIndex={hamburgerMenuOpen ? 0 : -1}
+					>
+						{lightMode ? <IconSun /> : <IconMoon />}
+					</button>
+				</div>
 				<nav className={styles.hamburgerMenuNavigation}>
 					<ul>
 						{locations.map(({ name, to }) => {
 							const active = matches?.length >= 2 && matches[1].pathname === to;
 							return (
 								<li key={name}>
-									<Link
-										className={styles.hamburgerNavigationLink}
-										to={to}
-										data-active={(active && "true") || undefined}
-									>
-										{!active && <IconChevron className={styles.activeRouteIndicator} />}
-										{name}
-									</Link>
+									{active ? (
+										<strong>{name}</strong>
+									) : (
+										<Link
+											className={styles.hamburgerNavigationLink}
+											to={to}
+											tabIndex={hamburgerMenuOpen ? 0 : -1}
+										>
+											{!active && <IconChevron className={styles.activeRouteIndicator} />}
+											{name}
+										</Link>
+									)}
 								</li>
 							);
 						})}

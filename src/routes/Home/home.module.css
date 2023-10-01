@@ -80,7 +80,7 @@ body:global(.light-mode) .landingUnderlay {
 	aspect-ratio: 2;
 	max-width: 2560px;
 	max-height: 960px;
-	margin-bottom: 64px;
+	margin: 0 auto 64px auto;
 }
 
 .contentImageContainer::after {

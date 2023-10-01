@@ -73,17 +73,15 @@ body {
 	--scroll-bar-color: white;
 	--scroll-bar-hover-color: #888;
 
-	--standard-padding: 32px;
+	--standard-container-padding: 32px;
 	--main-container-width: 1080px;
 	--main-icon-size: 24px;
 	--main-icon-padding: 8px;
 	--header-height: 64px;
 
 	margin: 0;
-	overflow-x: hidden;
 
 	font-family: "Montserrat", sans-serif;
-
 	background-color: var(--color-background);
 	color: var(--color-text);
 }
@@ -100,10 +98,15 @@ body.light-mode {
 	--color-header-border: #d8d8d8;
 }
 
+body *:focus-visible {
+	outline: 1px solid currentColor;
+	outline-offset: -1px;
+}
+
 .main-container {
-	width: calc(100vw - (var(--standard-padding) * 2));
+	width: calc(100vw - (var(--standard-container-padding) * 2));
 	max-width: var(--main-container-width);
-	padding: var(--standard-padding);
+	padding: var(--standard-container-padding);
 	margin: 0 auto;
 
 	box-sizing: content-box;
@@ -113,6 +116,13 @@ body.light-mode {
 	width: var(--main-icon-size);
 	height: var(--main-icon-size);
 	padding: var(--main-icon-padding);
+
+	transition: color 150ms linear;
+}
+
+.icon-button:hover,
+.icon-button:focus-visible {
+	color: #808080;
 }
 
 .icon-button > * {
@@ -121,6 +131,8 @@ body.light-mode {
 
 .link-text {
 	color: var(--color-link-text);
+
+	transition: color 150ms linear;
 }
 
 .link-text:hover {

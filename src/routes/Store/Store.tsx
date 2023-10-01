@@ -40,6 +40,7 @@ const SearchBar = ({ setSearchString, search }: SearchBarProps) => {
 				onClick={() => {
 					searchInputRef.current?.focus();
 				}}
+				tabIndex={-1}
 			>
 				<IconMagnifyingGlass />
 			</button>

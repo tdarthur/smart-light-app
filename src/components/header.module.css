@@ -7,7 +7,7 @@
 	display: grid;
 	grid-template-columns: 30% 40% 30%;
 
-	width: 100%;
+	width: 100vw;
 	height: var(--header-height);
 
 	background-color: var(--color-background);
@@ -34,7 +34,7 @@
 	align-items: center;
 
 	height: 100%;
-	padding-left: var(--standard-padding);
+	padding-left: var(--standard-container-padding);
 }
 
 body:global(.light-mode) .headerLogo {
@@ -60,6 +60,8 @@ body:global(.light-mode) .headerLogo {
 
 	position: relative;
 
+	padding: 0 16px;
+
 	color: white;
 	font-family: "Moul", cursive;
 	font-size: 24px;
@@ -79,11 +81,14 @@ body:global(.light-mode) .headerLogo {
 	top: 0;
 	left: 0;
 
+	padding: 0 16px;
+
 	background-size: var(--logo-background-size);
 	background-image: var(--logo-gradient);
 	-webkit-background-clip: text;
 
 	filter: blur(12px);
+	-webkit-filter: blur(12px);
 
 	animation: var(--logo-animation);
 	transition:
@@ -91,12 +96,12 @@ body:global(.light-mode) .headerLogo {
 		filter 150ms linear;
 }
 
-.headerLogoText:hover {
+.headerLogoText:hover,
+.headerLogoText:focus-visible,
+.headerLogoText:hover::before,
+.headerLogoText:focus-visible::before {
 	color: transparent;
-}
-
-.headerLogoText:hover::before {
-	color: transparent;
+	outline-color: white;
 }
 
 .headerNavigation {
@@ -126,7 +131,7 @@ body:global(.light-mode) .headerLogo {
 
 	width: calc(100% - 64px);
 	height: 100%;
-	padding: 0 var(--standard-padding);
+	padding: 0 var(--standard-container-padding);
 }
 
 .headerNavigation a > * {
@@ -145,11 +150,7 @@ body:global(.light-mode) .headerLogo {
 	justify-self: right;
 	gap: 8px;
 
-	margin-right: calc(var(--standard-padding) - var(--main-icon-padding));
-}
-
-.headerButtons > button:hover {
-	filter: invert(50%);
+	margin-right: calc(var(--standard-container-padding) - var(--main-icon-padding));
 }
 
 .shoppingCartHeader {
@@ -202,6 +203,9 @@ body:global(.light-mode) .headerLogo {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 	background-color: var(--color-input-background);
+	background-color: #202020d0;
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
 	font-size: 14px;
 }
 
@@ -307,11 +311,10 @@ body:global(.light-mode) .headerLogo {
 
 	width: 256px;
 	height: 100dvh;
-	padding: 0 var(--standard-padding);
 
 	background-color: var(--color-hamburger-menu-background);
-	backdrop-filter: blur(2px);
-	-webkit-backdrop-filter: blur(2px);
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
 	opacity: 0;
 
 	transform: translateX(-100%);
@@ -331,9 +334,21 @@ body:global(.light-mode) .headerLogo {
 	transition: transform 150ms ease-in-out;
 }
 
-.hamburgerExitButton {
-	margin: calc((var(--header-height) - var(--main-icon-size)) / 2 - var(--main-icon-padding)) 0 32px
-		calc(-1 * var(--main-icon-padding));
+.hamburgerHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	height: var(--header-height);
+	padding: calc(var(--standard-container-padding) - var(--main-icon-padding));
+}
+
+.hamburgerDarkModeToggle {
+	display: none;
+}
+
+.hamburgerMenuNavigation {
+	padding: 16px var(--standard-container-padding);
 }
 
 .hamburgerMenuNavigation ul {
@@ -349,39 +364,36 @@ body:global(.light-mode) .headerLogo {
 
 .hamburgerNavigationLink {
 	position: relative;
-
-	padding-left: 2px;
-}
-
-.hamburgerNavigationLink[data-active="true"] {
-	font-weight: bold;
-}
-
-.hamburgerNavigationLink[data-active="true"]:hover {
-	cursor: unset;
+	padding: 16px;
+	margin-left: -16px;
 }
 
 .activeRouteIndicator {
 	position: absolute;
-	left: -16px;
-	top: 2px;
+	left: -8px;
+	top: 50%;
 
-	display: none;
+	display: block;
 	width: 16px;
 	height: 16px;
 
+	opacity: 0;
 	stroke-width: 2px;
+
+	transform: translateY(-50%);
+
+	transition: opacity 150ms linear;
 }
 
 .hamburgerNavigationLink:hover .activeRouteIndicator {
-	display: inline-block;
+	opacity: 1;
 }
 
 @media (max-width: 895px) {
 	.hamburgerButton {
 		display: block;
 
-		margin-left: calc(var(--standard-padding) - var(--main-icon-padding));
+		margin-left: calc(var(--standard-container-padding) - var(--main-icon-padding));
 	}
 
 	.headerLogo {
@@ -406,5 +418,9 @@ body:global(.light-mode) .headerLogo {
 
 	.darkModeToggle {
 		display: none;
+	}
+
+	.hamburgerDarkModeToggle {
+		display: block;
 	}
 }
