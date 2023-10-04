@@ -120,6 +120,16 @@ body *:focus-visible {
 	transition: color 150ms linear;
 }
 
+.dollar-amount::before {
+	content: "$";
+
+	display: inline-block;
+	vertical-align: top;
+
+	font-size: 0.8em;
+	font-weight: normal;
+}
+
 .icon-button:hover,
 .icon-button:focus-visible {
 	color: #808080;

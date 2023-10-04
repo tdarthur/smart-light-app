@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useLoaderData, useMatches, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
-import type { Product } from "../../models/Product";
-
-import styles from "./product.module.css";
 import clsx from "clsx";
+
+import Header from "../../components/Header";
 import IconChevron from "../../components/icons/IconChevron";
 import useShoppingCartContext from "../../hooks/useCartContext";
+import type { Product } from "../../models/Product";
+import { formatDollarAmount } from "../../utils/stringUtils";
+
+import styles from "./product.module.css";
 
 const Product = () => {
 	const product = useLoaderData() as Product;
@@ -39,7 +41,7 @@ const Product = () => {
 					<div className={styles.productDetails}>
 						<h1>{product?.name}</h1>
 
-						<h2>{product.price}</h2>
+						<h2 className="dollar-amount">{formatDollarAmount(product.price)}</h2>
 
 						<button
 							className={styles.addToCartButton}

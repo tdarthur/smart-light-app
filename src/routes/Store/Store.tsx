@@ -3,12 +3,12 @@ import { Link, useLoaderData } from "react-router-dom";
 import clsx from "clsx";
 
 import Header from "../../components/Header";
-import type { Product } from "../../models/Product";
-import { calculateLevenshteinDistance } from "../../utils/stringUtils";
-
-import styles from "./store.module.css";
 import IconX from "../../components/icons/IconX";
 import IconMagnifyingGlass from "../../components/icons/IconMagnifyingGlass";
+import type { Product } from "../../models/Product";
+import { calculateLevenshteinDistance, formatDollarAmount } from "../../utils/stringUtils";
+
+import styles from "./store.module.css";
 
 type SearchBarProps = {
 	setSearchString: React.Dispatch<React.SetStateAction<string>>;
@@ -106,7 +106,9 @@ const Store = () => {
 								<img className={styles.productImage} src={image} key={name} />
 								<div className={styles.productDetails}>
 									<h3 className={styles.productName}>{name}</h3>
-									<div className={styles.productPrice}>{price.toLocaleString("en-US")}</div>
+									<div className={clsx("dollar-amount", styles.productPrice)}>
+										{formatDollarAmount(price)}
+									</div>
 								</div>
 							</Link>
 						))

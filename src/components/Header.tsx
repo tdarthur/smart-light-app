@@ -1,17 +1,19 @@
 import { useState, useEffect, useRef, type ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 import { Link, To, useLocation, useMatches, useMatch, useNavigate } from "react-router-dom";
+
 import IconSun from "./icons/IconSun";
 import IconMoon from "./icons/IconMoon";
 import IconHamburger from "./icons/IconHamburger";
-
-import styles from "./header.module.css";
 import IconX from "./icons/IconX";
 import IconChevron from "./icons/IconChevron";
 import IconShoppingCart from "./icons/IconShoppingCart";
 import useCartContext from "../hooks/useCartContext";
 import IconMinus from "./icons/IconMinus";
 import IconPlus from "./icons/IconPlus";
+import { formatDollarAmount } from "../utils/stringUtils";
+
+import styles from "./header.module.css";
 
 let lightModeEnabled = localStorage.getItem("light-mode") === "true";
 if (lightModeEnabled) {
@@ -97,10 +99,10 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 
 	const onStorePage = useMatch("/store");
 
-	let productQuantity = 0;
+	let distinctProducts = 0;
 	let productSubtotal = 0;
 	products.forEach(([{ price }, count]) => {
-		productQuantity++;
+		distinctProducts++;
 		productSubtotal += price * count;
 	});
 
@@ -163,9 +165,9 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 							}}
 							tabIndex={hamburgerMenuOpen ? -1 : 0}
 							data-quantity={
-								productQuantity > 0
-									? productQuantity < 10
-										? productQuantity.toString()
+								distinctProducts > 0
+									? distinctProducts < 10
+										? distinctProducts.toString()
 										: "9+"
 									: undefined
 							}
@@ -182,24 +184,29 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 												<img className={styles.shoppingCartProductImage} src={product.image} />
 												<div className={styles.shoppingCartProductInfo}>
 													<p>{product.name}</p>
-													<div className={styles.shoppingCartProductQuantity}>
-														<button
-															className="icon-button"
-															onClick={() => {
-																removeFromCart(product);
-															}}
-														>
-															<IconMinus />
-														</button>
-														{count}
-														<button
-															className="icon-button"
-															onClick={() => {
-																addToCart(product);
-															}}
-														>
-															<IconPlus />
-														</button>
+													<div className={styles.shoppingCartProductInfoBottom}>
+														<div className={styles.shoppingCartProductQuantity}>
+															<button
+																className="icon-button"
+																onClick={() => {
+																	removeFromCart(product);
+																}}
+															>
+																<IconMinus />
+															</button>
+															{count}
+															<button
+																className="icon-button"
+																onClick={() => {
+																	addToCart(product);
+																}}
+															>
+																<IconPlus />
+															</button>
+														</div>
+														<span className={clsx("dollar-amount", styles.productSubtotal)}>
+															{formatDollarAmount(product.price * count)}
+														</span>
 													</div>
 												</div>
 											</div>
@@ -207,8 +214,8 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 									</div>
 									<div className={styles.shoppingCartSubtotal}>
 										<p>Subtotal</p>
-										<strong className={styles.shoppingCartSubtotalPrice}>
-											{productSubtotal.toFixed(2)}
+										<strong className={clsx("dollar-amount", styles.shoppingCartSubtotalPrice)}>
+											{formatDollarAmount(productSubtotal)}
 										</strong>
 									</div>
 									<button

@@ -1,3 +1,8 @@
+const currencyFormat = new Intl.NumberFormat("en-US", {
+	style: "currency",
+	currency: "USD",
+});
+
 /**
  * Calculates the Levenshtein distance between two strings.
  */
@@ -23,4 +28,8 @@ export const calculateLevenshteinDistance = (s1: string, s2: string) => {
 	}
 
 	return matrix[s2.length][s1.length];
+};
+
+export const formatDollarAmount = (amount: number) => {
+	return currencyFormat.format(amount).substring(1);
 };
