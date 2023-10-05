@@ -218,15 +218,9 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 											{formatDollarAmount(productSubtotal)}
 										</strong>
 									</div>
-									<button
-										type="button"
-										className={styles.shoppingCartCheckoutButton}
-										onClick={() => {
-											console.log("Going to checkout!");
-										}}
-									>
+									<Link className={styles.shoppingCartCheckoutButton} to="/checkout">
 										Checkout
-									</button>
+									</Link>
 								</>
 							) : (
 								<p className={styles.shoppingCartEmptyMessage}>

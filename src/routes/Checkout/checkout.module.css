@@ -1,0 +1,16 @@
+.cartSummary {
+	display: block;
+}
+
+.product {
+	display: block;
+
+	margin-bottom: 32px;
+}
+
+.product img {
+	width: 192px;
+	height: 192px;
+
+	background-color: var(--color-input-background);
+}

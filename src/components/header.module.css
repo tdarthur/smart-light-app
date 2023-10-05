@@ -199,6 +199,7 @@ body:global(.light-mode) .headerLogo {
 
 	padding: 8px;
 
+	border-top: none;
 	border-radius: 2px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
@@ -272,10 +273,6 @@ body:global(.light-mode) .shoppingCart {
 	filter: invert(50%);
 }
 
-.productSubtotal {
-	/* flex-grow: 1; */
-}
-
 .shoppingCartSubtotal {
 	width: 100%;
 	margin-top: -4px;
@@ -287,6 +284,9 @@ body:global(.light-mode) .shoppingCart {
 }
 
 .shoppingCartCheckoutButton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
 
 	width: 100%;

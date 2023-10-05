@@ -2,7 +2,9 @@ import { Reducer, useReducer } from "react";
 import cartContext, { CartContext, CartProductData } from "./cartContext";
 import { Product } from "../models/Product";
 
-type Props = Omit<React.ProviderProps<CartContext>, "value">;
+type Props = {
+	initialValue: Map<string, CartProductData>;
+} & Omit<React.ProviderProps<CartContext>, "value">;
 
 type cardReducerAction = {
 	product: Product;
@@ -27,13 +29,15 @@ const cartReducer = (products: Map<string, CartProductData>, action: cardReducer
 		}
 	}
 
+	localStorage.setItem("shopping-cart", JSON.stringify(Array.from(updatedProducts.entries())));
+
 	return updatedProducts;
 };
 
-const CartContextProvider = ({ children }: Props) => {
+const CartContextProvider = ({ initialValue, children }: Props) => {
 	const [products, updateProducts] = useReducer<Reducer<Map<string, CartProductData>, cardReducerAction>>(
 		cartReducer,
-		new Map(),
+		initialValue,
 	);
 
 	const addToCart = (product: Product) => {

@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 import Header from "../../components/Header";
 import IconChevron from "../../components/icons/IconChevron";
-import useShoppingCartContext from "../../hooks/useCartContext";
+import useCartContext from "../../hooks/useCartContext";
 import type { Product } from "../../models/Product";
 import { formatDollarAmount } from "../../utils/stringUtils";
 
@@ -21,12 +21,12 @@ const Product = () => {
 		}
 	}, [matches, navigate]);
 
-	const { addToCart } = useShoppingCartContext();
+	const { addToCart } = useCartContext();
 
 	return (
 		<>
 			<Header />
-			<div className={clsx("main-container", styles.productPage)}>
+			<main className={clsx("main-container", styles.productPage)}>
 				<button
 					className={styles.viewProductsButton}
 					onClick={() => {
@@ -53,7 +53,7 @@ const Product = () => {
 						</button>
 					</div>
 				</div>
-			</div>
+			</main>
 		</>
 	);
 };
