@@ -191,6 +191,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																onClick={() => {
 																	removeFromCart(product);
 																}}
+																disabled={count === 1}
 															>
 																<IconMinus />
 															</button>
@@ -200,6 +201,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																onClick={() => {
 																	addToCart(product);
 																}}
+																disabled={count >= 10}
 															>
 																<IconPlus />
 															</button>

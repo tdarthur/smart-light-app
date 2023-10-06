@@ -120,6 +120,10 @@ body *:focus-visible {
 	transition: color 150ms linear;
 }
 
+.icon-button:disabled {
+	filter: invert(50%);
+}
+
 .dollar-amount::before {
 	content: "$";
 

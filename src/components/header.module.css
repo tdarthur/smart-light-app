@@ -269,7 +269,7 @@ body:global(.light-mode) .shoppingCart {
 	align-items: center;
 }
 
-.shoppingCartProductQuantity button:hover {
+.shoppingCartProductQuantity button:not(:disabled):hover {
 	filter: invert(50%);
 }
 

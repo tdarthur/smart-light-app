@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLoaderData, useMatches, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 
@@ -10,10 +10,16 @@ import { formatDollarAmount } from "../../utils/stringUtils";
 
 import styles from "./product.module.css";
 
+const magnifierMagnification = 1.5;
+
 const Product = () => {
 	const product = useLoaderData() as Product;
 	const matches = useMatches();
 	const navigate = useNavigate();
+
+	const imageRef = useRef<HTMLImageElement>(null);
+	const imageMagnifierRef = useRef<HTMLDivElement>(null);
+	const magnifiedImageRef = useRef<HTMLImageElement>(null);
 
 	useEffect(() => {
 		if (!matches[0].params.id) {
@@ -21,7 +27,58 @@ const Product = () => {
 		}
 	}, [matches, navigate]);
 
-	const { addToCart } = useCartContext();
+	useEffect(() => {
+		if (imageRef.current && imageMagnifierRef.current && magnifiedImageRef.current) {
+			window.addEventListener("mousemove", (e) => {
+				if (!imageRef.current || !imageMagnifierRef.current || !magnifiedImageRef.current) return;
+
+				const mouseX = e.clientX;
+				const mouseY = e.clientY;
+
+				const {
+					top,
+					right,
+					bottom,
+					left,
+					width: imageWidth,
+					height: imageHeight,
+				} = imageRef.current.getBoundingClientRect();
+				const { width: magnifierWidth, height: magnifierHeight } =
+					imageMagnifierRef.current.getBoundingClientRect();
+				const { width: magnifiedImageWidth, height: magnifiedImageHeight } =
+					magnifiedImageRef.current.getBoundingClientRect();
+
+				if (mouseX >= left && mouseX <= right && mouseY >= top && mouseY <= bottom) {
+					if (!imageMagnifierRef.current.getAttribute("data-shown")) {
+						imageMagnifierRef.current.setAttribute("data-shown", "true");
+					}
+
+					const xOffset = mouseX - (left + imageWidth / 2);
+					const yOffset = mouseY - (top + imageHeight / 2);
+
+					imageMagnifierRef.current.style.left = `${mouseX + window.scrollX - magnifierWidth / 2}px`;
+					imageMagnifierRef.current.style.top = `${mouseY + window.scrollY - magnifierHeight / 2}px`;
+
+					magnifiedImageRef.current.style.left = `${
+						-(magnifiedImageWidth / 2) + magnifierWidth / 2 - xOffset * (magnifiedImageWidth / imageWidth)
+					}px`;
+					magnifiedImageRef.current.style.top = `${
+						-(magnifiedImageHeight / 2) +
+						magnifierHeight / 2 -
+						yOffset * (magnifiedImageHeight / imageHeight)
+					}px`;
+					magnifiedImageRef.current.style.width = `${imageWidth * magnifierMagnification}px`;
+					magnifiedImageRef.current.style.height = `${imageHeight * magnifierMagnification}px`;
+				} else {
+					if (imageMagnifierRef.current.getAttribute("data-shown")) {
+						imageMagnifierRef.current.removeAttribute("data-shown");
+					}
+				}
+			});
+		}
+	}, []);
+
+	const { products, addToCart } = useCartContext();
 
 	return (
 		<>
@@ -37,17 +94,25 @@ const Product = () => {
 					<span>View more products</span>
 				</button>
 				<div className={styles.product}>
-					<img className={styles.productImage} src={product?.image} />
-					<div className={styles.productDetails}>
-						<h1>{product?.name}</h1>
+					<img className={styles.productImage} src={product?.image} ref={imageRef} />
+					<div className={styles.productImageMagnifier} ref={imageMagnifierRef}>
+						<img src={product?.image} ref={magnifiedImageRef} />
+					</div>
+					<div className={styles.productInfo}>
+						<div className={styles.productFeatures}>
+							<h1>{product?.name}</h1>
+						</div>
 
 						<h2 className="dollar-amount">{formatDollarAmount(product.price)}</h2>
 
 						<button
 							className={styles.addToCartButton}
 							onClick={() => {
-								addToCart(product);
+								if (!products.has(product.id) || products.get(product.id)![1] < 10) {
+									addToCart(product);
+								}
 							}}
+							disabled={products.has(product.id) && products.get(product.id)![1] >= 10}
 						>
 							Add to Cart
 						</button>
