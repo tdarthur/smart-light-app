@@ -235,6 +235,10 @@ body:global(.light-mode) .shoppingCart {
 	margin-bottom: 8px;
 }
 
+.shoppingCartProduct a {
+	display: inherit;
+}
+
 .shoppingCartProduct:last-child {
 	margin-bottom: 0;
 }

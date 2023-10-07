@@ -6,11 +6,12 @@ import Header from "../../components/Header";
 import IconChevron from "../../components/icons/IconChevron";
 import useCartContext from "../../hooks/useCartContext";
 import type { Product } from "../../models/Product";
+import { CartProductData, maxProductQuantity } from "../../contexts/cartContext";
 import { formatDollarAmount } from "../../utils/stringUtils";
 
 import styles from "./product.module.css";
 
-const magnifierMagnification = 1.5;
+const magnifierMagnification = 1.4;
 
 const Product = () => {
 	const product = useLoaderData() as Product;
@@ -79,10 +80,13 @@ const Product = () => {
 	}, []);
 
 	const { products, addToCart } = useCartContext();
+	const productCount = products.has(product.id) ? (products.get(product.id) as CartProductData)[1] : 0;
+
+	// TODO: fix horizontal overflow on mobile
 
 	return (
 		<>
-			<Header />
+			<Header key={product.id} />
 			<main className={clsx("main-container", styles.productPage)}>
 				<button
 					className={styles.viewProductsButton}
@@ -108,11 +112,11 @@ const Product = () => {
 						<button
 							className={styles.addToCartButton}
 							onClick={() => {
-								if (!products.has(product.id) || products.get(product.id)![1] < 10) {
+								if (productCount < maxProductQuantity && productCount < product.availableQuantity) {
 									addToCart(product);
 								}
 							}}
-							disabled={products.has(product.id) && products.get(product.id)![1] >= 10}
+							disabled={productCount >= maxProductQuantity || productCount >= product.availableQuantity}
 						>
 							Add to Cart
 						</button>

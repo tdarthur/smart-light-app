@@ -11,6 +11,7 @@ import IconShoppingCart from "./icons/IconShoppingCart";
 import useCartContext from "../hooks/useCartContext";
 import IconMinus from "./icons/IconMinus";
 import IconPlus from "./icons/IconPlus";
+import { maxProductQuantity } from "../contexts/cartContext";
 import { formatDollarAmount } from "../utils/stringUtils";
 
 import styles from "./header.module.css";
@@ -179,40 +180,63 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 							{products.size > 0 ? (
 								<>
 									<div className={styles.shoppingCartProducts}>
-										{[...products].map(([, [product, count]]) => (
-											<div className={styles.shoppingCartProduct}>
-												<img className={styles.shoppingCartProductImage} src={product.image} />
-												<div className={styles.shoppingCartProductInfo}>
-													<p>{product.name}</p>
-													<div className={styles.shoppingCartProductInfoBottom}>
-														<div className={styles.shoppingCartProductQuantity}>
-															<button
-																className="icon-button"
-																onClick={() => {
-																	removeFromCart(product);
-																}}
-																disabled={count === 1}
+										{[...products].map(([, [product, count]]) => {
+											const productUrl = `/product/${product.id}`;
+
+											return (
+												<div className={styles.shoppingCartProduct}>
+													<Link to={productUrl} style={{ display: "flex" }}>
+														<img
+															className={styles.shoppingCartProductImage}
+															src={product.image}
+														/>
+													</Link>
+													<div className={styles.shoppingCartProductInfo}>
+														{/* <Link to={productUrl}> */}
+														<p>{product.name}</p>
+														{/* </Link> */}
+														<div className={styles.shoppingCartProductInfoBottom}>
+															<div className={styles.shoppingCartProductQuantity}>
+																<button
+																	className="icon-button"
+																	onClick={() => {
+																		removeFromCart(product);
+																	}}
+																>
+																	<IconMinus />
+																</button>
+																{count}
+																<button
+																	className="icon-button"
+																	onClick={() => {
+																		if (
+																			count < maxProductQuantity &&
+																			count < product.availableQuantity
+																		) {
+																			addToCart(product);
+																		}
+																	}}
+																	disabled={
+																		count >= maxProductQuantity ||
+																		count >= product.availableQuantity
+																	}
+																>
+																	<IconPlus />
+																</button>
+															</div>
+															<span
+																className={clsx(
+																	"dollar-amount",
+																	styles.productSubtotal,
+																)}
 															>
-																<IconMinus />
-															</button>
-															{count}
-															<button
-																className="icon-button"
-																onClick={() => {
-																	addToCart(product);
-																}}
-																disabled={count >= 10}
-															>
-																<IconPlus />
-															</button>
+																{formatDollarAmount(product.price * count)}
+															</span>
 														</div>
-														<span className={clsx("dollar-amount", styles.productSubtotal)}>
-															{formatDollarAmount(product.price * count)}
-														</span>
 													</div>
 												</div>
-											</div>
-										))}
+											);
+										})}
 									</div>
 									<div className={styles.shoppingCartSubtotal}>
 										<p>Subtotal</p>

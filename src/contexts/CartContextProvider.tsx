@@ -1,5 +1,5 @@
 import { Reducer, useReducer } from "react";
-import cartContext, { CartContext, CartProductData } from "./cartContext";
+import cartContext, { CartContext, CartProductData, maxProductQuantity } from "./cartContext";
 import { Product } from "../models/Product";
 
 type Props = {
@@ -17,7 +17,10 @@ const cartReducer = (products: Map<string, CartProductData>, action: cardReducer
 	const updatedProducts = new Map(products);
 	if (operation === "add") {
 		if (updatedProducts.has(product.id)) {
-			updatedProducts.set(product.id, [product, (updatedProducts.get(product.id) as CartProductData)[1] + 1]);
+			const productCount = (updatedProducts.get(product.id) as CartProductData)[1];
+			if (productCount < maxProductQuantity && productCount < product.availableQuantity) {
+				updatedProducts.set(product.id, [product, productCount + 1]);
+			}
 		} else {
 			updatedProducts.set(product.id, [product, 1]);
 		}

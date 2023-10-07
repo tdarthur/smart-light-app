@@ -9,6 +9,8 @@ export type CartContext = {
 	removeFromCart: (product: Product) => void;
 };
 
+export const maxProductQuantity = 99;
+
 const cartContext = createContext<CartContext>({
 	products: new Map(),
 	addToCart: () => {},

@@ -1,4 +1,6 @@
 .productPage {
+	overflow: hidden;
+
 	width: var(--main-container-width);
 	margin: 0 auto;
 	padding: 32px;
