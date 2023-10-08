@@ -5,6 +5,11 @@ const currencyFormat = new Intl.NumberFormat("en-US", {
 
 /**
  * Calculates the Levenshtein distance between two strings.
+ *
+ * @param s1 - The first string used for comparison.
+ * @param s1 - The second string used for comparison.
+ *
+ * @returns The Levenshtein distance between the two strings.
  */
 export const calculateLevenshteinDistance = (s1: string, s2: string) => {
 	if (s1.length === 0) return s2.length;
@@ -30,6 +35,13 @@ export const calculateLevenshteinDistance = (s1: string, s2: string) => {
 	return matrix[s2.length][s1.length];
 };
 
+/**
+ * Formats a given number with 2 decimal points of precision.
+ *
+ * @param amount - The number to format.
+ *
+ * @returns The formatted dollar amount.
+ */
 export const formatDollarAmount = (amount: number) => {
 	return currencyFormat.format(amount).substring(1);
 };

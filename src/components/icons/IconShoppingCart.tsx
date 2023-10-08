@@ -1,5 +1,8 @@
 import styles from "./icons.module.css";
 
+/**
+ * SVG shopping cart icon.
+ */
 const IconShoppingCart = (props: React.SVGProps<SVGSVGElement>) => (
 	<span className={styles.iconImage}>
 		<svg

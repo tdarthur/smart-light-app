@@ -1,5 +1,8 @@
 import styles from "./icons.module.css";
 
+/**
+ * SVG chevron icon.
+ */
 const IconChevron = (props: React.SVGProps<SVGSVGElement>) => (
 	<span className={styles.iconImage}>
 		<svg

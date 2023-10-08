@@ -11,10 +11,16 @@ import accessoryCompatibilitiesImage from "../../assets/accessory-compatibilitie
 const animationStart = Date.now();
 const landingAnimationDefaultDuration = 4_000;
 
+/**
+ * The home page.
+ */
 const Home = () => {
 	const [landingAnimationEnabled, setLandingAnimationEnabled] = useState(false);
 	const [landingAnimationDuration, setLandingAnimationDuration] = useState(landingAnimationDefaultDuration);
 
+	/**
+	 * Listener that allows for skipping of the landing animation.
+	 */
 	const landingAnimationListener = useCallback((event: KeyboardEvent | MouseEvent) => {
 		let skipped = false;
 		if ("code" in event) {
@@ -39,6 +45,9 @@ const Home = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	/**
+	 * Determines whether or not to show the landing animation.
+	 */
 	useEffect(() => {
 		const visited = localStorage.getItem("last-visit");
 		if (visited && Date.now() - parseInt(visited) < 2000) {
@@ -46,6 +55,9 @@ const Home = () => {
 		}
 	}, []);
 
+	/**
+	 * Adds listeners to skip the landing animation if it is enabled.
+	 */
 	useEffect(() => {
 		if (landingAnimationEnabled) {
 			window.addEventListener("keydown", landingAnimationListener);

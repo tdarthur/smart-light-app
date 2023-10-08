@@ -7,6 +7,11 @@ type Props = {
 	returnTo?: To;
 };
 
+/**
+ * The error page. Used for the entire application.
+ *
+ * @param returnTo - Optional path used for navigation when the "Back" link is clicked. Defaults to the root path.
+ */
 const ErrorPage = ({ returnTo = "/" }: Props) => {
 	const error = useRouteError();
 

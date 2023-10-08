@@ -4,7 +4,7 @@ import { Product } from "../models/Product";
 export type CartProductData = [product: Product, count: number];
 
 export type CartContext = {
-	products: Map<string, CartProductData>;
+	cart: Map<string, CartProductData>;
 	addToCart: (product: Product) => void;
 	removeFromCart: (product: Product) => void;
 };
@@ -12,7 +12,7 @@ export type CartContext = {
 export const maxProductQuantity = 99;
 
 const cartContext = createContext<CartContext>({
-	products: new Map(),
+	cart: new Map(),
 	addToCart: () => {},
 	removeFromCart: () => {},
 });

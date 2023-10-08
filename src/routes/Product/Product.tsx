@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useLoaderData, useMatches, useNavigate } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import clsx from "clsx";
 
 import Header from "../../components/Header";
@@ -13,95 +13,165 @@ import styles from "./product.module.css";
 
 const magnifierMagnification = 1.4;
 
+/**
+ * The product page.
+ */
 const Product = () => {
 	const product = useLoaderData() as Product;
-	const matches = useMatches();
-	const navigate = useNavigate();
 
 	const imageRef = useRef<HTMLImageElement>(null);
 	const imageMagnifierRef = useRef<HTMLDivElement>(null);
 	const magnifiedImageRef = useRef<HTMLImageElement>(null);
 
 	useEffect(() => {
-		if (!matches[0].params.id) {
-			navigate("/store");
-		}
-	}, [matches, navigate]);
+		const imageElement = imageRef.current;
+		const imageMagnifierElement = imageMagnifierRef.current;
+		const magnifiedImageElement = magnifiedImageRef.current;
+		if (imageElement && imageMagnifierElement && magnifiedImageElement) {
+			let imageRect = imageElement.getBoundingClientRect();
+			magnifiedImageElement.style.width = `${imageRect.width * magnifierMagnification}px`;
+			magnifiedImageElement.style.height = `${imageRect.height * magnifierMagnification}px`;
 
-	useEffect(() => {
-		if (imageRef.current && imageMagnifierRef.current && magnifiedImageRef.current) {
-			window.addEventListener("mousemove", (e) => {
-				if (!imageRef.current || !imageMagnifierRef.current || !magnifiedImageRef.current) return;
+			/**
+			 * Updates the stored rect of the image.
+			 */
+			const updateImageRectOnResize = () => {
+				imageRect = imageElement.getBoundingClientRect();
+			};
 
-				const mouseX = e.clientX;
-				const mouseY = e.clientY;
-
-				const {
-					top,
-					right,
-					bottom,
-					left,
-					width: imageWidth,
-					height: imageHeight,
-				} = imageRef.current.getBoundingClientRect();
+			/**
+			 * Calculates position for the magnifier and determines whether to display or hide it.
+			 *
+			 * @param pointerPositionX - the x position of the pointer (mouse or touch)
+			 * @param pointerPositionY - the x position of the pointer (mouse or touch)
+			 */
+			const calculateMagnifierPosition = (pointerPositionX: number, pointerPositionY: number) => {
 				const { width: magnifierWidth, height: magnifierHeight } =
-					imageMagnifierRef.current.getBoundingClientRect();
+					imageMagnifierElement.getBoundingClientRect();
 				const { width: magnifiedImageWidth, height: magnifiedImageHeight } =
-					magnifiedImageRef.current.getBoundingClientRect();
+					magnifiedImageElement.getBoundingClientRect();
 
-				if (mouseX >= left && mouseX <= right && mouseY >= top && mouseY <= bottom) {
-					if (!imageMagnifierRef.current.getAttribute("data-shown")) {
-						imageMagnifierRef.current.setAttribute("data-shown", "true");
+				const xOffset = pointerPositionX - (imageRect.left + imageRect.width / 2);
+				const yOffset = pointerPositionY - (imageRect.top + imageRect.height / 2);
+
+				imageMagnifierElement.style.left = `${pointerPositionX + window.scrollX - magnifierWidth / 2}px`;
+				imageMagnifierElement.style.top = `${pointerPositionY + window.scrollY - magnifierHeight / 2}px`;
+
+				magnifiedImageElement.style.left = `${
+					-(magnifiedImageWidth / 2) + magnifierWidth / 2 - xOffset * (magnifiedImageWidth / imageRect.width)
+				}px`;
+				magnifiedImageElement.style.top = `${
+					-(magnifiedImageHeight / 2) +
+					magnifierHeight / 2 -
+					yOffset * (magnifiedImageHeight / imageRect.height)
+				}px`;
+				magnifiedImageElement.style.width = `${imageRect.width * magnifierMagnification}px`;
+				magnifiedImageElement.style.height = `${imageRect.height * magnifierMagnification}px`;
+			};
+
+			/**
+			 * Updates the magnifier on a mouse move and determines whether to display or hide it.
+			 * The magnifier will be shown when the pointer is over the product image and hidden otherwise.
+			 */
+			const updateMagnifierOnMouseMove = (event: MouseEvent) => {
+				const { clientX, clientY } = event;
+				if (event.target === imageElement) {
+					if (!imageMagnifierElement.getAttribute("data-shown")) {
+						imageMagnifierElement.setAttribute("data-shown", "true");
 					}
 
-					const xOffset = mouseX - (left + imageWidth / 2);
-					const yOffset = mouseY - (top + imageHeight / 2);
-
-					imageMagnifierRef.current.style.left = `${mouseX + window.scrollX - magnifierWidth / 2}px`;
-					imageMagnifierRef.current.style.top = `${mouseY + window.scrollY - magnifierHeight / 2}px`;
-
-					magnifiedImageRef.current.style.left = `${
-						-(magnifiedImageWidth / 2) + magnifierWidth / 2 - xOffset * (magnifiedImageWidth / imageWidth)
-					}px`;
-					magnifiedImageRef.current.style.top = `${
-						-(magnifiedImageHeight / 2) +
-						magnifierHeight / 2 -
-						yOffset * (magnifiedImageHeight / imageHeight)
-					}px`;
-					magnifiedImageRef.current.style.width = `${imageWidth * magnifierMagnification}px`;
-					magnifiedImageRef.current.style.height = `${imageHeight * magnifierMagnification}px`;
+					calculateMagnifierPosition(clientX, clientY);
 				} else {
-					if (imageMagnifierRef.current.getAttribute("data-shown")) {
-						imageMagnifierRef.current.removeAttribute("data-shown");
+					if (imageMagnifierElement.getAttribute("data-shown")) {
+						imageMagnifierElement.removeAttribute("data-shown");
 					}
 				}
-			});
+			};
+
+			/**
+			 * Updates the magnifier position when a touch moves.
+			 */
+			const updateMagnifierOnTouchMove = (event: TouchEvent) => {
+				event.preventDefault();
+
+				const { clientX, clientY } = event.touches[0];
+				if (
+					event.target === imageElement &&
+					clientX >= imageRect.left &&
+					clientX <= imageRect.right &&
+					clientY >= imageRect.top &&
+					clientY <= imageRect.bottom
+				) {
+					if (!imageMagnifierElement.getAttribute("data-shown")) {
+						imageMagnifierElement.setAttribute("data-shown", "true");
+					}
+
+					calculateMagnifierPosition(clientX, clientY);
+				} else {
+					if (imageMagnifierElement.getAttribute("data-shown")) {
+						imageMagnifierElement.removeAttribute("data-shown");
+					}
+				}
+			};
+
+			/**
+			 * Shows the magnifier when touch starts.
+			 */
+			const showMagnifierOnTouch = (event: TouchEvent) => {
+				event.preventDefault();
+
+				if (!imageMagnifierElement.getAttribute("data-shown")) {
+					imageMagnifierElement.setAttribute("data-shown", "true");
+				}
+
+				const { clientX, clientY } = event.touches[0];
+				calculateMagnifierPosition(clientX, clientY);
+			};
+
+			/**
+			 * Hides the magnifier when touch ends.
+			 */
+			const hideMagnifierOnTouchEnd = () => {
+				if (imageMagnifierElement.getAttribute("data-shown")) {
+					imageMagnifierElement.removeAttribute("data-shown");
+				}
+			};
+
+			window.addEventListener("resize", updateImageRectOnResize);
+			window.addEventListener("mousemove", updateMagnifierOnMouseMove);
+			imageElement.addEventListener("touchstart", showMagnifierOnTouch);
+			imageElement.addEventListener("touchmove", updateMagnifierOnTouchMove);
+			imageElement.addEventListener("touchend", hideMagnifierOnTouchEnd);
+
+			return () => {
+				window.removeEventListener("resize", updateImageRectOnResize);
+				window.removeEventListener("mousemove", updateMagnifierOnMouseMove);
+				imageElement.removeEventListener("touchstart", showMagnifierOnTouch);
+				imageElement.removeEventListener("touchmove", updateMagnifierOnTouchMove);
+				imageElement.removeEventListener("touchend", hideMagnifierOnTouchEnd);
+			};
 		}
 	}, []);
 
-	const { products, addToCart } = useCartContext();
-	const productCount = products.has(product.id) ? (products.get(product.id) as CartProductData)[1] : 0;
-
-	// TODO: fix horizontal overflow on mobile
+	const { cart, addToCart } = useCartContext();
+	const productCount = cart.has(product.id) ? (cart.get(product.id) as CartProductData)[1] : 0;
 
 	return (
 		<>
 			<Header key={product.id} />
 			<main className={clsx("main-container", styles.productPage)}>
-				<button
-					className={styles.viewProductsButton}
-					onClick={() => {
-						navigate("/store");
-					}}
-				>
+				<Link className={styles.viewProductsLink} to="/store">
 					<IconChevron style={{ rotate: "180deg" }} />
 					<span>View more products</span>
-				</button>
+				</Link>
+
 				<div className={styles.product}>
-					<img className={styles.productImage} src={product?.image} ref={imageRef} />
 					<div className={styles.productImageMagnifier} ref={imageMagnifierRef}>
 						<img src={product?.image} ref={magnifiedImageRef} />
 					</div>
+
+					<img className={styles.productImage} src={product?.image} ref={imageRef} />
+
 					<div className={styles.productInfo}>
 						<div className={styles.productFeatures}>
 							<h1>{product?.name}</h1>

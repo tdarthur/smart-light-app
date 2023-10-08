@@ -1,5 +1,8 @@
 import styles from "./icons.module.css";
 
+/**
+ * SVG magnifying glass icon.
+ */
 const IconMagnifyingGlass = (props: React.SVGProps<SVGSVGElement>) => (
 	<span className={styles.iconImage}>
 		<svg

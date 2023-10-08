@@ -1,5 +1,8 @@
 import styles from "./icons.module.css";
 
+/**
+ * SVG hamburger icon.
+ */
 const IconHamburger = (props: React.SVGProps<SVGSVGElement>) => (
 	<span className={styles.iconImage}>
 		<svg

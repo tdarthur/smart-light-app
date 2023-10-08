@@ -1,6 +1,9 @@
 import styles from "./icons.module.css";
 
-const IconPlus = (props: React.SVGProps<SVGSVGElement>) => (
+/**
+ * SVG plus sign icon.
+ */
+const IconPlusSign = (props: React.SVGProps<SVGSVGElement>) => (
 	<span className={styles.iconImage}>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -18,4 +21,4 @@ const IconPlus = (props: React.SVGProps<SVGSVGElement>) => (
 	</span>
 );
 
-export default IconPlus;
+export default IconPlusSign;

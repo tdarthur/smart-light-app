@@ -1,5 +1,8 @@
 import styles from "./icons.module.css";
 
+/**
+ * SVG filter icon.
+ */
 const IconFilter = (props: React.SVGProps<SVGSVGElement>) => (
 	<span className={styles.iconImage}>
 		<svg

@@ -15,6 +15,12 @@ type SearchBarProps = {
 	search: (searchValue?: string) => void;
 };
 
+/**
+ * Search bar input used to filter products shown on the store page.
+ *
+ * @param setSearchString - Callback used to update the search string.
+ * @param search - Callback invoked to search via the current searchString.
+ */
 const SearchBar = ({ setSearchString, search }: SearchBarProps) => {
 	const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -65,6 +71,9 @@ const SearchBar = ({ setSearchString, search }: SearchBarProps) => {
 
 const searchSimilarityThreshold = 0.6;
 
+/**
+ * The store page.
+ */
 const Store = () => {
 	const products = useLoaderData() as Product[];
 

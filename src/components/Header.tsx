@@ -9,8 +9,8 @@ import IconX from "./icons/IconX";
 import IconChevron from "./icons/IconChevron";
 import IconShoppingCart from "./icons/IconShoppingCart";
 import useCartContext from "../hooks/useCartContext";
-import IconMinus from "./icons/IconMinus";
-import IconPlus from "./icons/IconPlus";
+import IconMinusSign from "./icons/IconMinus";
+import IconPlusSign from "./icons/IconPlus";
 import { maxProductQuantity } from "../contexts/cartContext";
 import { formatDollarAmount } from "../utils/stringUtils";
 
@@ -32,6 +32,9 @@ const locations: NavigationOption[] = [
 	{ name: "About Us", to: "/about" },
 ];
 
+/**
+ * Application header. Handles hamburger menu for smaller screens and light/dark mode toggling.
+ */
 const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => {
 	const [lightMode, setLightMode] = useState(lightModeEnabled);
 	const [shoppingCartOpen, setShoppingCartOpen] = useState(false);
@@ -43,8 +46,11 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 
 	const matches = useMatches();
 
-	const { addToCart, removeFromCart, products } = useCartContext();
+	const { cart, addToCart, removeFromCart } = useCartContext();
 
+	/**
+	 * Sets a listener for closing the hamburger menu when the window is resized.
+	 */
 	useEffect(() => {
 		const resizeListener = () => {
 			setHamburgerMenuOpen(false);
@@ -57,6 +63,9 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 		};
 	}, []);
 
+	/**
+	 * Sets a listener to close the hamburger menu when a click/touch occurs outside of it.
+	 */
 	useEffect(() => {
 		if (hamburgerMenuRef.current) {
 			const hideHamburgerMenu = (event: MouseEvent) => {
@@ -84,6 +93,9 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 		}
 	}, []);
 
+	/**
+	 * Toggles between light and dark mode.
+	 */
 	const toggleDarkMode = () => {
 		lightModeEnabled = !lightModeEnabled;
 
@@ -102,7 +114,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 
 	let distinctProducts = 0;
 	let productSubtotal = 0;
-	products.forEach(([{ price }, count]) => {
+	cart.forEach(([{ price }, count]) => {
 		distinctProducts++;
 		productSubtotal += price * count;
 	});
@@ -177,24 +189,26 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 						</button>
 						<div className={styles.shoppingCart} data-displayed={shoppingCartOpen || undefined}>
 							<h3 className={styles.shoppingCartHeader}>Your Cart</h3>
-							{products.size > 0 ? (
+							{cart.size > 0 ? (
 								<>
 									<div className={styles.shoppingCartProducts}>
-										{[...products].map(([, [product, count]]) => {
+										{[...cart].map(([, [product, count]]) => {
 											const productUrl = `/product/${product.id}`;
 
 											return (
-												<div className={styles.shoppingCartProduct}>
+												<div className={styles.shoppingCartProduct} key={product.id}>
 													<Link to={productUrl} style={{ display: "flex" }}>
 														<img
 															className={styles.shoppingCartProductImage}
 															src={product.image}
 														/>
 													</Link>
+
 													<div className={styles.shoppingCartProductInfo}>
-														{/* <Link to={productUrl}> */}
-														<p>{product.name}</p>
-														{/* </Link> */}
+														<Link to={productUrl}>
+															<p>{product.name}</p>
+														</Link>
+
 														<div className={styles.shoppingCartProductInfoBottom}>
 															<div className={styles.shoppingCartProductQuantity}>
 																<button
@@ -203,7 +217,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																		removeFromCart(product);
 																	}}
 																>
-																	<IconMinus />
+																	<IconMinusSign />
 																</button>
 																{count}
 																<button
@@ -221,9 +235,10 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																		count >= product.availableQuantity
 																	}
 																>
-																	<IconPlus />
+																	<IconPlusSign />
 																</button>
 															</div>
+
 															<span
 																className={clsx(
 																	"dollar-amount",
@@ -238,6 +253,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 											);
 										})}
 									</div>
+
 									<div className={styles.shoppingCartSubtotal}>
 										<p>Subtotal</p>
 										<strong className={clsx("dollar-amount", styles.shoppingCartSubtotalPrice)}>
@@ -288,6 +304,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 						{lightMode ? <IconSun /> : <IconMoon />}
 					</button>
 				</div>
+
 				<nav className={styles.hamburgerMenuNavigation}>
 					<ul>
 						{locations.map(({ name, to }) => {

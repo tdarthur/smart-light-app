@@ -19,8 +19,8 @@ const visitedInThisSession = sessionStorage.getItem("visited");
 const lastVisited = localStorage.getItem("last-visit");
 if (!visitedInThisSession && (!lastVisited || Date.now() - parseInt(lastVisited) > tenMinutes)) {
 	localStorage.setItem("last-visit", Date.now().toString());
-	sessionStorage.setItem("visited", "true");
 }
+sessionStorage.setItem("visited", "true");
 
 const shoppingCartData = localStorage.getItem("shopping-cart");
 
@@ -42,7 +42,6 @@ const routes: RouteObject[] = [
 				path: "/",
 				element: <HomePage />,
 				errorElement: <ErrorPage />,
-				children: [],
 			},
 			{
 				path: "/store",

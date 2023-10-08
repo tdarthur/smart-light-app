@@ -11,10 +11,18 @@ type cardReducerAction = {
 	operation: "add" | "remove";
 };
 
-const cartReducer = (products: Map<string, CartProductData>, action: cardReducerAction) => {
+/**
+ * Reducer function for cartContext state mutations. Allows adding or removing items from the cart.
+ *
+ * @param cart - Initial cart state.
+ * @param action - Action to mutate the cart state.
+ *
+ * @returns - Modified cart state.
+ */
+const cartReducer = (cart: Map<string, CartProductData>, action: cardReducerAction) => {
 	const { product, operation } = action;
 
-	const updatedProducts = new Map(products);
+	const updatedProducts = new Map(cart);
 	if (operation === "add") {
 		if (updatedProducts.has(product.id)) {
 			const productCount = (updatedProducts.get(product.id) as CartProductData)[1];
@@ -37,24 +45,27 @@ const cartReducer = (products: Map<string, CartProductData>, action: cardReducer
 	return updatedProducts;
 };
 
+/**
+ * Custom ContextProvider used for the cartContext. Sets up initial context state and provides mutation functions.
+ */
 const CartContextProvider = ({ initialValue, children }: Props) => {
-	const [products, updateProducts] = useReducer<Reducer<Map<string, CartProductData>, cardReducerAction>>(
+	const [cart, updateCart] = useReducer<Reducer<Map<string, CartProductData>, cardReducerAction>>(
 		cartReducer,
 		initialValue,
 	);
 
 	const addToCart = (product: Product) => {
-		updateProducts({ product, operation: "add" });
+		updateCart({ product, operation: "add" });
 	};
 
 	const removeFromCart = (product: Product) => {
-		updateProducts({ product, operation: "remove" });
+		updateCart({ product, operation: "remove" });
 	};
 
 	return (
 		<cartContext.Provider
 			value={{
-				products,
+				cart,
 				addToCart,
 				removeFromCart,
 			}}

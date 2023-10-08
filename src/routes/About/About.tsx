@@ -3,6 +3,9 @@ import Header from "../../components/Header";
 
 import styles from "./about.module.css";
 
+/**
+ * The about page.
+ */
 const About = () => (
 	<>
 		<Header />

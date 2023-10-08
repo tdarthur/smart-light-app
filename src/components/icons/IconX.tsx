@@ -1,5 +1,8 @@
 import styles from "./icons.module.css";
 
+/**
+ * SVG "x" icon.
+ */
 const IconX = (props: React.SVGProps<SVGSVGElement>) => (
 	<span className={styles.iconImage}>
 		<svg

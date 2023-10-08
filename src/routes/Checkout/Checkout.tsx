@@ -1,15 +1,18 @@
 import clsx from "clsx";
 import Header from "../../components/Header";
-import IconMinus from "../../components/icons/IconMinus";
-import IconPlus from "../../components/icons/IconPlus";
+import IconMinusSign from "../../components/icons/IconMinus";
+import IconPlusSign from "../../components/icons/IconPlus";
 import useCartContext from "../../hooks/useCartContext";
 import { maxProductQuantity } from "../../contexts/cartContext";
 
 import styles from "./checkout.module.css";
 import { Link } from "react-router-dom";
 
+/**
+ * The checkout page.
+ */
 const Checkout = () => {
-	const { addToCart, removeFromCart, products } = useCartContext();
+	const { cart, addToCart, removeFromCart } = useCartContext();
 
 	return (
 		<>
@@ -17,7 +20,7 @@ const Checkout = () => {
 			<main className={clsx("main-container", styles.checkoutPage)}>
 				<h1>Review and Checkout</h1>
 				<div className={styles.cartSummary}>
-					{[...products].map(([, [product, count]]) => {
+					{[...cart].map(([, [product, count]]) => {
 						const productUrl = `/product/${product.id}`;
 
 						return (
@@ -36,7 +39,7 @@ const Checkout = () => {
 											removeFromCart(product);
 										}}
 									>
-										<IconMinus />
+										<IconMinusSign />
 									</button>
 									{count}
 									<button
@@ -48,7 +51,7 @@ const Checkout = () => {
 										}}
 										disabled={count >= maxProductQuantity || count >= product.availableQuantity}
 									>
-										<IconPlus />
+										<IconPlusSign />
 									</button>
 								</div>
 							</div>
