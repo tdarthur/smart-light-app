@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from "react";
 import clsx from "clsx";
 
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 import styles from "./home.module.css";
 
@@ -81,6 +82,7 @@ const Home = () => {
 				className={landingAnimationEnabled ? styles.landingFade : undefined}
 				style={{ animationDuration: landingAnimationDurationStyle, animationDelay: "0ms" }}
 			/>
+
 			<main
 				className={clsx(styles.homePage, landingAnimationEnabled && styles.landingFade)}
 				style={{ animationDuration: landingAnimationDurationStyle, animationDelay: "500ms" }}
@@ -131,6 +133,8 @@ const Home = () => {
 					</div>
 				</div>
 			</main>
+
+			<Footer />
 		</>
 	);
 };
