@@ -1,5 +1,6 @@
 import { Link, To } from "react-router-dom";
 import styles from "./footer.module.css";
+import IconChevron from "./icons/IconChevron";
 
 type FooterLink = {
 	name: string;
@@ -45,6 +46,10 @@ const footerSections: FooterSection[] = [
 				to: "",
 			},
 			{
+				name: "Mobile App",
+				to: "",
+			},
+			{
 				name: "What's New",
 				to: "/store",
 			},
@@ -56,6 +61,14 @@ const footerSections: FooterSection[] = [
 			{
 				name: "About Us",
 				to: "/about",
+			},
+			{
+				name: "LinkedIn",
+				to: "https://www.linkedin.com/in/tyler-arthur-b914b9171/",
+			},
+			{
+				name: "Github",
+				to: "https://github.com/tdarthur",
 			},
 			{
 				name: "Tyler's Site",
@@ -74,6 +87,10 @@ const footerSections: FooterSection[] = [
 				name: "Join Our Team",
 				to: "",
 			},
+			{
+				name: "Employee Login",
+				to: "",
+			},
 		],
 	},
 ];
@@ -88,12 +105,17 @@ const Footer = () => {
 				<div className={styles.footerSections}>
 					{footerSections.map((section) => (
 						<section className={styles.footerSection}>
-							<h3>{section.name}</h3>
+							<h3>
+								{section.name}
+								<span className={styles.footerSectionCollapseIcon}>
+									<IconChevron style={{ rotate: "90deg" }} />
+								</span>
+							</h3>
 							<ul>
 								{section.links.map((link) => (
-									<Link to={link.to || "#"} target={link.to ? "_blank" : undefined}>
-										<li>{link.name}</li>
-									</Link>
+									<li>
+										<Link to={link.to || "#"}>{link.name}</Link>
+									</li>
 								))}
 							</ul>
 						</section>

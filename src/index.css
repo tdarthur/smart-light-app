@@ -112,6 +112,10 @@ body *:focus-visible {
 	box-sizing: content-box;
 }
 
+.expand-to-footer {
+	min-height: calc(100vh - var(--header-height) - var(--standard-container-padding) * 2);
+}
+
 .icon-button {
 	width: var(--main-icon-size);
 	height: var(--main-icon-size);

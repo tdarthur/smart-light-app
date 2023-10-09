@@ -3,6 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import clsx from "clsx";
 
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import IconX from "../../components/icons/IconX";
 import IconMagnifyingGlass from "../../components/icons/IconMagnifyingGlass";
 import type { Product } from "../../models/Product";
@@ -105,7 +106,7 @@ const Store = () => {
 	return (
 		<>
 			<Header />
-			<main className={clsx("main-container", styles.storePage)}>
+			<main className={clsx("main-container expand-to-footer", styles.storePage)}>
 				<SearchBar setSearchString={setSearchString} search={search} />
 
 				<div className={styles.productList}>
@@ -126,6 +127,7 @@ const Store = () => {
 					)}
 				</div>
 			</main>
+			<Footer />
 		</>
 	);
 };

@@ -55,13 +55,15 @@ body:global(.light-mode) .headerLogo {
 	);
 	--logo-background-size: 1600% 100%;
 	--logo-animation: background-slide 64s linear infinite;
+	--logo-padding: 4px 10px;
 
 	content: attr(data-text);
 
 	position: relative;
 
-	padding: 0 16px;
+	padding: var(--logo-padding);
 
+	border-radius: 2px;
 	color: white;
 	font-family: "Moul", cursive;
 	font-size: 24px;
@@ -81,7 +83,7 @@ body:global(.light-mode) .headerLogo {
 	top: 0;
 	left: 0;
 
-	padding: 0 16px;
+	padding: var(--logo-padding);
 
 	background-size: var(--logo-background-size);
 	background-image: var(--logo-gradient);

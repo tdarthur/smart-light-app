@@ -3,6 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import clsx from "clsx";
 
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import IconChevron from "../../components/icons/IconChevron";
 import useCartContext from "../../hooks/useCartContext";
 import type { Product } from "../../models/Product";
@@ -159,7 +160,7 @@ const Product = () => {
 	return (
 		<>
 			<Header key={product.id} />
-			<main className={clsx("main-container", styles.productPage)}>
+			<main className={clsx("main-container expand-to-footer", styles.productPage)}>
 				<Link className={styles.viewProductsLink} to="/store">
 					<IconChevron style={{ rotate: "180deg" }} />
 					<span>View more products</span>
@@ -193,6 +194,7 @@ const Product = () => {
 					</div>
 				</div>
 			</main>
+			<Footer />
 		</>
 	);
 };

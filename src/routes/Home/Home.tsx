@@ -84,7 +84,7 @@ const Home = () => {
 			/>
 
 			<main
-				className={clsx(styles.homePage, landingAnimationEnabled && styles.landingFade)}
+				className={clsx("expand-to-footer", styles.homePage, landingAnimationEnabled && styles.landingFade)}
 				style={{ animationDuration: landingAnimationDurationStyle, animationDelay: "500ms" }}
 				onAnimationEnd={() => {
 					removeLandingAnimationListener();

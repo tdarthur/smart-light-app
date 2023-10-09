@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 import styles from "./about.module.css";
 
@@ -9,7 +10,7 @@ import styles from "./about.module.css";
 const About = () => (
 	<>
 		<Header />
-		<main className="main-container">
+		<main className="main-container expand-to-footer">
 			<div className={styles.statement}>
 				<h1>Our mission</h1>
 				<p>
@@ -38,6 +39,7 @@ const About = () => (
 				</p>
 			</div>
 		</main>
+		<Footer />
 	</>
 );
 
