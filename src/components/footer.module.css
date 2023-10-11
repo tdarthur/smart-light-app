@@ -26,16 +26,16 @@
 }
 
 .footerSection {
-	--header-height: 16px;
-
 	display: block;
 	justify-self: center;
+
+	height: 100%;
 }
 
 .footerSection h3 {
 	margin-bottom: 16px;
 
-	height: var(--header-height);
+	height: 16px;
 
 	font-size: 16px;
 	font-weight: bold;
@@ -43,14 +43,23 @@
 	vertical-align: top;
 }
 
-.footerSectionCollapseIcon {
+.footerSectionButton {
 	display: none;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
 
-	width: var(--main-icon-size);
-	height: var(--main-icon-size);
-	padding: 4px 0;
-	box-sizing: content-box;
-	padding-left: 8px;
+	width: 100%;
+	height: 32px;
+	margin-bottom: 8px;
+
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.footerSectionCollapseIcon {
+	width: 20px;
+	height: 20px;
 }
 
 .footerSection ul {
@@ -97,24 +106,36 @@ body:global(.light-mode) .copyright {
 	}
 
 	.footerSection {
-		--header-height: 32px;
-
 		overflow: hidden;
 		text-align: center;
 
 		margin: 0 auto;
 
-		height: var(--header-height);
+		height: 32px;
+
+		transition:
+			height 150ms linear,
+			margin 150ms linear;
 	}
 
-	.footerSection h3 {
-		margin-bottom: 16px;
-
-		font-size: 16px;
-		font-weight: bold;
+	.footerSection a {
+		display: none;
 	}
 
-	.footerSectionCollapseIcon {
-		display: inline-block;
+	.footerSection[data-expanded] {
+		margin-bottom: 24px;
+		height: 100%;
+	}
+
+	.footerSection[data-expanded] a {
+		display: block;
+	}
+
+	.footerSectionHeader {
+		display: none;
+	}
+
+	.footerSectionButton {
+		display: flex;
 	}
 }

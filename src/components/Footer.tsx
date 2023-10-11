@@ -1,6 +1,8 @@
 import { Link, To } from "react-router-dom";
 import styles from "./footer.module.css";
 import IconChevron from "./icons/IconChevron";
+import { ComponentPropsWithoutRef, useState } from "react";
+import clsx from "clsx";
 
 type FooterLink = {
 	name: string;
@@ -98,28 +100,50 @@ const footerSections: FooterSection[] = [
 /**
  * Application footer.
  */
-const Footer = () => {
+const Footer = ({ className, ...props }: ComponentPropsWithoutRef<"footer">) => {
+	const [expandedSection, setExpandedSection] = useState<string>();
+
 	return (
-		<footer className={styles.footer}>
+		<footer className={clsx(styles.footer, className)} {...props}>
 			<div className={styles.footerContent}>
 				<div className={styles.footerSections}>
-					{footerSections.map((section) => (
-						<section className={styles.footerSection}>
-							<h3>
-								{section.name}
-								<span className={styles.footerSectionCollapseIcon}>
-									<IconChevron style={{ rotate: "90deg" }} />
-								</span>
-							</h3>
-							<ul>
-								{section.links.map((link) => (
-									<li>
-										<Link to={link.to || "#"}>{link.name}</Link>
-									</li>
-								))}
-							</ul>
-						</section>
-					))}
+					{footerSections.map((section) => {
+						const expanded = expandedSection === section.name;
+						return (
+							<section
+								className={styles.footerSection}
+								data-expanded={expanded || undefined}
+								style={expanded ? { height: `${48 + 24 * section.links.length}px` } : undefined}
+							>
+								<h3 className={styles.footerSectionHeader}>{section.name}</h3>
+								<button
+									className={styles.footerSectionButton}
+									onClick={() => {
+										setExpandedSection(expanded ? undefined : section.name);
+									}}
+								>
+									{section.name}
+									<span className={styles.footerSectionCollapseIcon}>
+										<IconChevron
+											style={{
+												transition: "rotate 150ms linear",
+												rotate: expanded ? "-90deg" : "90deg",
+												strokeWidth: "2px",
+											}}
+											key={section.name}
+										/>
+									</span>
+								</button>
+								<ul>
+									{section.links.map((link) => (
+										<li style={expanded ? { display: "block", height: "16px" } : undefined}>
+											<Link to={link.to || "#"}>{link.name}</Link>
+										</li>
+									))}
+								</ul>
+							</section>
+						);
+					})}
 				</div>
 
 				<p className={styles.copyright}>© 2023 Illuminous</p>

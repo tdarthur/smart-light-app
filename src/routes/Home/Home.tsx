@@ -134,7 +134,10 @@ const Home = () => {
 				</div>
 			</main>
 
-			<Footer />
+			<Footer
+				className={landingAnimationEnabled ? styles.landingFade : undefined}
+				style={{ animationDuration: landingAnimationDurationStyle, animationDelay: "1000ms" }}
+			/>
 		</>
 	);
 };
