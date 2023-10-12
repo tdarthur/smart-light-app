@@ -30,6 +30,7 @@ const Product = () => {
 		const magnifiedImageElement = magnifiedImageRef.current;
 		if (imageElement && imageMagnifierElement && magnifiedImageElement) {
 			let imageRect = imageElement.getBoundingClientRect();
+			let imageRectYOffset = 0;
 			magnifiedImageElement.style.width = `${imageRect.width * magnifierMagnification}px`;
 			magnifiedImageElement.style.height = `${imageRect.height * magnifierMagnification}px`;
 
@@ -38,6 +39,7 @@ const Product = () => {
 			 */
 			const updateImageRectOnResize = () => {
 				imageRect = imageElement.getBoundingClientRect();
+				imageRectYOffset = window.scrollY;
 			};
 
 			/**
@@ -53,7 +55,8 @@ const Product = () => {
 					magnifiedImageElement.getBoundingClientRect();
 
 				const xOffset = pointerPositionX - (imageRect.left + imageRect.width / 2);
-				const yOffset = pointerPositionY - (imageRect.top + imageRect.height / 2);
+				const yOffset =
+					pointerPositionY + window.scrollY - (imageRect.top + imageRectYOffset + imageRect.height / 2);
 
 				imageMagnifierElement.style.left = `${pointerPositionX + window.scrollX - magnifierWidth / 2}px`;
 				imageMagnifierElement.style.top = `${pointerPositionY + window.scrollY - magnifierHeight / 2}px`;
@@ -174,8 +177,12 @@ const Product = () => {
 					<img className={styles.productImage} src={product?.image} ref={imageRef} />
 
 					<div className={styles.productInfo}>
+						<h1>{product?.name}</h1>
+						<h3>Features</h3>
 						<div className={styles.productFeatures}>
-							<h1>{product?.name}</h1>
+							{product.features.map((feature) => (
+								<p>{feature}</p>
+							))}
 						</div>
 
 						<h2 className="dollar-amount">{formatDollarAmount(product.price)}</h2>

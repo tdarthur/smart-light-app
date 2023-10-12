@@ -58,6 +58,8 @@
 	aspect-ratio: 1;
 
 	background-color: var(--color-input-background);
+
+	cursor: crosshair;
 }
 
 .productImageMagnifier {
@@ -99,7 +101,31 @@
 }
 
 .productFeatures {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
 	flex-grow: 1;
+
+	margin: 8px 0 16px 0;
+
+	font-size: 12px;
+}
+
+.productFeatures p {
+	white-space: nowrap;
+
+	width: fit-content;
+	height: fit-content;
+	padding: 4px;
+
+	border-radius: 2px;
+	background-color: white;
+	color: black;
+}
+
+body:global(.light-mode) .productFeatures p {
+	background-color: black;
+	color: white;
 }
 
 .addToCartButton {

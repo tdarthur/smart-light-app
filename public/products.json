@@ -5,6 +5,7 @@
 		"image": "/smart-light-rgb.png",
 		"features": ["800 lumen", "full color range vibrant LED", "supports Alexa, Google Home, and Homekit"],
 		"price": 19.99,
+		"purchaseOptions": [1, 2, 4],
 		"availableQuantity": 118
 	},
 	{
@@ -13,6 +14,7 @@
 		"image": "/smart-light-rgb.png",
 		"features": ["1100 lumen", "full color range vibrant LED", "supports Alexa, Google Home, and Homekit"],
 		"price": 24.99,
+		"purchaseOptions": [1, 2],
 		"availableQuantity": 16
 	},
 	{
@@ -21,6 +23,7 @@
 		"image": "/smart-light.png",
 		"features": ["800 lumen", "vibrant LED", "supports Alexa, Google Home, and Homekit"],
 		"price": 9.99,
+		"purchaseOptions": [1, 2, 4],
 		"availableQuantity": 7
 	},
 	{
@@ -29,6 +32,7 @@
 		"image": "/smart-light.png",
 		"features": ["1100 lumen", "vibrant LED", "supports Alexa, Google Home, and Homekit"],
 		"price": 12.99,
+		"purchaseOptions": [1, 2],
 		"availableQuantity": 59
 	},
 	{
@@ -37,6 +41,7 @@
 		"image": "/smart-light.png",
 		"features": ["800 lumen", "vibrant LED"],
 		"price": 5.99,
+		"purchaseOptions": [4, 6, 8, 12],
 		"availableQuantity": 226
 	},
 	{
@@ -45,6 +50,7 @@
 		"image": "/smart-light.png",
 		"features": ["1100 lumen", "vibrant LED"],
 		"price": 6.99,
+		"purchaseOptions": [2, 4],
 		"availableQuantity": 104
 	}
 ]
