@@ -9,6 +9,9 @@
 .viewProductsLink {
 	display: block;
 	margin-bottom: 16px;
+	width: fit-content;
+	padding: 8px;
+	padding-left: 0;
 
 	opacity: 0.8;
 	white-space: nowrap;
@@ -59,11 +62,11 @@
 
 	background-color: var(--color-input-background);
 
-	cursor: crosshair;
+	cursor: none;
 }
 
 .productImageMagnifier {
-	--magnifierDiameter: 256px;
+	--magnifierDiameter: 192px;
 
 	pointer-events: none;
 
@@ -75,6 +78,7 @@
 
 	width: var(--magnifierDiameter);
 	height: var(--magnifierDiameter);
+	border: 1px solid black;
 	border-radius: 50%;
 
 	backdrop-filter: blur(1px);
@@ -93,22 +97,28 @@
 }
 
 .productInfo {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-rows: 1fr auto;
 
 	width: 100%;
 	height: 100%;
+}
+
+.productInfo h3 {
+	width: 100%;
+	margin-bottom: 8px;
 }
 
 .productFeatures {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
-	flex-grow: 1;
 
 	margin: 8px 0 16px 0;
+}
 
-	font-size: 12px;
+.productFeatures h3 {
+	width: 100%;
 }
 
 .productFeatures p {
@@ -121,11 +131,67 @@
 	border-radius: 2px;
 	background-color: white;
 	color: black;
+	font-size: 12px;
 }
 
 body:global(.light-mode) .productFeatures p {
 	background-color: black;
 	color: white;
+}
+
+.productSizes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+
+	margin-bottom: 16px;
+}
+
+.productSizes button {
+	flex-grow: 1;
+	text-align: center;
+
+	height: 32px;
+	padding: 8px;
+
+	border-radius: 2px;
+	border: 2px solid var(--color-input-background);
+	opacity: 0.5;
+}
+
+.productSizes button[data-selected] {
+	background-color: var(--color-input-background);
+	opacity: 1;
+}
+
+.productSizes button:hover {
+	background-color: var(--color-input-background);
+}
+
+.productQuantity {
+	margin-bottom: 16px;
+}
+
+.productQuantity * {
+	vertical-align: middle;
+}
+
+.productQuantity button {
+	padding: 4px ;
+}
+
+.productQuantity input {
+	display: inline-block;
+	text-align: center;
+
+	width: 40px;
+	height: 32px;
+	margin: 0 8px;
+
+	border: none;
+	border-bottom: 2px solid var(--color-input-background);
+	border-radius: 2px;
+	background-color: transparent;
 }
 
 .addToCartButton {
@@ -155,6 +221,6 @@ body:global(.light-mode) .productFeatures p {
 
 @media (max-width: 511px) {
 	.productImageMagnifier {
-		--magnifierDiameter: 50vw;
+		--magnifierDiameter: 37.5vw;
 	}
 }

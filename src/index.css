@@ -121,6 +121,8 @@ body *:focus-visible {
 	height: var(--main-icon-size);
 	padding: var(--main-icon-padding);
 
+	border-radius: 2px;
+
 	transition: color 150ms linear;
 }
 

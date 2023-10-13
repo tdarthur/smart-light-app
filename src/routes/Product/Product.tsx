@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import clsx from "clsx";
 
@@ -11,18 +11,25 @@ import { CartProductData, maxProductQuantity } from "../../contexts/cartContext"
 import { formatDollarAmount } from "../../utils/stringUtils";
 
 import styles from "./product.module.css";
+import IconMinusSign from "../../components/icons/IconMinusSign";
+import IconPlusSign from "../../components/icons/IconPlusSign";
 
-const magnifierMagnification = 1.4;
+const magnifierMagnification = 1.25;
 
 /**
  * The product page.
  */
 const Product = () => {
 	const product = useLoaderData() as Product;
+	const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+	const [quantity, setQuantity] = useState(1);
 
 	const imageRef = useRef<HTMLImageElement>(null);
 	const imageMagnifierRef = useRef<HTMLDivElement>(null);
 	const magnifiedImageRef = useRef<HTMLImageElement>(null);
+	const productQuantityRef = useRef<HTMLInputElement>(null);
+
+	const { cart, addToCart } = useCartContext();
 
 	useEffect(() => {
 		const imageElement = imageRef.current;
@@ -157,7 +164,6 @@ const Product = () => {
 		}
 	}, []);
 
-	const { cart, addToCart } = useCartContext();
 	const productCount = cart.has(product.id) ? (cart.get(product.id) as CartProductData)[1] : 0;
 
 	return (
@@ -178,11 +184,74 @@ const Product = () => {
 
 					<div className={styles.productInfo}>
 						<h1>{product?.name}</h1>
+
 						<h3>Features</h3>
 						<div className={styles.productFeatures}>
 							{product.features.map((feature) => (
 								<p>{feature}</p>
 							))}
+						</div>
+
+						<h3>Size</h3>
+						<div className={styles.productSizes}>
+							{product.sizes.map((size) => (
+								<button
+									onClick={() => {
+										setSelectedSize(size);
+									}}
+									data-selected={selectedSize === size || undefined}
+								>{`${size}-pack`}</button>
+							))}
+						</div>
+
+						<h3>Quantity</h3>
+						<div className={styles.productQuantity}>
+							<button
+								className="icon-button"
+								onClick={() => {
+									const newQuantity = Math.max(quantity - 1, 1);
+									setQuantity(newQuantity);
+									if (productQuantityRef.current) {
+										productQuantityRef.current.value = newQuantity.toString();
+									}
+								}}
+								disabled={quantity <= 1}
+							>
+								<IconMinusSign />
+							</button>
+							<input
+								id="product_quantity"
+								type="text"
+								onInput={(event) => {
+									const inputText = event.currentTarget.value;
+									if (inputText.length > 0) {
+										const newQuantity = parseInt(event.currentTarget.value.replace(/\D/g, "")) || 0;
+										setQuantity(newQuantity);
+										event.currentTarget.value = newQuantity.toString();
+									}
+								}}
+								onBlur={(event) => {
+									const newQuantity = parseInt(event.currentTarget.value.replace(/\D/g, "")) || 1;
+									setQuantity(newQuantity);
+									event.currentTarget.value = newQuantity.toString();
+								}}
+								maxLength={2}
+								defaultValue={1}
+								ref={productQuantityRef}
+							/>
+							<button
+								className="icon-button"
+								onClick={() => {
+									const newQuantity = Math.min(quantity + 1, 99);
+									setQuantity(newQuantity);
+									if (productQuantityRef.current) {
+										productQuantityRef.current.value = newQuantity.toString();
+									}
+								}}
+								disabled={quantity >= 99}
+							>
+								<IconPlusSign />
+							</button>
 						</div>
 
 						<h2 className="dollar-amount">{formatDollarAmount(product.price)}</h2>

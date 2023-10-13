@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Header from "../../components/Header";
-import IconMinusSign from "../../components/icons/IconMinus";
-import IconPlusSign from "../../components/icons/IconPlus";
+import IconMinusSignCircle from "../../components/icons/IconMinusSignCircle";
+import IconPlusSignCircle from "../../components/icons/IconPlusSignCircle";
 import useCartContext from "../../hooks/useCartContext";
 import { maxProductQuantity } from "../../contexts/cartContext";
 
@@ -39,7 +39,7 @@ const Checkout = () => {
 											removeFromCart(product);
 										}}
 									>
-										<IconMinusSign />
+										<IconMinusSignCircle />
 									</button>
 									{count}
 									<button
@@ -51,7 +51,7 @@ const Checkout = () => {
 										}}
 										disabled={count >= maxProductQuantity || count >= product.availableQuantity}
 									>
-										<IconPlusSign />
+										<IconPlusSignCircle />
 									</button>
 								</div>
 							</div>

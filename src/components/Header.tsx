@@ -9,8 +9,8 @@ import IconX from "./icons/IconX";
 import IconChevron from "./icons/IconChevron";
 import IconShoppingCart from "./icons/IconShoppingCart";
 import useCartContext from "../hooks/useCartContext";
-import IconMinusSign from "./icons/IconMinus";
-import IconPlusSign from "./icons/IconPlus";
+import IconMinusSignCircle from "./icons/IconMinusSignCircle";
+import IconPlusSignCircle from "./icons/IconPlusSignCircle";
 import { maxProductQuantity } from "../contexts/cartContext";
 import { formatDollarAmount } from "../utils/stringUtils";
 
@@ -217,7 +217,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																		removeFromCart(product);
 																	}}
 																>
-																	<IconMinusSign />
+																	<IconMinusSignCircle />
 																</button>
 																{count}
 																<button
@@ -235,7 +235,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																		count >= product.availableQuantity
 																	}
 																>
-																	<IconPlusSign />
+																	<IconPlusSignCircle />
 																</button>
 															</div>
 

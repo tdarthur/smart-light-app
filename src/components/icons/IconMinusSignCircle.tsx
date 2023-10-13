@@ -1,9 +1,9 @@
 import styles from "./icons.module.css";
 
 /**
- * SVG minus sign icon.
+ * SVG minus sign circle icon.
  */
-const IconMinusSign = (props: React.SVGProps<SVGSVGElement>) => (
+const IconMinusSignCircle = (props: React.SVGProps<SVGSVGElement>) => (
 	<span className={styles.iconImage}>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -21,4 +21,4 @@ const IconMinusSign = (props: React.SVGProps<SVGSVGElement>) => (
 	</span>
 );
 
-export default IconMinusSign;
+export default IconMinusSignCircle;
