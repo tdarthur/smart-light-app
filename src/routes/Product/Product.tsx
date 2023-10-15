@@ -16,6 +16,8 @@ import IconPlusSign from "../../components/icons/IconPlusSign";
 
 const magnifierMagnification = 1.25;
 
+const addedMessageTimeout = 1000;
+
 /**
  * The product page.
  */
@@ -23,6 +25,8 @@ const Product = () => {
 	const product = useLoaderData() as Product;
 	const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
 	const [quantity, setQuantity] = useState(1);
+
+	const [showAddedMessage, setShowAddedMessage] = useState(false);
 
 	const imageRef = useRef<HTMLImageElement>(null);
 	const imageMagnifierRef = useRef<HTMLDivElement>(null);
@@ -261,11 +265,20 @@ const Product = () => {
 							onClick={() => {
 								if (productCount < maxProductQuantity && productCount < product.availableQuantity) {
 									addToCart(product);
+									setShowAddedMessage(true);
+
+									setTimeout(() => {
+										setShowAddedMessage(false);
+									}, addedMessageTimeout);
 								}
 							}}
-							disabled={productCount >= maxProductQuantity || productCount >= product.availableQuantity}
+							disabled={
+								showAddedMessage ||
+								productCount >= maxProductQuantity ||
+								productCount >= product.availableQuantity
+							}
 						>
-							Add to Cart
+							{showAddedMessage ? "Added to Cart!" : "Add to Cart"}
 						</button>
 					</div>
 				</div>

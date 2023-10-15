@@ -177,14 +177,14 @@ body:global(.light-mode) .productFeatures p {
 }
 
 .productQuantity button {
-	padding: 4px ;
+	padding: 4px;
 }
 
 .productQuantity input {
 	display: inline-block;
 	text-align: center;
 
-	width: 40px;
+	width: 32px;
 	height: 32px;
 	margin: 0 8px;
 
