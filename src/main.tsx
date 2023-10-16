@@ -10,6 +10,7 @@ import ErrorPage from "./routes/Error/ErrorPage";
 import CheckoutPage from "./routes/Checkout/Checkout";
 import { Product } from "./models/Product";
 import CartContextProvider from "./contexts/CartContextProvider";
+import { CartProductData, cartVersion } from "./contexts/cartContext";
 
 import "./index.css";
 
@@ -23,15 +24,20 @@ if (!visitedInThisSession && (!lastVisited || Date.now() - parseInt(lastVisited)
 sessionStorage.setItem("visited", "true");
 
 const shoppingCartData = localStorage.getItem("shopping-cart");
+let shoppingCart: Map<string, CartProductData> | undefined = undefined;
+if (shoppingCartData) {
+	const parsedShoppingCartData = JSON.parse(shoppingCartData);
+	if (parsedShoppingCartData?.version === cartVersion) {
+		shoppingCart = parsedShoppingCartData.cart as Map<string, CartProductData>;
+	}
+}
 
 const routes: RouteObject[] = [
 	{
 		element: (
 			<>
 				<ScrollRestoration />
-				<CartContextProvider
-					initialValue={shoppingCartData ? new Map(JSON.parse(shoppingCartData)) : new Map()}
-				>
+				<CartContextProvider initialValue={shoppingCart ? new Map(shoppingCart) : new Map()}>
 					<Outlet />
 				</CartContextProvider>
 			</>

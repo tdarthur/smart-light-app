@@ -1,5 +1,5 @@
 import { Reducer, useReducer } from "react";
-import cartContext, { CartContext, CartProductData, maxProductQuantity } from "./cartContext";
+import cartContext, { CartContext, CartProductData, cartVersion, maxProductQuantity } from "./cartContext";
 import { getProductOption } from "../utils/productUtils";
 import { Product } from "../models/Product";
 
@@ -48,7 +48,10 @@ const cartReducer = (cart: Map<string, CartProductData>, action: cardReducerActi
 		}
 	}
 
-	localStorage.setItem("shopping-cart", JSON.stringify(Array.from(updatedCart.entries())));
+	localStorage.setItem(
+		"shopping-cart",
+		JSON.stringify({ version: cartVersion, cart: Array.from(updatedCart.entries()) }),
+	);
 
 	return updatedCart;
 };

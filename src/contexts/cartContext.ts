@@ -11,6 +11,8 @@ export type CartContext = {
 
 export const maxProductQuantity = 99;
 
+export const cartVersion = "1.0";
+
 const cartContext = createContext<CartContext>({
 	cart: new Map(),
 	addToCart: () => {},
