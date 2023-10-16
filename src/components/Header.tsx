@@ -13,6 +13,7 @@ import IconMinusSignCircle from "./icons/IconMinusSignCircle";
 import IconPlusSignCircle from "./icons/IconPlusSignCircle";
 import { maxProductQuantity } from "../contexts/cartContext";
 import { formatDollarAmount } from "../utils/stringUtils";
+import { getProductOption } from "../utils/productUtils";
 
 import styles from "./header.module.css";
 
@@ -114,7 +115,9 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 
 	let distinctProducts = 0;
 	let productSubtotal = 0;
-	cart.forEach(([{ price }, count]) => {
+	cart.forEach(([product, optionId, count]) => {
+		const price = getProductOption(product, optionId)?.price || 0;
+
 		distinctProducts++;
 		productSubtotal += price * count;
 	});
@@ -192,11 +195,16 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 							{cart.size > 0 ? (
 								<>
 									<div className={styles.shoppingCartProducts}>
-										{[...cart].map(([, [product, count]]) => {
+										{[...cart].map(([, [product, optionId, count]]) => {
 											const productUrl = `/product/${product.id}`;
+											const option = getProductOption(product, optionId);
+											if (!option) return;
 
 											return (
-												<div className={styles.shoppingCartProduct} key={product.id}>
+												<div
+													className={styles.shoppingCartProduct}
+													key={`${product.id}-${optionId}`}
+												>
 													<Link to={productUrl} style={{ display: "flex" }}>
 														<img
 															className={styles.shoppingCartProductImage}
@@ -208,13 +216,14 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 														<Link to={productUrl}>
 															<p>{product.name}</p>
 														</Link>
+														<small>{option.caption}</small>
 
 														<div className={styles.shoppingCartProductInfoBottom}>
 															<div className={styles.shoppingCartProductQuantity}>
 																<button
 																	className="icon-button"
 																	onClick={() => {
-																		removeFromCart(product);
+																		removeFromCart(product, optionId, 1);
 																	}}
 																>
 																	<IconMinusSignCircle />
@@ -225,14 +234,14 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																	onClick={() => {
 																		if (
 																			count < maxProductQuantity &&
-																			count < product.availableQuantity
+																			count < option.available
 																		) {
-																			addToCart(product);
+																			addToCart(product, optionId, 1);
 																		}
 																	}}
 																	disabled={
 																		count >= maxProductQuantity ||
-																		count >= product.availableQuantity
+																		count >= option.available
 																	}
 																>
 																	<IconPlusSignCircle />
@@ -245,7 +254,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																	styles.productSubtotal,
 																)}
 															>
-																{formatDollarAmount(product.price * count)}
+																{formatDollarAmount(option.price * count)}
 															</span>
 														</div>
 													</div>

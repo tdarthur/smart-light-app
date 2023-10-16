@@ -1,12 +1,12 @@
 import { createContext } from "react";
 import { Product } from "../models/Product";
 
-export type CartProductData = [product: Product, count: number];
+export type CartProductData = [product: Product, optionId: string, count: number];
 
 export type CartContext = {
 	cart: Map<string, CartProductData>;
-	addToCart: (product: Product) => void;
-	removeFromCart: (product: Product) => void;
+	addToCart: (product: Product, optionId: string, count: number) => void;
+	removeFromCart: (product: Product, optionId: string, count: number) => void;
 };
 
 export const maxProductQuantity = 99;

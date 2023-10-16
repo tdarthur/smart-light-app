@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import clsx from "clsx";
+import toast, { Toaster } from "react-hot-toast";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -16,17 +17,13 @@ import IconPlusSign from "../../components/icons/IconPlusSign";
 
 const magnifierMagnification = 1.25;
 
-const addedMessageTimeout = 1000;
-
 /**
  * The product page.
  */
 const Product = () => {
 	const product = useLoaderData() as Product;
-	const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+	const [selectedOption, setSelectedOption] = useState(product.options[0]);
 	const [quantity, setQuantity] = useState(1);
-
-	const [showAddedMessage, setShowAddedMessage] = useState(false);
 
 	const imageRef = useRef<HTMLImageElement>(null);
 	const imageMagnifierRef = useRef<HTMLDivElement>(null);
@@ -168,10 +165,18 @@ const Product = () => {
 		}
 	}, []);
 
-	const productCount = cart.has(product.id) ? (cart.get(product.id) as CartProductData)[1] : 0;
+	const productCount = cart.has(product.id) ? (cart.get(product.id) as CartProductData)[2] : 0;
 
 	return (
 		<>
+			<Toaster
+				containerClassName={styles.toaster}
+				toastOptions={{
+					position: "top-right",
+					className: styles.toast,
+					duration: 750,
+				}}
+			/>
 			<Header key={product.id} />
 			<main className={clsx("main-container expand-to-footer", styles.productPage)}>
 				<Link className={styles.viewProductsLink} to="/store">
@@ -192,19 +197,22 @@ const Product = () => {
 						<h3>Features</h3>
 						<div className={styles.productFeatures}>
 							{product.features.map((feature) => (
-								<p>{feature}</p>
+								<p key={feature}>{feature}</p>
 							))}
 						</div>
 
 						<h3>Size</h3>
 						<div className={styles.productSizes}>
-							{product.sizes.map((size) => (
+							{product.options.map((option) => (
 								<button
 									onClick={() => {
-										setSelectedSize(size);
+										setSelectedOption(option);
 									}}
-									data-selected={selectedSize === size || undefined}
-								>{`${size}-pack`}</button>
+									data-selected={selectedOption.id === option.id || undefined}
+									key={option.id}
+								>
+									{option.caption}
+								</button>
 							))}
 						</div>
 
@@ -252,33 +260,31 @@ const Product = () => {
 										productQuantityRef.current.value = newQuantity.toString();
 									}
 								}}
-								disabled={quantity >= 99}
+								disabled={
+									productCount + quantity > maxProductQuantity ||
+									productCount + quantity > selectedOption.available
+								}
 							>
 								<IconPlusSign />
 							</button>
 						</div>
 
-						<h2 className="dollar-amount">{formatDollarAmount(product.price)}</h2>
+						<h2 className="dollar-amount">{formatDollarAmount(selectedOption.price)}</h2>
 
 						<button
 							className={styles.addToCartButton}
 							onClick={() => {
-								if (productCount < maxProductQuantity && productCount < product.availableQuantity) {
-									addToCart(product);
-									setShowAddedMessage(true);
-
-									setTimeout(() => {
-										setShowAddedMessage(false);
-									}, addedMessageTimeout);
+								if (
+									productCount + quantity <= maxProductQuantity &&
+									productCount + quantity <= selectedOption.available
+								) {
+									addToCart(product, selectedOption.id, quantity);
+									toast("Added to cart!", { id: "added-to-cart" });
 								}
 							}}
-							disabled={
-								showAddedMessage ||
-								productCount >= maxProductQuantity ||
-								productCount >= product.availableQuantity
-							}
+							disabled={productCount >= maxProductQuantity || productCount >= selectedOption.available}
 						>
-							{showAddedMessage ? "Added to Cart!" : "Add to Cart"}
+							Add to Cart
 						</button>
 					</div>
 				</div>

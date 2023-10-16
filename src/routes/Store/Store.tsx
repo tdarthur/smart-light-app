@@ -111,7 +111,7 @@ const Store = () => {
 
 				<div className={styles.productList}>
 					{filteredProducts.length > 0 ? (
-						filteredProducts.map(({ id, name, image, price }) => (
+						filteredProducts.map(({ id, name, image, options: [{ price }] }) => (
 							<Link className={styles.product} to={`/product/${id}`} key={name}>
 								<img className={styles.productImage} src={image} key={name} />
 								<div className={styles.productDetails}>

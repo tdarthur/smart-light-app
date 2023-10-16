@@ -4,53 +4,132 @@
 		"name": "Full Color Smart Bulb",
 		"image": "/smart-light-rgb.png",
 		"features": ["800 lumen", "Full color range vibrant LED", "Supports Alexa, Google Home, and Homekit"],
-		"price": 19.99,
-		"sizes": [1, 2, 4],
-		"availableQuantity": 118
+		"options": [
+			{
+				"id": "2",
+				"caption": "2-pack",
+				"price": 22.49,
+				"available": 238
+			},
+			{
+				"id": "4",
+				"caption": "4-pack",
+				"price": 44.99,
+				"available": 123
+			}
+		]
 	},
 	{
 		"id": "smart-bulb-flood-rgb",
 		"name": "Full Color Smart Flood Bulb",
 		"image": "/smart-light-rgb.png",
 		"features": ["1100 lumen", "Full color range vibrant LED", "Supports Alexa, Google Home, and Homekit"],
-		"price": 24.99,
-		"sizes": [1, 2],
-		"availableQuantity": 16
+		"options": [
+			{
+				"id": "1",
+				"caption": "1-pack",
+				"price": 17.99,
+				"available": 89
+			},
+			{
+				"id": "2",
+				"caption": "2-pack",
+				"price": 35.99,
+				"available": 52
+			}
+		]
 	},
 	{
 		"id": "smart-bulb-standard",
 		"name": "Smart Bulb",
 		"image": "/smart-light.png",
 		"features": ["800 lumen", "Vibrant LED", "Supports Alexa, Google Home, and Homekit"],
-		"price": 9.99,
-		"sizes": [1, 2, 4],
-		"availableQuantity": 7
+		"options": [
+			{
+				"id": "2",
+				"caption": "2-pack",
+				"price": 14.99,
+				"available": 89
+			},
+			{
+				"id": "4",
+				"caption": "4-pack",
+				"price": 29.99,
+				"available": 89
+			}
+		]
 	},
 	{
 		"id": "smart-bulb-flood",
 		"name": "Smart Flood Bulb",
 		"image": "/smart-light.png",
 		"features": ["1100 lumen", "Vibrant LED", "Supports Alexa, Google Home, and Homekit"],
-		"price": 12.99,
-		"sizes": [1, 2],
-		"availableQuantity": 59
+		"options": [
+			{
+				"id": "1",
+				"caption": "1-pack",
+				"price": 12.49,
+				"available": 89
+			},
+			{
+				"id": "2",
+				"caption": "2-pack",
+				"price": 24.99,
+				"available": 89
+			}
+		]
 	},
 	{
 		"id": "led-bulb-standard",
 		"name": "LED Standard Bulb",
 		"image": "/smart-light.png",
 		"features": ["800 lumen", "Vibrant LED"],
-		"price": 5.99,
-		"sizes": [4, 6, 8, 12],
-		"availableQuantity": 226
+
+		"options": [
+			{
+				"id": "4",
+				"caption": "4-pack",
+				"price": 19.99,
+				"available": 89
+			},
+			{
+				"id": "6",
+				"caption": "6-pack",
+				"price": 29.99,
+				"available": 89
+			},
+			{
+				"id": "8",
+				"caption": "8-pack",
+				"price": 39.99,
+				"available": 89
+			},
+			{
+				"id": "12",
+				"caption": "12-pack",
+				"price": 54.99,
+				"available": 89
+			}
+		]
 	},
 	{
 		"id": "led-bulb-flood",
 		"name": "LED Flood Bulb",
 		"image": "/smart-light.png",
 		"features": ["1100 lumen", "Vibrant LED"],
-		"price": 6.99,
-		"sizes": [2, 4],
-		"availableQuantity": 104
+		"options": [
+			{
+				"id": "2",
+				"caption": "2-pack",
+				"price": 13.49,
+				"available": 89
+			},
+			{
+				"id": "4",
+				"caption": "4-pack",
+				"price": 26.99,
+				"available": 89
+			}
+		]
 	}
 ]

@@ -211,6 +211,25 @@ body:global(.light-mode) .productFeatures p {
 	background-color: #80808040;
 }
 
+.toaster {
+	pointer-events: none;
+
+	transform: translateY(64px);
+}
+
+.toaster * {
+	pointer-events: none !important;
+}
+
+.toast {
+	border-radius: 2px !important;
+}
+
+body:global(:not(.light-mode)) .toast {
+	background-color: var(--color-input-background);
+	color: white;
+}
+
 @media (max-width: 1079px) {
 	.product {
 		display: block;

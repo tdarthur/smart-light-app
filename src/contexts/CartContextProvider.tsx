@@ -1,5 +1,6 @@
 import { Reducer, useReducer } from "react";
 import cartContext, { CartContext, CartProductData, maxProductQuantity } from "./cartContext";
+import { getProductOption } from "../utils/productUtils";
 import { Product } from "../models/Product";
 
 type Props = {
@@ -8,7 +9,9 @@ type Props = {
 
 type cardReducerAction = {
 	product: Product;
+	optionId: string;
 	operation: "add" | "remove";
+	count: number;
 };
 
 /**
@@ -17,32 +20,37 @@ type cardReducerAction = {
  * @param cart - Initial cart state.
  * @param action - Action to mutate the cart state.
  *
- * @returns - Modified cart state.
+ * @returns Modified cart state.
  */
 const cartReducer = (cart: Map<string, CartProductData>, action: cardReducerAction) => {
-	const { product, operation } = action;
+	const { product, optionId, operation, count: actionCount } = action;
+	const option = getProductOption(product, optionId);
+	if (!option) return cart;
 
-	const updatedProducts = new Map(cart);
+	const updatedCart = new Map(cart);
+	const key = `${product.id}-${optionId}`;
+	const productCount = updatedCart.has(key) ? (updatedCart.get(key) as CartProductData)[2] : 0;
 	if (operation === "add") {
-		if (updatedProducts.has(product.id)) {
-			const productCount = (updatedProducts.get(product.id) as CartProductData)[1];
-			if (productCount < maxProductQuantity && productCount < product.availableQuantity) {
-				updatedProducts.set(product.id, [product, productCount + 1]);
-			}
-		} else {
-			updatedProducts.set(product.id, [product, 1]);
+		if (productCount < maxProductQuantity && productCount < option.available) {
+			updatedCart.set(key, [
+				product,
+				optionId,
+				Math.min(productCount + actionCount, maxProductQuantity, option.available),
+			]);
 		}
 	} else if (operation === "remove") {
-		if ((updatedProducts.get(product.id) as CartProductData)?.[1] > 1) {
-			updatedProducts.set(product.id, [product, (updatedProducts.get(product.id) as CartProductData)[1] - 1]);
-		} else {
-			updatedProducts.delete(product.id);
+		if (productCount > 0) {
+			if ((updatedCart.get(key) as CartProductData)?.[2] > actionCount) {
+				updatedCart.set(key, [product, optionId, productCount - actionCount]);
+			} else {
+				updatedCart.delete(key);
+			}
 		}
 	}
 
-	localStorage.setItem("shopping-cart", JSON.stringify(Array.from(updatedProducts.entries())));
+	localStorage.setItem("shopping-cart", JSON.stringify(Array.from(updatedCart.entries())));
 
-	return updatedProducts;
+	return updatedCart;
 };
 
 /**
@@ -54,12 +62,26 @@ const CartContextProvider = ({ initialValue, children }: Props) => {
 		initialValue,
 	);
 
-	const addToCart = (product: Product) => {
-		updateCart({ product, operation: "add" });
+	/**
+	 * Adds a specified number of products to the cart.
+	 *
+	 * @param product - The product to add to the cart.
+	 * @param optionId - The ID of the product option being added.
+	 * @param count - The number of products to add.
+	 */
+	const addToCart = (product: Product, optionId: string, count: number) => {
+		updateCart({ product, optionId, operation: "add", count });
 	};
 
-	const removeFromCart = (product: Product) => {
-		updateCart({ product, operation: "remove" });
+	/**
+	 * Removes a specified number of products from the cart.
+	 *
+	 * @param product - The product to remove from the cart.
+	 * @param optionId - The ID of the product option being removed.
+	 * @param count - The number of products to remove.
+	 */
+	const removeFromCart = (product: Product, optionId: string, count: number) => {
+		updateCart({ product, optionId, operation: "remove", count });
 	};
 
 	return (

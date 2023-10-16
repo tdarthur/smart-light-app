@@ -114,6 +114,7 @@ const Footer = ({ className, ...props }: ComponentPropsWithoutRef<"footer">) => 
 								className={styles.footerSection}
 								data-expanded={expanded || undefined}
 								style={expanded ? { height: `${48 + 24 * section.links.length}px` } : undefined}
+								key={section.name}
 							>
 								<h3 className={styles.footerSectionHeader}>{section.name}</h3>
 								<button
@@ -136,7 +137,10 @@ const Footer = ({ className, ...props }: ComponentPropsWithoutRef<"footer">) => 
 								</button>
 								<ul>
 									{section.links.map((link) => (
-										<li style={expanded ? { display: "block", height: "16px" } : undefined}>
+										<li
+											style={expanded ? { display: "block", height: "16px" } : undefined}
+											key={link.name}
+										>
 											<Link to={link.to || "#"}>{link.name}</Link>
 										</li>
 									))}
