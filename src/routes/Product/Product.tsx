@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import clsx from "clsx";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -10,6 +10,7 @@ import useCartContext from "../../hooks/useCartContext";
 import type { Product } from "../../models/Product";
 import { CartProductData, maxProductQuantity } from "../../contexts/cartContext";
 import { formatDollarAmount } from "../../utils/stringUtils";
+import { getProductOption } from "../../utils/productUtils";
 
 import styles from "./product.module.css";
 import IconMinusSign from "../../components/icons/IconMinusSign";
@@ -22,7 +23,6 @@ const magnifierMagnification = 1.25;
  */
 const Product = () => {
 	const product = useLoaderData() as Product;
-	const [selectedOption, setSelectedOption] = useState(product.options[0]);
 	const [quantity, setQuantity] = useState(1);
 
 	const imageRef = useRef<HTMLImageElement>(null);
@@ -31,6 +31,8 @@ const Product = () => {
 	const productQuantityRef = useRef<HTMLInputElement>(null);
 
 	const { cart, addToCart } = useCartContext();
+
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
 		const imageElement = imageRef.current;
@@ -165,6 +167,8 @@ const Product = () => {
 		}
 	}, []);
 
+	const selectedOptionId = searchParams.get("option") || product.options[0].id;
+	const selectedOption = getProductOption(product, selectedOptionId)!;
 	const productCount = cart.has(product.id) ? (cart.get(product.id) as CartProductData)[2] : 0;
 
 	return (
@@ -206,9 +210,12 @@ const Product = () => {
 							{product.options.map((option) => (
 								<button
 									onClick={() => {
-										setSelectedOption(option);
+										setSearchParams(
+											{ ...searchParams, option: option.id },
+											{ preventScrollReset: true },
+										);
 									}}
-									data-selected={selectedOption.id === option.id || undefined}
+									data-selected={selectedOptionId === option.id || undefined}
 									key={option.id}
 								>
 									{option.caption}
@@ -243,7 +250,14 @@ const Product = () => {
 									}
 								}}
 								onBlur={(event) => {
-									const newQuantity = parseInt(event.currentTarget.value.replace(/\D/g, "")) || 1;
+									const newQuantity = Math.max(
+										1,
+										Math.min(
+											parseInt(event.currentTarget.value.replace(/\D/g, "")),
+											maxProductQuantity,
+											selectedOption.available,
+										),
+									);
 									setQuantity(newQuantity);
 									event.currentTarget.value = newQuantity.toString();
 								}}
@@ -261,8 +275,8 @@ const Product = () => {
 									}
 								}}
 								disabled={
-									productCount + quantity > maxProductQuantity ||
-									productCount + quantity > selectedOption.available
+									productCount + quantity >= maxProductQuantity ||
+									productCount + quantity >= selectedOption.available
 								}
 							>
 								<IconPlusSign />

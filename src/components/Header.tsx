@@ -196,7 +196,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 								<>
 									<div className={styles.shoppingCartProducts}>
 										{[...cart].map(([, [product, optionId, count]]) => {
-											const productUrl = `/product/${product.id}`;
+											const productUrl = `/product/${product.id}?option=${optionId}`;
 											const option = getProductOption(product, optionId);
 											if (!option) return;
 
@@ -213,10 +213,14 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 													</Link>
 
 													<div className={styles.shoppingCartProductInfo}>
-														<Link to={productUrl}>
-															<p>{product.name}</p>
-														</Link>
-														<small>{option.caption}</small>
+														<div className={styles.productNameAndOption}>
+															<Link to={productUrl} style={{ width: "fit-content" }}>
+																<p>{product.name}</p>
+															</Link>
+															<Link to={productUrl} style={{ width: "fit-content" }}>
+																<small>{option.caption}</small>
+															</Link>
+														</div>
 
 														<div className={styles.shoppingCartProductInfoBottom}>
 															<div className={styles.shoppingCartProductQuantity}>
@@ -225,6 +229,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																	onClick={() => {
 																		removeFromCart(product, optionId, 1);
 																	}}
+																	style={{ marginLeft: "-1px", marginRight: "4px" }}
 																>
 																	<IconMinusSignCircle />
 																</button>
@@ -239,6 +244,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																			addToCart(product, optionId, 1);
 																		}
 																	}}
+																	style={{ marginLeft: "4px" }}
 																	disabled={
 																		count >= maxProductQuantity ||
 																		count >= option.available

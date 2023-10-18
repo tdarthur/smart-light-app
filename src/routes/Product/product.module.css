@@ -214,7 +214,7 @@ body:global(.light-mode) .productFeatures p {
 .toaster {
 	pointer-events: none;
 
-	transform: translateY(64px);
+	transform: translateX(-8px) translateY(64px);
 }
 
 .toaster * {

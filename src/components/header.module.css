@@ -194,7 +194,7 @@ body:global(.light-mode) .headerLogo {
 	top: calc(
 		var(--header-height) - ((var(--header-height) - var(--main-icon-size) - (var(--main-icon-padding) * 2)) / 2)
 	);
-	right: 0;
+	right: 8px;
 
 	display: none;
 	width: 320px;
@@ -221,6 +221,7 @@ body:global(.light-mode) .shoppingCart {
 }
 
 .shoppingCartProducts {
+	overflow-x: hidden;
 	overflow-y: scroll;
 	max-height: 320px;
 	margin-bottom: 8px;
@@ -254,6 +255,8 @@ body:global(.light-mode) .shoppingCart {
 }
 
 .shoppingCartProductInfo {
+	overflow: hidden;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -273,6 +276,10 @@ body:global(.light-mode) .shoppingCart {
 .shoppingCartProductQuantity {
 	display: flex;
 	align-items: center;
+}
+
+.shoppingCartProductQuantity button {
+	padding: 0;
 }
 
 .shoppingCartProductQuantity button:not(:disabled):hover {
