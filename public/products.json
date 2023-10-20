@@ -17,7 +17,9 @@
 				"price": 44.99,
 				"available": 123
 			}
-		]
+		],
+		"averageRating": 4.8,
+		"reviews": 21294
 	},
 	{
 		"id": "smart-bulb-flood-rgb",
@@ -37,7 +39,9 @@
 				"price": 35.99,
 				"available": 52
 			}
-		]
+		],
+		"averageRating": 4.6,
+		"reviews": 5223
 	},
 	{
 		"id": "smart-bulb-standard",
@@ -57,7 +61,9 @@
 				"price": 29.99,
 				"available": 89
 			}
-		]
+		],
+		"averageRating": 4.5,
+		"reviews": 11529
 	},
 	{
 		"id": "smart-bulb-flood",
@@ -77,7 +83,9 @@
 				"price": 24.99,
 				"available": 89
 			}
-		]
+		],
+		"averageRating": 4.6,
+		"reviews": 2329
 	},
 	{
 		"id": "led-bulb-standard",
@@ -110,7 +118,9 @@
 				"price": 54.99,
 				"available": 89
 			}
-		]
+		],
+		"averageRating": 4.1,
+		"reviews": 9450
 	},
 	{
 		"id": "led-bulb-flood",
@@ -130,6 +140,8 @@
 				"price": 26.99,
 				"available": 89
 			}
-		]
+		],
+		"averageRating": 3.5,
+		"reviews": 1802
 	}
 ]

@@ -10,6 +10,7 @@ import type { Product } from "../../models/Product";
 import { calculateLevenshteinDistance, formatDollarAmount } from "../../utils/stringUtils";
 
 import styles from "./store.module.css";
+import StarRating from "../../components/StarRating";
 
 type SearchBarProps = {
 	setSearchString: React.Dispatch<React.SetStateAction<string>>;
@@ -111,10 +112,11 @@ const Store = () => {
 
 				<div className={styles.productList}>
 					{filteredProducts.length > 0 ? (
-						filteredProducts.map(({ id, name, image, options: [{ price }] }) => (
+						filteredProducts.map(({ id, name, image, options: [{ price }], averageRating }) => (
 							<Link className={styles.product} to={`/product/${id}`} key={name}>
 								<img className={styles.productImage} src={image} key={name} />
 								<div className={styles.productDetails}>
+									<StarRating rating={averageRating} starSize={20} />
 									<h3 className={styles.productName}>{name}</h3>
 									<div className={clsx("dollar-amount", styles.productPrice)}>
 										{formatDollarAmount(price)}

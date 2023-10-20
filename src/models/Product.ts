@@ -11,4 +11,6 @@ export type Product = {
 	image: string;
 	features: string[];
 	options: PurchaseOption[];
+	averageRating: number;
+	reviews: number;
 };

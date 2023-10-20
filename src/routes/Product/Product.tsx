@@ -6,15 +6,16 @@ import toast, { Toaster } from "react-hot-toast";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import IconChevron from "../../components/icons/IconChevron";
+import IconMinusSign from "../../components/icons/IconMinusSign";
+import IconPlusSign from "../../components/icons/IconPlusSign";
 import useCartContext from "../../hooks/useCartContext";
 import type { Product } from "../../models/Product";
 import { CartProductData, maxProductQuantity } from "../../contexts/cartContext";
-import { formatDollarAmount } from "../../utils/stringUtils";
+import { formatDollarAmount, formatNumber } from "../../utils/stringUtils";
 import { getProductOption } from "../../utils/productUtils";
 
 import styles from "./product.module.css";
-import IconMinusSign from "../../components/icons/IconMinusSign";
-import IconPlusSign from "../../components/icons/IconPlusSign";
+import StarRating from "../../components/StarRating";
 
 const magnifierMagnification = 1.25;
 
@@ -196,7 +197,18 @@ const Product = () => {
 					<img className={styles.productImage} src={product?.image} ref={imageRef} />
 
 					<div className={styles.productInfo}>
-						<h1>{product?.name}</h1>
+						<div>
+							<h1>{product?.name}</h1>
+							<button
+								className={styles.productRating}
+								onClick={() => {
+									document.querySelector("#reviews")?.scrollIntoView();
+								}}
+							>
+								<StarRating rating={product.averageRating} />
+								<span>( {formatNumber(product.reviews)} reviews )</span>
+							</button>
+						</div>
 
 						<h3>Features</h3>
 						<div className={styles.productFeatures}>
@@ -301,6 +313,14 @@ const Product = () => {
 							Add to Cart
 						</button>
 					</div>
+				</div>
+
+				<div className={styles.similarProducts}>
+					<h2>Similar Products</h2>
+				</div>
+
+				<div className={styles.reviews} id="reviews">
+					<h2>Reviews</h2>
 				</div>
 			</main>
 			<Footer />

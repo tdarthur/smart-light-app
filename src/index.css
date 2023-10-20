@@ -27,6 +27,8 @@ a:not(:disabled):hover {
 }
 
 :root {
+	scroll-behavior: smooth;
+
 	overflow-x: hidden;
 }
 

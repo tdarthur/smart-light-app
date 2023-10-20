@@ -1,0 +1,25 @@
+.rating {
+	display: inline-block;
+}
+
+.ratingStar {
+	display: inline-block;
+
+	position: relative;
+}
+
+.ratingStar > * {
+	width: 100%;
+	height: 100%;
+}
+
+.ratingStar > *:nth-child(1) {
+	opacity: 0.2;
+}
+
+.ratingStar > *:nth-child(2) {
+	position: absolute;
+	left: 0;
+
+	color: gold;
+}

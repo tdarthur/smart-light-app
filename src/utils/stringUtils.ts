@@ -38,10 +38,27 @@ export const calculateLevenshteinDistance = (s1: string, s2: string) => {
 /**
  * Formats a given number with 2 decimal points of precision.
  *
+ * @param value - The number to format.
+ *
+ * @returns The formatted dollar amount.
+ */
+export const formatDollarAmount = (value: number) => {
+	return currencyFormat.format(value).substring(1);
+};
+
+/**
+ * Formats a given number with 2 decimal points of precision.
+ *
  * @param amount - The number to format.
  *
  * @returns The formatted dollar amount.
  */
-export const formatDollarAmount = (amount: number) => {
-	return currencyFormat.format(amount).substring(1);
+export const formatNumber = (value: number) => {
+	if (value < 1000) {
+		return value;
+	} else if (value >= 1_000 && value < 1_000_000) {
+		return `${(value / 1_000).toFixed(1)}k`;
+	} else {
+		return `${(value / 1_000_000).toFixed(1)}m`;
+	}
 };
