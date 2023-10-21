@@ -319,7 +319,12 @@ const Product = () => {
 					<h2>Reviews</h2>
 					{product.reviews.map(({ customer, review, rating }) => (
 						<div className={styles.review}>
-							<p className={styles.reviewerName}>{customer}</p>
+							<p
+								className={styles.reviewerName}
+								style={customer === "Anonymous" ? { fontStyle: "italic" } : undefined}
+							>
+								{customer}
+							</p>
 							<div>
 								<StarRating rating={rating} starSize={16} />
 							</div>

@@ -6,8 +6,8 @@ import Footer from "../../components/Footer";
 
 import styles from "./home.module.css";
 
-import homeLightingImage from "../../assets/home-lighting.jpg";
-import accessoryCompatibilitiesImage from "../../assets/accessory-compatibilities.png";
+import homeLightingImage from "../../assets/home-lighting.webp";
+import accessoryCompatibilitiesImage from "../../assets/accessory-compatibilities.webp";
 
 const animationStart = Date.now();
 const landingAnimationDefaultDuration = 4_000;
@@ -27,6 +27,7 @@ const Home = () => {
 		if ("code" in event) {
 			const keyboardEvent = event as KeyboardEvent;
 			if (keyboardEvent.code === "Escape" || keyboardEvent.code === "Space" || keyboardEvent.code === "Enter") {
+				keyboardEvent.preventDefault();
 				skipped = true;
 			}
 		} else {
