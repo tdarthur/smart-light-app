@@ -19,7 +19,34 @@
 			}
 		],
 		"averageRating": 4.8,
-		"reviews": 21294
+		"reviewCount": 85179,
+		"reviews": [
+			{
+				"customer": "Tyler A",
+				"review": "This is an awesome product. I did not create this website and then review it myself. That did not happen.",
+				"rating": 5
+			},
+			{
+				"customer": "Anonymous",
+				"review": "I absolutely love this smart light bulb! It's super easy to set up, and I can control the brightness and color from my phone. It's made my home so much more inviting!",
+				"rating": 5
+			},
+			{
+				"customer": "John P",
+				"review": "This bulb has been a game-changer for me. The convenience of voice control through my smart speaker is amazing. Plus, it's energy-efficient, which is a win-win.",
+				"rating": 5
+			},
+			{
+				"customer": "Charlie",
+				"review": "Sweet product. Wish it was cheaper.",
+				"rating": 4
+			},
+			{
+				"customer": "Anonymous",
+				"review": "I purchased these smart bulbs a week ago, and they've transformed my home into a colorful wonderland. They're great for setting the mood for any occasion. Highly recommended!",
+				"rating": 5
+			}
+		]
 	},
 	{
 		"id": "smart-bulb-flood-rgb",
@@ -41,7 +68,34 @@
 			}
 		],
 		"averageRating": 4.6,
-		"reviews": 5223
+		"reviewCount": 20892,
+		"reviews": [
+			{
+				"customer": "George C",
+				"review": "Nice lighting.",
+				"rating": 5
+			},
+			{
+				"customer": "Anonymous",
+				"review": "I can't stop raving about these smart lights. It's so convenient to adjust the lighting to match my mood. The dimming feature helps create a cozy atmosphere. I'm in love with it!",
+				"rating": 4
+			},
+			{
+				"customer": "Donald T",
+				"review": "This product has made my mansion great again.",
+				"rating": 5
+			},
+			{
+				"customer": "Michelle D",
+				"review": "I purchased a few of these and they've made my home feel more modern and lively. I love how I can control them remotely. They're a must-have for any smart home.",
+				"rating": 5
+			},
+			{
+				"customer": "Anonymous",
+				"review": "Pretty good",
+				"rating": 4
+			}
+		]
 	},
 	{
 		"id": "smart-bulb-standard",
@@ -63,7 +117,34 @@
 			}
 		],
 		"averageRating": 4.5,
-		"reviews": 11529
+		"reviewCount": 46116,
+		"reviews": [
+			{
+				"customer": "David H.",
+				"review": "This is hands down the best smart light I've ever owned. The quality of the light is fantastic, and the app is user-friendly. I'm considering replacing all my bulbs with these.",
+				"rating": 4
+			},
+			{
+				"customer": "Anonymous",
+				"review": "I'm impressed with the quality of these smart bulbs. They're easy to install and work seamlessly with my home automation system. I can't imagine my life without them now!",
+				"rating": 5
+			},
+			{
+				"customer": "Anonymous",
+				"review": "Just installed this in my entire house. They're awesome.",
+				"rating": 5
+			},
+			{
+				"customer": "Henry F",
+				"review": "I am thinking about using these inside my newest invention. They may help revolution the world.",
+				"rating": 5
+			},
+			{
+				"customer": "Darnell K",
+				"review": "I like the app.",
+				"rating": 5
+			}
+		]
 	},
 	{
 		"id": "smart-bulb-flood",
@@ -85,7 +166,34 @@
 			}
 		],
 		"averageRating": 4.6,
-		"reviews": 2329
+		"reviewCount": 9304,
+		"reviews": [
+			{
+				"customer": "Michael S.",
+				"review": "The smart lights from Illuminous are a hit in our household. They're not only energy-efficient but also very durable. I've had over a dozen of them for months now, and they all still works like new. Great products!",
+				"rating": 5
+			},
+			{
+				"customer": "Gregory",
+				"review": "Best flood lights I've had.",
+				"rating": 5
+			},
+			{
+				"customer": "Anonymous",
+				"review": "I thought this was an NES version of Donkey Kong that was playable via my PlayStation. I was wrong.",
+				"rating": 2
+			},
+			{
+				"customer": "Anonymous",
+				"review": "5 out of 5 my guy",
+				"rating": 1
+			},
+			{
+				"customer": "Anonymous",
+				"review": "Simply delightful! My home has never been so vibrant. Love these!",
+				"rating": 5
+			}
+		]
 	},
 	{
 		"id": "led-bulb-standard",
@@ -120,7 +228,34 @@
 			}
 		],
 		"averageRating": 4.1,
-		"reviews": 9450
+		"reviewCount": 37801,
+		"reviews": [
+			{
+				"customer": "Jessica R.",
+				"review": "I was a bit skeptical about smart bulbs, but this one exceeded my expectations. The range of colors and the ability to set schedules are fantastic. It's a fantastic addition to my home.",
+				"rating": 5
+			},
+			{
+				"customer": "Anonymous",
+				"review": "My bulbs were burnt. Still good.",
+				"rating": 4
+			},
+			{
+				"customer": "Jesse",
+				"review": "Dude these are rad bulbs.",
+				"rating": 5
+			},
+			{
+				"customer": "Anonymous",
+				"review": "Yo what's up, I'm having a 2 for the price of 1 deal on my fathers Facebook page. Stop by for some sick deals.",
+				"rating": 4
+			},
+			{
+				"customer": "Other Jessica",
+				"review": "I will never buy anything ever again. This is the only thing I need in my life from now on. Just bought a bulk order of 1200 lights.",
+				"rating": 5
+			}
+		]
 	},
 	{
 		"id": "led-bulb-flood",
@@ -142,6 +277,33 @@
 			}
 		],
 		"averageRating": 3.5,
-		"reviews": 1802
+		"reviewCount": 7207,
+		"reviews": [
+			{
+				"customer": "Daniel C",
+				"review": "These were perfect for my garage. Shipping was delayed for 4 months tho >:(",
+				"rating": 3
+			},
+			{
+				"customer": "Doug F",
+				"review": "I've found the key to the perfect life. It is not these light bulbs, but it does exist.",
+				"rating": 4
+			},
+			{
+				"customer": "Anonymous",
+				"review": "I like lights. I've tried tens of thousands of different bulbs over the years. Buy these.",
+				"rating": 5
+			},
+			{
+				"customer": "Harold W",
+				"review": "Me mum says hello to the people of the internet. She likes these lights quite a lot actually. Right then.",
+				"rating": 5
+			},
+			{
+				"customer": "Anonymous",
+				"review": "xD",
+				"rating": 4
+			}
+		]
 	}
 ]

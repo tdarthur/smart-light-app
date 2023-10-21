@@ -109,6 +109,7 @@
 
 	background-color: #80808040;
 }
+
 .checkoutDetails button:hover {
 	background-color: var(--color-input-background);
 }

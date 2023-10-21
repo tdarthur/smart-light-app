@@ -5,6 +5,12 @@ type PurchaseOption = {
 	available: number;
 };
 
+type Review = {
+	customer: string;
+	review: string;
+	rating: number;
+};
+
 export type Product = {
 	id: string;
 	name: string;
@@ -12,5 +18,6 @@ export type Product = {
 	features: string[];
 	options: PurchaseOption[];
 	averageRating: number;
-	reviews: number;
+	reviewCount: number;
+	reviews: Review[];
 };

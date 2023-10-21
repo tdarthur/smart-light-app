@@ -206,7 +206,7 @@ const Product = () => {
 								}}
 							>
 								<StarRating rating={product.averageRating} />
-								<span>( {formatNumber(product.reviews)} reviews )</span>
+								<span>( {formatNumber(product.reviewCount)} ratings )</span>
 							</button>
 						</div>
 
@@ -315,12 +315,17 @@ const Product = () => {
 					</div>
 				</div>
 
-				<div className={styles.similarProducts}>
-					<h2>Similar Products</h2>
-				</div>
-
 				<div className={styles.reviews} id="reviews">
 					<h2>Reviews</h2>
+					{product.reviews.map(({ customer, review, rating }) => (
+						<div className={styles.review}>
+							<p className={styles.reviewerName}>{customer}</p>
+							<div>
+								<StarRating rating={rating} starSize={16} />
+							</div>
+							<p>{review}</p>
+						</div>
+					))}
 				</div>
 			</main>
 			<Footer />
