@@ -141,7 +141,7 @@ const Footer = ({ className, ...props }: ComponentPropsWithoutRef<"footer">) => 
 											style={expanded ? { display: "block", height: "16px" } : undefined}
 											key={link.name}
 										>
-											<Link to={link.to || "#"}>{link.name}</Link>
+											<Link to={link.to || "/random"}>{link.name}</Link>
 										</li>
 									))}
 								</ul>

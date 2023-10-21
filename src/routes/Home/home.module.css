@@ -40,14 +40,14 @@
 	height: 100dvh;
 
 	color: transparent;
-	background-color: #000000;
+	background-image: linear-gradient(black 25%, #404040);
 	font-size: 20px;
 
 	animation: landing-underlay-fade 4000ms 500ms forwards;
 }
 
 body:global(.light-mode) .landingUnderlay {
-	background-color: white;
+	background-image: linear-gradient(white 25%, #b0b0b0);
 }
 
 @keyframes landing-fade {

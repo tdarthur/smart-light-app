@@ -202,7 +202,7 @@ const Product = () => {
 							<button
 								className={styles.productRating}
 								onClick={() => {
-									document.querySelector("#reviews")?.scrollIntoView();
+									document.querySelector("#reviews")?.scrollIntoView({ behavior: "smooth" });
 								}}
 							>
 								<StarRating rating={product.averageRating} />

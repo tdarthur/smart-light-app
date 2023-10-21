@@ -1,0 +1,8 @@
+.randomPage h1 {
+	margin: 0 0 8px 0;
+}
+
+.randomPage p {
+	max-width: 512px;
+	margin-bottom: 8px;
+}

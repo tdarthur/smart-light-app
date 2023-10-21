@@ -8,6 +8,7 @@ import ProductPage from "./routes/Product/Product";
 import AboutPage from "./routes/About/About";
 import ErrorPage from "./routes/Error/ErrorPage";
 import CheckoutPage from "./routes/Checkout/Checkout";
+import RandomPage from "./routes/Random/Random";
 import { Product } from "./models/Product";
 import CartContextProvider from "./contexts/CartContextProvider";
 import { CartProductData, cartVersion } from "./contexts/cartContext";
@@ -90,6 +91,15 @@ const routes: RouteObject[] = [
 			{
 				path: "/checkout",
 				element: <CheckoutPage />,
+			},
+			{
+				path: "/random",
+				element: <RandomPage />,
+				loader: async () => {
+					const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
+
+					return products || [];
+				},
 			},
 		],
 	},

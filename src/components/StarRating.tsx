@@ -19,7 +19,7 @@ const StarRating = ({ rating, starSize = 24 }: ProductRatingProps) => {
 	for (let i = 0; i < ratingScale; i++) {
 		const fillPercentage = (rating > i + 1 ? 1 : rating - i) * 100;
 		stars.push(
-			<div className={styles.ratingStar} style={{ height: `${starSize}px` }}>
+			<div className={styles.ratingStar} style={{ height: `${starSize}px`, width: `${starSize}px` }}>
 				<IconStar />
 				<IconStar
 					style={{ clipPath: `polygon(0 0, ${fillPercentage}% 0, ${fillPercentage}% 100%, 0% 100%)` }}
