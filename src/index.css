@@ -17,7 +17,8 @@ select {
 }
 
 a,
-button {
+button,
+dialog {
 	all: unset;
 }
 
@@ -60,6 +61,10 @@ h6 {
 }
 
 /* App Styles */
+
+main:focus-visible {
+	outline: none !important;
+}
 
 body {
 	--color-text: white;

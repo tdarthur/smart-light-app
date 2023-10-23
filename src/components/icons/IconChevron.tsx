@@ -11,9 +11,9 @@ const IconChevron = (props: React.SVGProps<SVGSVGElement>) => (
 			viewBox="0 0 24 24"
 			strokeWidth={1.5}
 			stroke="currentColor"
-			className="w-6 h-6"
 			width="100%"
 			height="100%"
+			role="presentation"
 			{...props}
 		>
 			<path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />

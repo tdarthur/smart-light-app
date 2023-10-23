@@ -47,7 +47,7 @@ const Checkout = () => {
 
 									<div className={styles.productInfo}>
 										<Link to={productUrl}>
-											<img src={product.image} />
+											<img src={product.image} alt={`${product.name} image`} />
 										</Link>
 
 										<div className={styles.productActions}>
@@ -58,6 +58,7 @@ const Checkout = () => {
 													onClick={() => {
 														removeFromCart(product, optionId, 1);
 													}}
+													aria-label="decrease quantity by 1"
 												>
 													<IconMinusSign />
 												</button>
@@ -70,6 +71,7 @@ const Checkout = () => {
 														}
 													}}
 													disabled={count >= maxProductQuantity || count >= option.available}
+													aria-label="increase quantity by 1"
 												>
 													<IconPlusSign />
 												</button>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { Outlet, RouteObject, RouterProvider, ScrollRestoration, createBrowserRouter } from "react-router-dom";
 
@@ -33,6 +33,17 @@ if (shoppingCartData) {
 	}
 }
 
+type PageProps = {
+	title: string;
+} & React.PropsWithChildren;
+const Page = ({ title, children }: PageProps) => {
+	useEffect(() => {
+		document.title = `Illuminous - ${title}`;
+	}, [title]);
+
+	return children;
+};
+
 const routes: RouteObject[] = [
 	{
 		element: (
@@ -47,12 +58,20 @@ const routes: RouteObject[] = [
 		children: [
 			{
 				path: "/",
-				element: <HomePage />,
+				element: (
+					<Page title="Home">
+						<HomePage />
+					</Page>
+				),
 				errorElement: <ErrorPage />,
 			},
 			{
 				path: "/store",
-				element: <StorePage />,
+				element: (
+					<Page title="Store">
+						<StorePage />
+					</Page>
+				),
 				loader: async () => {
 					const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
 
@@ -68,7 +87,11 @@ const routes: RouteObject[] = [
 			},
 			{
 				path: "/product/:id",
-				element: <ProductPage />,
+				element: (
+					<Page title="Product Page">
+						<ProductPage />
+					</Page>
+				),
 				errorElement: <ErrorPage returnTo="/store" />,
 				loader: async ({ params }) => {
 					const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
@@ -86,15 +109,27 @@ const routes: RouteObject[] = [
 			},
 			{
 				path: "/about",
-				element: <AboutPage />,
+				element: (
+					<Page title="About">
+						<AboutPage />
+					</Page>
+				),
 			},
 			{
 				path: "/checkout",
-				element: <CheckoutPage />,
+				element: (
+					<Page title="Checkout">
+						<CheckoutPage />
+					</Page>
+				),
 			},
 			{
 				path: "/random",
-				element: <RandomPage />,
+				element: (
+					<Page title="Nothing Here">
+						<RandomPage />
+					</Page>
+				),
 				loader: async () => {
 					const products = (await (await fetch("/products.json", { cache: "no-store" })).json()) as Product[];
 

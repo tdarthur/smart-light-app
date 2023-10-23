@@ -4,7 +4,7 @@ import styles from "./starRating.module.css";
 type ProductRatingProps = {
 	rating: number;
 	starSize?: number;
-};
+} & React.ComponentPropsWithoutRef<"div">;
 
 const ratingScale = 5;
 
@@ -14,7 +14,7 @@ const ratingScale = 5;
  * @param rating - The rating to use, from a scale of 1 to 5.
  * @param starSize - The size in pixels of the stars.
  */
-const StarRating = ({ rating, starSize = 24 }: ProductRatingProps) => {
+const StarRating = ({ rating, starSize = 24, ...props }: ProductRatingProps) => {
 	const stars = [];
 	for (let i = 0; i < ratingScale; i++) {
 		const fillPercentage = (rating > i + 1 ? 1 : rating - i) * 100;
@@ -28,7 +28,11 @@ const StarRating = ({ rating, starSize = 24 }: ProductRatingProps) => {
 		);
 	}
 
-	return <div className={styles.rating}>{stars}</div>;
+	return (
+		<div className={styles.rating} {...props}>
+			{stars}
+		</div>
+	);
 };
 
 export default StarRating;

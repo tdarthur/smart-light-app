@@ -38,9 +38,9 @@ const locations: NavigationOption[] = [
  */
 const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => {
 	const [lightMode, setLightMode] = useState(lightModeEnabled);
-	const [shoppingCartOpen, setShoppingCartOpen] = useState(false);
 	const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
-	const hamburgerMenuRef = useRef(null);
+	const hamburgerMenuRef = useRef<HTMLDivElement>(null);
+	const shoppingCartDialogRef = useRef<HTMLDialogElement>(null);
 
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -124,6 +124,24 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 
 	return (
 		<>
+			<button
+				type="button"
+				className={styles.skipToMainContentButton}
+				onClick={() => {
+					const mainElement = document.querySelector("main");
+					if (!mainElement) return;
+
+					mainElement.addEventListener("focusout", () => {
+						mainElement.tabIndex = -1;
+					});
+
+					mainElement.tabIndex = 0;
+					mainElement.focus({ preventScroll: true });
+				}}
+			>
+				Skip to main content
+			</button>
+
 			<header className={clsx(styles.header, className)} {...props} key={location.key}>
 				<button
 					id="hamburger-button"
@@ -134,6 +152,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 					}}
 					style={hamburgerMenuOpen ? { color: "transparent" } : undefined}
 					tabIndex={hamburgerMenuOpen ? -1 : 0}
+					aria-label="open hamburger menu"
 				>
 					<IconHamburger />
 				</button>
@@ -170,6 +189,8 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 						className={clsx("icon-button", styles.darkModeToggle)}
 						onClick={toggleDarkMode}
 						tabIndex={hamburgerMenuOpen ? -1 : 0}
+						aria-label="dark mode toggle"
+						aria-hidden
 					>
 						{lightMode ? <IconSun /> : <IconMoon />}
 					</button>
@@ -177,7 +198,13 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 						<button
 							className={clsx("icon-button", styles.shoppingCartButton)}
 							onClick={() => {
-								setShoppingCartOpen(!shoppingCartOpen);
+								if (!shoppingCartDialogRef.current) return;
+
+								if (shoppingCartDialogRef.current?.open) {
+									shoppingCartDialogRef.current.close();
+								} else {
+									shoppingCartDialogRef.current.show();
+								}
 							}}
 							tabIndex={hamburgerMenuOpen ? -1 : 0}
 							data-quantity={
@@ -187,10 +214,13 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 										: "9+"
 									: undefined
 							}
+							aria-label={
+								shoppingCartDialogRef.current?.open ? "close shopping cart" : "open shopping cart"
+							}
 						>
 							<IconShoppingCart />
 						</button>
-						<div className={styles.shoppingCart} data-displayed={shoppingCartOpen || undefined}>
+						<dialog className={styles.shoppingCart} ref={shoppingCartDialogRef}>
 							<h3 className={styles.shoppingCartHeader}>Your Cart</h3>
 							{cart.size > 0 ? (
 								<>
@@ -230,6 +260,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																		removeFromCart(product, optionId, 1);
 																	}}
 																	style={{ marginLeft: "-1px", marginRight: "4px" }}
+																	aria-label="increase quantity by 1"
 																>
 																	<IconMinusSignCircle />
 																</button>
@@ -249,6 +280,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 																		count >= maxProductQuantity ||
 																		count >= option.available
 																	}
+																	aria-label="increase quantity by 1"
 																>
 																	<IconPlusSignCircle />
 																</button>
@@ -289,7 +321,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 									)}
 								</p>
 							)}
-						</div>
+						</dialog>
 					</div>
 				</div>
 			</header>
@@ -308,6 +340,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 							setHamburgerMenuOpen(false);
 						}}
 						tabIndex={hamburgerMenuOpen ? 0 : -1}
+						aria-label="close hamburger menu"
 					>
 						<IconX />
 					</button>
@@ -315,6 +348,7 @@ const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => 
 						className={clsx("icon-button", styles.hamburgerDarkModeToggle)}
 						onClick={toggleDarkMode}
 						tabIndex={hamburgerMenuOpen ? 0 : -1}
+						aria-hidden
 					>
 						{lightMode ? <IconSun /> : <IconMoon />}
 					</button>

@@ -49,6 +49,7 @@ const SearchBar = ({ setSearchString, search }: SearchBarProps) => {
 					searchInputRef.current?.focus();
 				}}
 				tabIndex={-1}
+				aria-hidden
 			>
 				<IconMagnifyingGlass />
 			</button>
@@ -63,6 +64,7 @@ const SearchBar = ({ setSearchString, search }: SearchBarProps) => {
 							search("");
 						}
 					}}
+					aria-label="clear search"
 				>
 					<IconX />
 				</button>

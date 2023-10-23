@@ -1,3 +1,3 @@
-# Smart Lights
+# Illuminous
 
 Under construction

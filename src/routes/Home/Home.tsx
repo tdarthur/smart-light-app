@@ -92,16 +92,16 @@ const Home = () => {
 				}}
 			>
 				<div className={styles.contentImageContainer}>
-					<img className={styles.contentImage} src={homeLightingImage} />
+					<img className={styles.contentImage} src={homeLightingImage} alt="RGB home lighting scene" />
 					<div className={styles.contentImageText}>
-						<h2>Home lighting redefined</h2>
-						<h3>Give life to your whole space</h3>
+						<h1>Home lighting redefined</h1>
+						<h2>Give life to your whole space</h2>
 					</div>
 				</div>
 
 				<div className={clsx("main-container", styles.homeContent)}>
 					<div className={styles.infoContainer}>
-						<h2>A world of customization</h2>
+						<h1>A world of customization</h1>
 						<p>
 							Control your lights one at a time, as part of a group, or all at once. Schedule wake-up and
 							wind-down routines to shape the mood of your day. Your lights, how you want them.
@@ -109,26 +109,30 @@ const Home = () => {
 					</div>
 
 					<div className={styles.infoContainer}>
-						<h2>Control anytime, anywhere</h2>
+						<h1>Control anytime, anywhere</h1>
 						<p>
 							All of our products support all the major home-hub accessories and integrate seamlessly for
 							a simple and relaxing experience.
 						</p>
-						<img className={styles.compatibleAccessoriesImage} src={accessoryCompatibilitiesImage} />
+						<img
+							className={styles.compatibleAccessoriesImage}
+							src={accessoryCompatibilitiesImage}
+							alt="WiFi 6e, Apple Homekit, Google Assistant, and Amazon Alexa compatibility"
+						/>
 					</div>
 
-					<h2 className={styles.statsHeader}>Smart home done right</h2>
+					<h1 className={styles.statsHeader}>Smart home done right</h1>
 					<div className={styles.statsContainer}>
 						<div className={styles.stat}>
-							<h3>2m+</h3>
+							<h2>2m+</h2>
 							<p>satisfied customers</p>
 						</div>
 						<div className={styles.stat}>
-							<h3>200k</h3>
+							<h2>200k</h2>
 							<p>positive reviews</p>
 						</div>
 						<div className={styles.stat}>
-							<h3>5m+</h3>
+							<h2>5m+</h2>
 							<p>devices purchased</p>
 						</div>
 					</div>

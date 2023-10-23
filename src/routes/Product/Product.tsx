@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import StarRating from "../../components/StarRating";
 import IconChevron from "../../components/icons/IconChevron";
 import IconMinusSign from "../../components/icons/IconMinusSign";
 import IconPlusSign from "../../components/icons/IconPlusSign";
@@ -15,7 +16,6 @@ import { formatDollarAmount, formatNumber } from "../../utils/stringUtils";
 import { getProductOption } from "../../utils/productUtils";
 
 import styles from "./product.module.css";
-import StarRating from "../../components/StarRating";
 
 const magnifierMagnification = 1.25;
 
@@ -205,7 +205,10 @@ const Product = () => {
 									document.querySelector("#reviews")?.scrollIntoView({ behavior: "smooth" });
 								}}
 							>
-								<StarRating rating={product.averageRating} />
+								<StarRating
+									rating={product.averageRating}
+									aria-label={`${product.averageRating} star average rating`}
+								/>
 								<span>( {formatNumber(product.reviewCount)} ratings )</span>
 							</button>
 						</div>
@@ -218,21 +221,26 @@ const Product = () => {
 						</div>
 
 						<h3>Size</h3>
-						<div className={styles.productSizes}>
-							{product.options.map((option) => (
-								<button
-									onClick={() => {
-										setSearchParams(
-											{ ...searchParams, option: option.id },
-											{ preventScrollReset: true },
-										);
-									}}
-									data-selected={selectedOptionId === option.id || undefined}
-									key={option.id}
-								>
-									{option.caption}
-								</button>
-							))}
+						<div className={styles.productSizes} role="tablist">
+							{product.options.map((option) => {
+								const selected = selectedOptionId === option.id;
+								return (
+									<button
+										onClick={() => {
+											setSearchParams(
+												{ ...searchParams, option: option.id },
+												{ preventScrollReset: true },
+											);
+										}}
+										data-selected={selected || undefined}
+										key={option.id}
+										role="tab"
+										aria-selected={selected}
+									>
+										{option.caption}
+									</button>
+								);
+							})}
 						</div>
 
 						<h3>Quantity</h3>
@@ -247,6 +255,7 @@ const Product = () => {
 									}
 								}}
 								disabled={quantity <= 1}
+								aria-label="decrease quantity by 1"
 							>
 								<IconMinusSign />
 							</button>
@@ -276,6 +285,7 @@ const Product = () => {
 								maxLength={2}
 								defaultValue={1}
 								ref={productQuantityRef}
+								aria-label="quantity"
 							/>
 							<button
 								className="icon-button"
@@ -290,6 +300,7 @@ const Product = () => {
 									productCount + quantity >= maxProductQuantity ||
 									productCount + quantity >= selectedOption.available
 								}
+								aria-label="increase quantity by 1"
 							>
 								<IconPlusSign />
 							</button>
@@ -326,7 +337,7 @@ const Product = () => {
 								{customer}
 							</p>
 							<div>
-								<StarRating rating={rating} starSize={16} />
+								<StarRating rating={rating} starSize={16} aria-label={`${rating} star rating`} />
 							</div>
 							<p>{review}</p>
 						</div>

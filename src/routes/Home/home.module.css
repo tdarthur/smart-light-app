@@ -118,21 +118,21 @@ body:global(.light-mode) .landingUnderlay {
 	transform: translateY(-50%);
 }
 
-.contentImageText > h2 {
+.contentImageText > h1 {
 	margin-bottom: 8px;
 
 	font-size: 3rem;
 	font-weight: normal;
 }
 
-.contentImageText > h3 {
+.contentImageText > h2 {
 	margin-bottom: 8px;
 
 	font-size: 2rem;
 	font-weight: normal;
 }
 
-.homeContent h2 {
+.homeContent h1 {
 	font-weight: normal;
 	font-size: 3rem;
 }
@@ -192,7 +192,7 @@ body:global(.light-mode) .landingUnderlay {
 	text-align: center;
 }
 
-.stat h3 {
+.stat h2 {
 	font-size: 2.5rem;
 	font-weight: bold;
 }

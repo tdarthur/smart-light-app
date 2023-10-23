@@ -2,6 +2,7 @@ import { Link, To, isRouteErrorResponse, useRouteError } from "react-router-dom"
 import Header from "../../components/Header";
 
 import styles from "./error.module.css";
+import { useEffect } from "react";
 
 type Props = {
 	returnTo?: To;
@@ -17,7 +18,9 @@ const ErrorPage = ({ returnTo = "/" }: Props) => {
 
 	let errorStatus = "500 Internal Server Error";
 	let errorMessage = "No details";
+	let statusCode = 500;
 	if (isRouteErrorResponse(error)) {
+		statusCode = error.status;
 		errorStatus = `${error.status.toString()} ${error.statusText}`;
 		if (error.data) {
 			const errorData = error.data as string;
@@ -29,9 +32,14 @@ const ErrorPage = ({ returnTo = "/" }: Props) => {
 		}
 	}
 
+	useEffect(() => {
+		document.title = `Illuminous - ${statusCode === 404 ? "Not Found" : "Unexpected Error"}`;
+	});
+
 	return (
 		<>
 			<Header />
+
 			<main className={styles.errorPage}>
 				<div className="main-container">
 					<div className={styles.errorInformation}>
