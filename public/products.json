@@ -2,7 +2,7 @@
 	{
 		"id": "smart-bulb-standard-rgb",
 		"name": "Full Color Smart Bulb",
-		"image": "/smart-light-rgb.webp",
+		"image": "https://d1clmlgd64m407.cloudfront.net/smart-light-rgb.webp",
 		"features": ["800 lumen", "Full color range vibrant LED", "Supports Alexa, Google Home, and Homekit"],
 		"options": [
 			{
@@ -51,7 +51,7 @@
 	{
 		"id": "smart-bulb-flood-rgb",
 		"name": "Full Color Smart Flood Bulb",
-		"image": "/smart-light-rgb.webp",
+		"image": "https://d1clmlgd64m407.cloudfront.net/smart-light-rgb.webp",
 		"features": ["1100 lumen", "Full color range vibrant LED", "Supports Alexa, Google Home, and Homekit"],
 		"options": [
 			{
@@ -100,7 +100,7 @@
 	{
 		"id": "smart-bulb-standard",
 		"name": "Smart Bulb",
-		"image": "/smart-light.webp",
+		"image": "https://d1clmlgd64m407.cloudfront.net/smart-light.webp",
 		"features": ["800 lumen", "Vibrant LED", "Supports Alexa, Google Home, and Homekit"],
 		"options": [
 			{
@@ -120,7 +120,7 @@
 		"reviewCount": 46116,
 		"reviews": [
 			{
-				"customer": "David H.",
+				"customer": "David H",
 				"review": "This is hands down the best smart light I've ever owned. The quality of the light is fantastic, and the app is user-friendly. I'm considering replacing all my bulbs with these.",
 				"rating": 4
 			},
@@ -149,7 +149,7 @@
 	{
 		"id": "smart-bulb-flood",
 		"name": "Smart Flood Bulb",
-		"image": "/smart-light.webp",
+		"image": "https://d1clmlgd64m407.cloudfront.net/smart-light.webp",
 		"features": ["1100 lumen", "Vibrant LED", "Supports Alexa, Google Home, and Homekit"],
 		"options": [
 			{
@@ -169,7 +169,7 @@
 		"reviewCount": 9304,
 		"reviews": [
 			{
-				"customer": "Michael S.",
+				"customer": "Michael S",
 				"review": "The smart lights from Illuminous are a hit in our household. They're not only energy-efficient but also very durable. I've had over a dozen of them for months now, and they all still works like new. Great products!",
 				"rating": 5
 			},
@@ -198,7 +198,7 @@
 	{
 		"id": "led-bulb-standard",
 		"name": "LED Standard Bulb",
-		"image": "/smart-light.webp",
+		"image": "https://d1clmlgd64m407.cloudfront.net/smart-light.webp",
 		"features": ["800 lumen", "Vibrant LED"],
 
 		"options": [
@@ -231,7 +231,7 @@
 		"reviewCount": 37801,
 		"reviews": [
 			{
-				"customer": "Jessica R.",
+				"customer": "Jessica R",
 				"review": "I was a bit skeptical about smart bulbs, but this one exceeded my expectations. The range of colors and the ability to set schedules are fantastic. It's a fantastic addition to my home.",
 				"rating": 5
 			},
@@ -260,7 +260,7 @@
 	{
 		"id": "led-bulb-flood",
 		"name": "LED Flood Bulb",
-		"image": "/smart-light.webp",
+		"image": "https://d1clmlgd64m407.cloudfront.net/smart-light.webp",
 		"features": ["1100 lumen", "Vibrant LED"],
 		"options": [
 			{

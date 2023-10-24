@@ -6,9 +6,6 @@ import Footer from "../../components/Footer";
 
 import styles from "./home.module.css";
 
-import homeLightingImage from "../../assets/home-lighting.webp";
-import accessoryCompatibilitiesImage from "../../assets/accessory-compatibilities.webp";
-
 const animationStart = Date.now();
 const landingAnimationDefaultDuration = 4_000;
 
@@ -92,7 +89,11 @@ const Home = () => {
 				}}
 			>
 				<div className={styles.contentImageContainer}>
-					<img className={styles.contentImage} src={homeLightingImage} alt="RGB home lighting scene" />
+					<img
+						className={styles.contentImage}
+						src="https://d1clmlgd64m407.cloudfront.net/home-lighting.webp"
+						alt="RGB home lighting scene"
+					/>
 					<div className={styles.contentImageText}>
 						<h1>Home lighting redefined</h1>
 						<h2>Give life to your whole space</h2>
@@ -116,7 +117,7 @@ const Home = () => {
 						</p>
 						<img
 							className={styles.compatibleAccessoriesImage}
-							src={accessoryCompatibilitiesImage}
+							src="https://d1clmlgd64m407.cloudfront.net/accessory-compatibilities.webp"
 							alt="WiFi 6e, Apple Homekit, Google Assistant, and Amazon Alexa compatibility"
 						/>
 					</div>

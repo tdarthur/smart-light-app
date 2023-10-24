@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { Outlet, RouteObject, RouterProvider, ScrollRestoration, createBrowserRouter } from "react-router-dom";
 
+import Page from "./Page";
 import HomePage from "./routes/Home/Home";
 import StorePage from "./routes/Store/Store";
 import ProductPage from "./routes/Product/Product";
@@ -32,17 +33,6 @@ if (shoppingCartData) {
 		shoppingCart = parsedShoppingCartData.cart as Map<string, CartProductData>;
 	}
 }
-
-type PageProps = {
-	title: string;
-} & React.PropsWithChildren;
-const Page = ({ title, children }: PageProps) => {
-	useEffect(() => {
-		document.title = `Illuminous - ${title}`;
-	}, [title]);
-
-	return children;
-};
 
 const routes: RouteObject[] = [
 	{
