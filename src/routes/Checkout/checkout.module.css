@@ -113,3 +113,42 @@
 .checkoutDetails button:hover {
 	background-color: var(--color-input-background);
 }
+
+.processingOverlay {
+	position: absolute;
+	left: 0;
+	top: -100vh;
+	z-index: 100;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+
+	width: 100vw;
+	height: 100dvh;
+
+	background-color: #80808080;
+	color: white;
+	font-size: 20px;
+	opacity: 0;
+
+	transition:
+		top 0ms 150ms linear,
+		opacity 150ms linear;
+}
+
+.processingOverlay[data-displayed] {
+	top: 0;
+	opacity: 1;
+
+	transition:
+		top 0ms linear,
+		opacity 150ms linear;
+}
+
+.processingLoadingSpinner {
+	width: 48px;
+	height: 48px;
+}

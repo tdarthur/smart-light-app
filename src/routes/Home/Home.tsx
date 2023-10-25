@@ -7,7 +7,7 @@ import Footer from "../../components/Footer";
 import styles from "./home.module.css";
 
 const animationStart = Date.now();
-const landingAnimationDefaultDuration = 4_000;
+const landingAnimationDefaultDuration = 3_000;
 
 /**
  * The home page.

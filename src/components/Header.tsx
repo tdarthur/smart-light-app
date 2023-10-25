@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type ComponentPropsWithoutRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { Link, To, useLocation, useMatches, useMatch, useNavigate } from "react-router-dom";
 
@@ -36,7 +36,7 @@ const locations: NavigationOption[] = [
 /**
  * Application header. Handles hamburger menu for smaller screens and light/dark mode toggling.
  */
-const Header = ({ className, ...props }: ComponentPropsWithoutRef<"header">) => {
+const Header = ({ className, ...props }: React.ComponentPropsWithoutRef<"header">) => {
 	const [lightMode, setLightMode] = useState(lightModeEnabled);
 	const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
 	const hamburgerMenuRef = useRef<HTMLDivElement>(null);

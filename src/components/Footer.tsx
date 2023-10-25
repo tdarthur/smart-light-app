@@ -1,7 +1,7 @@
 import { Link, To } from "react-router-dom";
 import styles from "./footer.module.css";
 import IconChevron from "./icons/IconChevron";
-import { ComponentPropsWithoutRef, useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 
 type FooterLink = {
@@ -100,7 +100,7 @@ const footerSections: FooterSection[] = [
 /**
  * Application footer.
  */
-const Footer = ({ className, ...props }: ComponentPropsWithoutRef<"footer">) => {
+const Footer = ({ className, ...props }: React.ComponentPropsWithoutRef<"footer">) => {
 	const [expandedSection, setExpandedSection] = useState<string>();
 
 	return (
