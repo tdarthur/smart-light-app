@@ -7,6 +7,9 @@ import Product from "../Product/Product";
 
 import styles from "./random.module.css";
 
+/**
+ * The 'Random' page, used as a destination for links without any actual content.
+ */
 const Random = () => {
 	const products = useLoaderData() as Product[];
 	const navigate = useNavigate();

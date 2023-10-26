@@ -112,6 +112,11 @@
 
 .productPrice {
 	font-size: 18px;
+	font-weight: bold;
+}
+
+.productPrice::before {
+	font-weight: bold !important;
 }
 
 .productListEmptyText {

@@ -68,6 +68,8 @@ main:focus-visible {
 
 body {
 	--color-text: white;
+	--color-text-light: #dddddd;
+	--color-text-lighter: #888888;
 	--color-link-text: #57bcff;
 	--color-background: #080808;
 	--color-input-background: #202020;
@@ -93,6 +95,7 @@ body {
 
 body.light-mode {
 	--color-text: #080808;
+	--color-text-light: #484848;
 	--color-background: #f0f0f0;
 	--color-link-text: #0099ff;
 	--color-input-background: #d0d0d0;

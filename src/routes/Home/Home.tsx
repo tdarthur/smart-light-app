@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 import styles from "./home.module.css";
+import { Link } from "react-router-dom";
 
 const animationStart = Date.now();
 const landingAnimationDefaultDuration = 3_000;
@@ -107,6 +108,9 @@ const Home = () => {
 							Control your lights one at a time, as part of a group, or all at once. Schedule wake-up and
 							wind-down routines to shape the mood of your day. Your lights, how you want them.
 						</p>
+						<Link className={styles.storeLink} to="/store">
+							Check out our latest smart-home products
+						</Link>
 					</div>
 
 					<div className={styles.infoContainer}>
