@@ -72,8 +72,8 @@ body {
 	--color-text-lighter: #888888;
 	--color-link-text: #57bcff;
 	--color-background: #080808;
-	--color-input-background: #202020;
-	--color-header-border: #202020;
+	--color-background-highlight-1: #202020;
+	--color-background-highlight-2: #282828;
 	--color-hamburger-menu-background: #08080880;
 
 	--scroll-bar-width: 8px;
@@ -91,6 +91,10 @@ body {
 	font-family: "Montserrat", sans-serif;
 	background-color: var(--color-background);
 	color: var(--color-text);
+
+	transition:
+		color 150ms linear,
+		background-color 150ms linear;
 }
 
 body.light-mode {
@@ -98,12 +102,13 @@ body.light-mode {
 	--color-text-light: #484848;
 	--color-background: #f0f0f0;
 	--color-link-text: #0099ff;
-	--color-input-background: #d0d0d0;
+	--color-background-highlight-1: #d0d0d0;
+	--color-background-highlight-2: #c8c8c8;
 	--color-hamburger-menu-background: #f0f0f080;
 
 	--scroll-bar-color: black;
 
-	--color-header-border: #d8d8d8;
+	--color-background-highlight-1: #d8d8d8;
 }
 
 body *:focus-visible {
@@ -163,7 +168,8 @@ body *:focus-visible {
 	transition: color 150ms linear;
 }
 
-.link-text:hover {
+.link-text:hover,
+.link-text:focus-visible {
 	color: var(--color-text);
 	text-decoration: underline;
 }

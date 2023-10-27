@@ -179,7 +179,8 @@ body:global(.light-mode) .landingUnderlay {
 		border-color 450ms linear;
 }
 
-.storeLink:hover {
+.storeLink:hover,
+.storeLink:focus-visible {
 	color: var(--color-background);
 	background-color: var(--color-text);
 	border-color: var(--color-background);
@@ -203,7 +204,8 @@ body:global(.light-mode) .landingUnderlay {
 	transition: left 450ms ease;
 }
 
-.storeLink:hover:after {
+.storeLink:hover:after,
+.storeLink:focus-visible:after {
 	left: calc(100% + 16px);
 }
 

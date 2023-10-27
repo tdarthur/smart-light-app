@@ -3,7 +3,7 @@
 	margin: 64px auto 0 auto;
 	padding: 64px var(--standard-container-padding) 32px var(--standard-container-padding);
 
-	background-color: var(--color-input-background);
+	background-color: var(--color-background-highlight-1);
 
 	font-size: 14px;
 }
@@ -33,14 +33,14 @@
 }
 
 .footerSection h3 {
+	vertical-align: top;
+
 	margin-bottom: 16px;
 
 	height: 16px;
 
 	font-size: 16px;
 	font-weight: bold;
-
-	vertical-align: top;
 }
 
 .footerSectionButton {
@@ -55,6 +55,12 @@
 
 	font-size: 16px;
 	font-weight: bold;
+
+	transition: color 150ms linear;
+}
+
+.footerSectionButton:hover {
+	color: #808080;
 }
 
 .footerSectionCollapseIcon {
@@ -129,6 +135,8 @@ body:global(.light-mode) .copyright {
 
 	.footerSection[data-expanded] a {
 		display: block;
+		width: fit-content;
+		margin: 0 auto;
 	}
 
 	.footerSectionHeader {

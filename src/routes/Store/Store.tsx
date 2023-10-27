@@ -118,8 +118,8 @@ const Store = () => {
 							<Link className={styles.product} to={`/product/${id}`} key={name}>
 								<img className={styles.productImage} src={image} key={name} />
 								<div className={styles.productDetails}>
-									<StarRating rating={averageRating} starSize={20} />
-									<h3 className={styles.productName}>{name}</h3>
+									<div className={styles.productName}>{name}</div>
+									<StarRating rating={averageRating} starSize={18} />
 									<div className={clsx("dollar-amount", styles.productPrice)}>
 										{formatDollarAmount(price)}
 									</div>

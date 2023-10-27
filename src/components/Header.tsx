@@ -247,7 +247,11 @@ const Header = ({ className, ...props }: React.ComponentPropsWithoutRef<"header"
 															<Link to={productUrl} style={{ width: "fit-content" }}>
 																<p>{product.name}</p>
 															</Link>
-															<Link to={productUrl} style={{ width: "fit-content" }}>
+															<Link
+																to={productUrl}
+																style={{ width: "fit-content" }}
+																tabIndex={-1}
+															>
 																<small>{option.caption}</small>
 															</Link>
 														</div>

@@ -138,6 +138,7 @@ const Footer = ({ className, ...props }: React.ComponentPropsWithoutRef<"footer"
 								<ul>
 									{section.links.map((link) => (
 										<li
+											// className={styles.}
 											style={expanded ? { display: "block", height: "16px" } : undefined}
 											key={link.name}
 										>

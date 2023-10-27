@@ -123,6 +123,7 @@ const Home = () => {
 							className={styles.compatibleAccessoriesImage}
 							src="https://d1clmlgd64m407.cloudfront.net/accessory-compatibilities.webp"
 							alt="WiFi 6e, Apple Homekit, Google Assistant, and Amazon Alexa compatibility"
+							loading="lazy"
 						/>
 					</div>
 

@@ -17,7 +17,8 @@
 	white-space: nowrap;
 }
 
-.viewProductsLink:hover {
+.viewProductsLink:hover,
+.viewProductsLink:focus-visible {
 	opacity: 1;
 }
 
@@ -60,7 +61,7 @@
 	max-width: 100%;
 	aspect-ratio: 1;
 
-	background-color: var(--color-input-background);
+	background-color: var(--color-background-highlight-1);
 
 	cursor: none;
 }
@@ -93,7 +94,7 @@
 
 	position: relative;
 
-	background-color: var(--color-input-background);
+	background-color: var(--color-background-highlight-1);
 }
 
 .productInfo {
@@ -166,17 +167,18 @@ body:global(.light-mode) .productFeatures p {
 	padding: 8px;
 
 	border-radius: 2px;
-	border: 2px solid var(--color-input-background);
+	border: 2px solid var(--color-background-highlight-1);
 	opacity: 0.5;
 }
 
 .productSizes button[data-selected] {
-	background-color: var(--color-input-background);
+	background-color: var(--color-background-highlight-1);
 	opacity: 1;
 }
 
-.productSizes button:hover {
-	background-color: var(--color-input-background);
+.productSizes button:hover,
+.productSizes button:focus-visible {
+	background-color: var(--color-background-highlight-1);
 }
 
 .productQuantity {
@@ -200,7 +202,7 @@ body:global(.light-mode) .productFeatures p {
 	margin: 0 8px;
 
 	border: none;
-	border-bottom: 2px solid var(--color-input-background);
+	border-bottom: 2px solid var(--color-background-highlight-1);
 	border-radius: 2px;
 	background-color: transparent;
 }
@@ -218,7 +220,8 @@ body:global(.light-mode) .productFeatures p {
 	filter: invert(50%);
 }
 
-.addToCartButton:not(:disabled):hover {
+.addToCartButton:not(:disabled):hover,
+.addToCartButton:not(:disabled):focus-visible {
 	background-color: #80808040;
 }
 
@@ -234,6 +237,8 @@ body:global(.light-mode) .productFeatures p {
 
 .toast {
 	border-radius: 2px !important;
+
+	background-color: var(--color-background-highlight-2);
 }
 
 .reviews h2 {
@@ -244,7 +249,7 @@ body:global(.light-mode) .productFeatures p {
 	max-width: 768px;
 	margin-bottom: 12px;
 	padding-bottom: 12px;
-	border-bottom: 1px solid var(--color-input-background);
+	border-bottom: 1px solid var(--color-background-highlight-1);
 
 	font-size: 14px;
 }
@@ -256,7 +261,7 @@ body:global(.light-mode) .productFeatures p {
 }
 
 body:global(:not(.light-mode)) .toast {
-	background-color: var(--color-input-background);
+	background-color: var(--color-background-highlight-1);
 	color: white;
 }
 

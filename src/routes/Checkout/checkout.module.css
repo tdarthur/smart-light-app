@@ -26,7 +26,7 @@
 }
 
 .product:not(:last-child) {
-	border-bottom: 1px solid var(--color-input-background);
+	border-bottom: 1px solid var(--color-background-highlight-1);
 }
 
 .product h3,
@@ -52,7 +52,7 @@
 	width: 96px;
 	height: 96px;
 
-	background-color: var(--color-input-background);
+	background-color: var(--color-background-highlight-1);
 }
 
 .productActions {
@@ -106,7 +106,7 @@
 .priceSummary {
 	text-align: right;
 
-	border-left: 1px solid var(--color-input-background);
+	border-left: 1px solid var(--color-background-highlight-1);
 }
 
 .checkoutDetails {
@@ -128,7 +128,7 @@
 }
 
 .checkoutDetails button:hover {
-	background-color: var(--color-input-background);
+	background-color: var(--color-background-highlight-1);
 }
 
 .priceBreakdown {
