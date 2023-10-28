@@ -26,7 +26,7 @@ const Random = () => {
 	return (
 		<>
 			<Header />
-			<main className={clsx("main-container expand-to-footer", styles.randomPage)}>
+			<main className={clsx("main-container", styles.randomPage)}>
 				<h1>Nothing Here!</h1>
 				<p>
 					So yeah there's no content here. Just pretend this is a Privacy Policy or Terms of Service or

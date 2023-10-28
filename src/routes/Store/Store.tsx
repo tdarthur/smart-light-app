@@ -109,7 +109,7 @@ const Store = () => {
 	return (
 		<>
 			<Header />
-			<main className={clsx("main-container expand-to-footer", styles.storePage)}>
+			<main className={clsx("main-container", styles.storePage)}>
 				<SearchBar setSearchString={setSearchString} search={search} />
 
 				<div className={styles.productList}>

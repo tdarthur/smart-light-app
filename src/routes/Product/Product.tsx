@@ -19,12 +19,15 @@ import styles from "./product.module.css";
 
 const magnifierMagnification = 1.25;
 
+const addToCartCooldownTime = 1_000;
+
 /**
  * The product page.
  */
 const Product = () => {
 	const product = useLoaderData() as Product;
 	const [quantity, setQuantity] = useState(1);
+	const [onCooldown, setOnCooldown] = useState(false);
 
 	const imageRef = useRef<HTMLImageElement>(null);
 	const imageMagnifierRef = useRef<HTMLDivElement>(null);
@@ -168,6 +171,13 @@ const Product = () => {
 		}
 	}, []);
 
+	const updateQuantity = (newQuantity: number) => {
+		setQuantity(newQuantity);
+		if (productQuantityRef.current) {
+			productQuantityRef.current.value = newQuantity.toString();
+		}
+	};
+
 	const selectedOptionId = searchParams.get("option") || product.options[0].id;
 	const selectedOption = getProductOption(product, selectedOptionId)!;
 	const productCount = cart.has(product.id) ? (cart.get(product.id) as CartProductData)[2] : 0;
@@ -183,7 +193,7 @@ const Product = () => {
 				}}
 			/>
 			<Header key={product.id} />
-			<main className={clsx("main-container expand-to-footer", styles.productPage)}>
+			<main className={clsx("main-container", styles.productPage)}>
 				<Link className={styles.viewProductsLink} to="/store">
 					<IconChevron style={{ rotate: "180deg" }} />
 					<span>View more products</span>
@@ -249,10 +259,7 @@ const Product = () => {
 								className="icon-button"
 								onClick={() => {
 									const newQuantity = Math.max(quantity - 1, 1);
-									setQuantity(newQuantity);
-									if (productQuantityRef.current) {
-										productQuantityRef.current.value = newQuantity.toString();
-									}
+									updateQuantity(newQuantity);
 								}}
 								disabled={quantity <= 1}
 								aria-label="decrease quantity by 1"
@@ -279,8 +286,7 @@ const Product = () => {
 											selectedOption.available,
 										),
 									);
-									setQuantity(newQuantity);
-									event.currentTarget.value = newQuantity.toString();
+									updateQuantity(newQuantity);
 								}}
 								maxLength={2}
 								defaultValue={1}
@@ -291,10 +297,7 @@ const Product = () => {
 								className="icon-button"
 								onClick={() => {
 									const newQuantity = Math.min(quantity + 1, 99);
-									setQuantity(newQuantity);
-									if (productQuantityRef.current) {
-										productQuantityRef.current.value = newQuantity.toString();
-									}
+									updateQuantity(newQuantity);
 								}}
 								disabled={
 									productCount + quantity >= maxProductQuantity ||
@@ -306,7 +309,7 @@ const Product = () => {
 							</button>
 						</div>
 
-						<h2 className="dollar-amount">{formatDollarAmount(selectedOption.price)}</h2>
+						<h2 className="dollar-amount">{}{formatDollarAmount(selectedOption.price)}</h2>
 
 						<button
 							className={styles.addToCartButton}
@@ -317,9 +320,19 @@ const Product = () => {
 								) {
 									addToCart(product, selectedOption.id, quantity);
 									toast("Added to cart!", { id: "added-to-cart" });
+
+									setOnCooldown(true);
+									setTimeout(() => {
+										updateQuantity(1);
+										setOnCooldown(false);
+									}, addToCartCooldownTime);
 								}
 							}}
-							disabled={productCount >= maxProductQuantity || productCount >= selectedOption.available}
+							disabled={
+								onCooldown ||
+								productCount >= maxProductQuantity ||
+								productCount >= selectedOption.available
+							}
 						>
 							Add to Cart
 						</button>

@@ -10,7 +10,7 @@ import styles from "./about.module.css";
 const About = () => (
 	<>
 		<Header />
-		<main className="main-container expand-to-footer">
+		<main className="main-container">
 			<div className={styles.statement}>
 				<h1>Our mission</h1>
 				<p>

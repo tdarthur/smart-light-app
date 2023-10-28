@@ -11,7 +11,7 @@
 
 	height: var(--search-bar-height);
 	width: 100%;
-	margin-bottom: 32px;
+	margin-bottom: 16px;
 }
 
 .searchInput {
@@ -87,6 +87,8 @@
 	cursor: pointer;
 
 	background-color: var(--color-background-highlight-2);
+
+	outline: 1px solid currentColor;
 }
 
 .productImage {
