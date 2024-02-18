@@ -15,7 +15,7 @@
 
 .ratingStar > *:nth-child(1) {
 	opacity: 0.2;
-	filter: drop-shadow(0 0 1px black);
+	filter: drop-shadow(0 0 1px black) drop-shadow(0 0 1px black) drop-shadow(0 0 1px black);
 }
 
 .ratingStar > *:nth-child(2) {
