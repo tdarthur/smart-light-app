@@ -151,7 +151,7 @@ const Footer = ({ className, ...props }: React.ComponentPropsWithoutRef<"footer"
 					})}
 				</div>
 
-				<p className={styles.copyright}>© 2023 Illuminous</p>
+				<p className={styles.copyright}>© 2024 Illuminous</p>
 			</div>
 		</footer>
 	);

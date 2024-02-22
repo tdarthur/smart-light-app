@@ -198,7 +198,7 @@
 	{
 		"id": "led-bulb-standard",
 		"name": "LED Standard Bulb",
-		"image": "https://d1clmlgd64m407.cloudfront.net/smart-light.webp",
+		"image": "https://d1clmlgd64m407.cloudfront.net/led-light.webp",
 		"features": ["800 lumen", "Vibrant LED"],
 
 		"options": [
@@ -260,7 +260,7 @@
 	{
 		"id": "led-bulb-flood",
 		"name": "LED Flood Bulb",
-		"image": "https://d1clmlgd64m407.cloudfront.net/smart-light.webp",
+		"image": "https://d1clmlgd64m407.cloudfront.net/led-light.webp",
 		"features": ["1100 lumen", "Vibrant LED"],
 		"options": [
 			{
