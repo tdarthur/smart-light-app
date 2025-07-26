@@ -20,7 +20,7 @@ const footerSections: FooterSection[] = [
 		links: [
 			{
 				name: "Contact Us",
-				to: "https://findtyler.com/#contact",
+				to: "https://tyler-arthur.com/#contact",
 			},
 			{
 				name: "FAQ",
@@ -74,7 +74,7 @@ const footerSections: FooterSection[] = [
 			},
 			{
 				name: "Tyler's Site",
-				to: "https://findtyler.com",
+				to: "https://tyler-arthur.com",
 			},
 		],
 	},
